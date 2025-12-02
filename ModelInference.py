@@ -6,7 +6,7 @@ def call_model(prompt : str, number_of_answers : int = 1, show_probabilities : b
     if number_of_answers == 1 and arend_adapters:
         model, tokenizer = load(
             "mlx-community/Qwen2.5-Coder-1.5B-Instruct-Q6",
-            adapter_path=pathFile.adapter_path
+            adapter_path=pathFile.adapters_Qwen_1_5_path
         )
         return generate(model, tokenizer, prompt=prompt)
 

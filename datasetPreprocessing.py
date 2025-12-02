@@ -27,6 +27,6 @@ def parse_concatenated_json(path):
 # Code that transforms Arend lib samples into trainable data, version 1
 def simplify_jsonl(entry : dict) -> dict:
     two_field_dict = dict()
-    two_field_dict['prompt'] = str(entry['Context']) + "<<<break>>>" + str(entry['Premises']) + "<<<break>>>" + entry['Expected type']
+    two_field_dict['prompt'] = "<<<Context:>>> "+ str(entry['Context']) + "<<<Premises:>>> " + str(entry['Premises']) + "<<<Expected type:>>> " + entry['Expected type']
     two_field_dict['completion'] = entry['Expression']
     return two_field_dict
