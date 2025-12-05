@@ -1,0 +1,28 @@
+index = 28
+
+the query:{
+  "Context": [
+    "li : Array (Fin n) k",
+    "k : Nat",
+    "Ad : IsDiagonal {R} {n} {m} A",
+    "A : Matrix R.E n m",
+    "e : E",
+    "lj : Array (Fin m) k",
+    "s : \\Sigma (j : Fin k) (li.at (f {e} j) /= lj.at j)",
+    "R : CRing"
+  ],
+  "Expected type": "at {\\new Array R.E k (\\lam (j : Fin k) => at {at {A} (li.at (f {e} j))} (lj.at j))} s.1 = R.zro",
+  "Expression": "later (Ad s.2)",
+  "Premises": [
+    "| zro : E",
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "| f A : B",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\func \\infixl 9 !! (a : DArray) (i : Fin a.len) : a.A i ",
+    "| at (j : Fin len) : A j",
+    "\\class DArray {\n  | len : Nat\n  | A (Fin len) : \\Type\n  | at (j : Fin len) : A j\n}",
+    "| E : \\Set"
+  ]
+}
+model output: 
+{at {at {A} (li.at (f {e} 0))} (lj.at 0)} {at {at {A} (li.at (f {e} 0))} (lj.at 0)} {at {at {A} (li.at (f {e} 0))} (lj.at 0)} {at {at {A} (li.at (f {e} 0))} (lj.at 0)} {at {at {A} (li.at (f {e} 0))} (lj.at 0)} {at {at {A} (li.at (f {e} 0))} (lj.at 0)} {at {at {A} (li.at (f {e} 0))} (lj.at 0)} {at {at {A} (li.at (f {e} 0))} (lj.at 0)} {at {at {A} (li.at (f {e} 0))} (lj.at 0)} {at {at {A} (li.at (f {e} 0))} (lj.at 0)} {at {at {A

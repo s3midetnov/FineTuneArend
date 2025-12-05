@@ -1,0 +1,16 @@
+index = 11
+
+the query:{
+  "Context": [
+    "k : Fin (len {map {\\Sigma (s : \\Sigma (Fin l.len) (Fin l.len)) (l.at s.1 -> l.at s.2)} {\\Sigma (Fin l.len) (Fin l.len)}\n  (\\lam (p0 : \\Sigma (s : \\Sigma (Fin l.len) (Fin l.len)) (l.at s.1 -> l.at s.2)) => p0.1) p})",
+    "p : Array (\\Sigma (s : \\Sigma (Fin l.len) (Fin l.len)) (l.at s.1 -> l.at s.2))",
+    "l : Array \\Prop"
+  ],
+  "Expected type": "l.at (p.at k).1.1 -> l.at (p.at k).1.2",
+  "Expression": "(p k).2",
+  "Premises": [
+    "| at (j : Fin len) : A j"
+  ]
+}
+model output: 
+<<<Proof:>>> \case k => \case \with \elim p => \case \with \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim p => \case \elim

@@ -1,0 +1,33 @@
+index = 26
+
+the query:{
+  "Context": [
+    "y : D.Ob",
+    "g : D.Hom y z",
+    "D : Precat",
+    "P : Pullback {D} {x} {y} {z} f g",
+    "P' : Pullback {D} {x} {y} {z} f g",
+    "x : D.Ob",
+    "z : D.Ob",
+    "f : D.Hom x z"
+  ],
+  "Expected type": "P'.pbProj2 D.\u2218 p-map {D1} {x} {y1} {z} {f} {g} P P' = P.pbProj2 \u2218 D.id P.apex",
+  "Expression": "rewrite (p-beta2 P' P) (inv id-right)",
+  "Premises": [
+    "\\func p-beta2 \\plevels obj >= hom \\hlevels  {D : Precat} {x y z : D.Ob} {f : D.Hom x z} {g : D.Hom y z} (P P' : Pullback {D} {x} {y} {z} f g) :\n  P.pbProj2 D.\u2218 p-map {D} {x} {y} {z} {f} {g} P' P = P'.pbProj2 \n  => P.pbBeta2 {P'.apex} {P'.pbProj1} {P'.pbProj2} {P'.pbCoh}",
+    "| Hom Ob Ob : \\Set",
+    "| y : Ob {D}",
+    "| pbProj2 : Hom {D} apex y",
+    "| \\infixl 8 o \\alias \\infixl 8 \u2218 {X Y Z : Ob} (Hom Y Z) (Hom X Y) : Hom X Z",
+    "\\func p-map \\plevels obj >= hom \\hlevels  {D : Precat} {x y z : D.Ob} {f : D.Hom x z} {g : D.Hom y z} (P P' : Pullback {D} {x} {y} {z} f g) : D.Hom P.apex P'.apex \n  => P'.pbMap {P.apex} P.pbProj1 P.pbProj2 P.pbCoh",
+    "| apex : Ob {D}",
+    "| id-right {X Y : Ob} {f : Hom X Y} : f \u2218 id X = f",
+    "| id (X : Ob) : Hom X X",
+    "\\func transportInv {A : \\Type} (B : A -> \\Type) {a a' : A} (_ : a = a') (_ : B a') : B a \n  | {A}, B, {a}, {a'}, idp, b => b",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\func inv {A1 : \\Type} {a1 a' : A1} (_ : a1 = a') : a' = a1 \n  | {A}, {a}, {a'}, idp => idp {A} {a}",
+    "| D : Precat"
+  ]
+}
+model output: 
+P'.apex <<<Expected evaluation:>>> p-map {D} {x} {y} {z} {f} {g} P P' = pbProj2 {D} {x} {y} {z} {f} {g} P P' <<<Proof:>>> \case inv {P'.pbProj2 D.∘ p-map {D} {x} {y} {z} {f} {g} P P' = pbProj2 {D} {x} {y} {z} {f} {g} P P'} \with \case \infixl 8 o \alias \infixl 8 ∘ {X Y Z : Ob} (Hom Y Z) (Hom X Y) : Hom X Z, \case \infixl 8 = {A : \Type} (a a' : A) : \Type => a = a', \case id {X : Ob} : Hom X X => \lam (x : X) => x, \case id-right {X Y : Ob} {f : Hom X Y} : f ∘ id X = f, \case p-map {D : Precat} {x y

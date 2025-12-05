@@ -1,0 +1,36 @@
+index = 30
+
+the query:{
+  "Context": [
+    "X : TopLModule R",
+    "R : NearSkewField",
+    "a : X.E"
+  ],
+  "Expected type": "ContMap R X {\n  | func => \\lam (_ : E {Dom {\\this}}) => a\n}",
+  "Expression": "const a",
+  "Premises": [
+    "\\class ContMap \\extends SetHom \\hlevels  {\n  | func-cont {U : E {Cod} -> \\Prop} (isOpen {Cod} U) : isOpen {Dom} (\\lam (x : E {Dom}) => U (func x))\n}",
+    "| E : \\Set",
+    "\\func const \\hlevels  {Y X : TopSpace} (x : X.E) : ContMap Y X {\n  | func => \\lam (_ : E {Dom {\\this}}) => x\n} => \\new ContMap {\n  | func-cont => {?hidden}\n}",
+    "| Dom : BaseSet"
+  ]
+}
+model output: 
+<<<Expected type:>>> ContMap R X {
+  | func => \lam (_ : E {Dom {\this}}) => a
+}<<<Expected type:>>> ContMap R X {
+  | func => \lam (_ : E {Dom {\this}}) => a
+}<<<Expected type:>>> ContMap R X {
+  | func => \lam (_ : E {Dom {\this}}) => a
+}<<<Expected type:>>> ContMap R X {
+  | func => \lam (_ : E {Dom {\this}}) => a
+}<<<Expected type:>>> ContMap R X {
+  | func => \lam (_ : E {Dom {\this}}) => a
+}<<<Expected type:>>> ContMap R X {
+  | func => \lam (_ : E {Dom {\this}}) => a
+}<<<Expected type:>>> ContMap R X {
+  | func => \lam (_ : E {Dom {\this}}) => a
+}<<<Expected type:>>> ContMap R X {
+  | func => \lam (_ : E {Dom {\this}}) => a
+}<<<Expected type:>>> ContMap R X {
+  | func => \lam (_ : E {Dom {\this}}

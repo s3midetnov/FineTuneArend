@@ -1,0 +1,29 @@
+index = 50
+
+the query:{
+  "Context": [
+    "eps : Rat",
+    "X : \\Set",
+    "h : \\Pi (x : X) ->\nTruncP (\\Sigma (V : Set Y.E) (TruncP (\\Sigma (x : Y.E) (V = (\\lam (y : Y.E) => U {Y.dist x y} (half eps)))))\n  (\\Pi {n : I.E} -> N I.<= n -> V (f n x)))",
+    "I : DirectedSet",
+    "f : I.E -> X -> Y.E",
+    "Y : ExPseudoMetricSpace",
+    "N : I.E"
+  ],
+  "Expected type": "\\Pi (x : X) -> \\Pi {n : I.E} -> N I.<= n -> U {Y.dist (f n x) (f N x)} eps",
+  "Expression": "\\lam x N<=n => (\\case h x \\with {\n  | inP (_, inP (y, idp), g) => halving1/2 {Y} (g N<=n) (g <=-refl)\n})",
+  "Premises": [
+    "\\lemma halving1/2 \\hlevels  {this : ExPseudoMetricSpace} {x y z : E} {c : Rat} (_ : U {dist y x} (c * ratio (pos 1) 2))\n  (_ : U {dist y z} (c * ratio (pos 1) 2)) : U {dist x z} c ",
+    "| <=-refl {x : E} : x <= x",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\func Set \\hlevels  (X : \\hType) : \\Set => X -> \\Prop",
+    "| U Rat : \\Prop",
+    "| dist E E : ExUpperReal",
+    "| \\infix 4 <= E E : \\Prop",
+    "| E : \\Set",
+    "\\func half \\plevels  \\hlevels  (a : Rat) : Rat => a * ratio (pos 1) 2",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I"
+  ]
+}
+model output: 
+\n  (\\Pi {n : I.E} -> N I.<= n -> U {Y.dist (f n x) (f N x)} eps) \n  (\\Pi {n : I.E} -> N I.<= n -> U {Y.dist (f n x) (f N x)} eps) \n  (\\Pi {n : I.E} -> N I.<= n -> U {Y.dist (f n x) (f N x)} eps) \n  (\\Pi {n : I.E} -> N I.<= n -> U {Y.dist (f n x) (f N x)} eps) \n  (\\Pi {n : I.E} -> N I.<= n -> U {Y.dist (f n x) (f N x)} eps) \n  (\\Pi {n : I.E} -> N I.<= n -> U {Y.dist (f n x) (f N x)} eps) \n  (\\Pi {n : I.E} -> N I.<= n -> U {Y.dist (f n x) (f N x)} eps) \n  (\\Pi {n : I.E

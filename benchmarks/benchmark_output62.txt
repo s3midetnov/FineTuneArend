@@ -1,0 +1,49 @@
+index = 62
+
+the query:{
+  "Context": [],
+  "Expected type": "CoverMap (RealNormed \u2a2f RealNormed) RealNormed {\n  | func => \\lam (x : E {Dom {*-cover \u2218 tuple {RealNormed} {RealNormed} {RealNormed \u2a2f RealNormed} (proj2 {RealNormed} {RealNormed}) (proj1 {RealNormed} {RealNormed})}}) =>\n  func {*-cover}\n    (func {tuple {RealNormed} {RealNormed} {RealNormed \u2a2f RealNormed} (proj2 {RealNormed} {RealNormed}) (proj1 {RealNormed} {RealNormed})}\n      x)\n}",
+  "Expression": "*-cover \u2218 tuple proj2 proj1",
+  "Premises": [
+    "\\instance CoverSpaceHasProduct \\hlevels  : HasProduct CoverSpace {\n  | Product => ProductCoverSpace\n} => \\new HasProduct",
+    "\\func compose \\alias \\infixl 8 \u2218 \\hlevels  {X Y Z : PrecoverSpace} (g : PrecoverMap Y Z) (f : PrecoverMap X Y) : PrecoverMap X Z {\n  | func => \\lam (x : E {Dom {\\this}}) => g.func (f.func x)\n} => \\new PrecoverMap {\n  | func-cont => {?hidden}\n  | func-cover => {?hidden}\n}",
+    "\\lemma *-cover \\hlevels  : CoverMap (ProductCoverSpace RealNormed RealNormed) RealNormed {\n  | func => \\lam (s : E {Dom {\\this}}) => s.1 * s.2\n} ",
+    "\\lemma proj2 \\hlevels  {X Y : CoverSpace} : CoverMap (X \u2a2f Y) Y {\n  | func => \\lam (p0 : E {Dom {\\this}}) => p0.2\n} ",
+    "\\func compose \\alias \\infixl 8 \u2218 \\hlevels  {X Y Z : CoverSpace} (g : CoverMap Y Z) (f : CoverMap X Y) : CoverMap X Z {\n  | func => \\lam (x : E {Dom {g \u2218 f}}) => g.func (f.func x)\n} => \\new CoverMap {\n  | func-cont => {?hidden}\n  | func-cover => {?hidden}\n}",
+    "| Product \\alias \\infixl 7 \u2a2f E E : E",
+    "\\func tuple \\hlevels  {X Y Z : CoverSpace} (f : CoverMap Z X) (g : CoverMap Z Y) : CoverMap Z (X \u2a2f Y) {\n  | func => \\lam (z : E {Dom {\\this}}) => (f.func z, g.func z)\n} => \\new CoverMap {\n  | func-cont => {?hidden}\n  | func-cover => {?hidden}\n}",
+    "\\class CoverMap \\extends PrecoverMap, StronglyCauchyMap \\hlevels  {\n  | func-weak-cauchy => \\lam (F1 : WeaklyCauchyFilter Dom) =>\n  \\new WeaklyCauchyFilter Cod (\\lam (V : E {A {SetFilter-map {E {Dom}} {E {Cod}} func F1}}) => F.F (func ^-1 V)) {\n    | filter-mono => {?hidden}\n    | filter-top => {?hidden}\n    | filter-meet => {?hidden}\n    | isWeaklyProper => {?hidden}\n    | isCauchyFilter => {?hidden}\n  }\n}",
+    "\\lemma proj1 \\hlevels  {X Y : CoverSpace} : CoverMap (X \u2a2f Y) X {\n  | func => \\lam (p0 : E {Dom {\\this}}) => p0.1\n} ",
+    "| E : \\Set",
+    "| func (E {Dom}) : E {Cod}",
+    "| Dom : BaseSet",
+    "\\instance RealNormed \\hlevels  : CompleteNormedAbGroup Real {\n  | isOpen => isOpen {RealNormedAbGroup}\n  | isCauchy => Closure {E} PreuniformSpace.isUniform\n  | isUniform => ExPseudoMetricSpace.isUniform {RealNormedAbGroup}\n  | dist => dist {RealNormedAbGroup}\n  | zro => fromRat zro\n  | + => (RealAbGroup.+)\n  | negative => RealAbGroup.negative\n  | norm => abs {RealAbGroup}\n} => \\new CompleteNormedAbGroup {\n  | cauchy-open => {?hidden}\n  | uniform-cauchy => {?hidden}\n  | dist-refl => {?hidden}\n  | dist-symm => {?hidden}\n  | dist-triang => {?hidden}\n  | dist-uniform => {?hidden}\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | negative-left => {?hidden}\n  | +-comm => {?hidden}\n  | norm_zro => {?hidden}\n  | norm_negative => {?hidden}\n  | norm_+ => {?hidden}\n  | norm-dist => {?hidden}\n  | isSeparatedCoverSpace => {?hidden}\n  | dist-ext => {?hidden}\n  | norm-ext => {?hidden}\n  | isCompleteMetric => {?hidden}\n  | isStronglyComplete => {?hidden}\n}"
+  ]
+}
+model output: 
+{
+  | func-weak-cauchy => {?hidden}
+  | func-strong-cauchy => {?hidden}
+  | func-weak-uniform => {?hidden}
+  | func-strong-uniform => {?hidden}
+  | func-weak-continuous => {?hidden}
+  | func-strong-continuous => {?hidden}
+  | func-weak-unicity => {?hidden}
+  | func-strong-unicity => {?hidden}
+  | func-uniform => {?hidden}
+  | func-continuous => {?hidden}
+  | func-unicity => {?hidden}
+  | func-open => {?hidden}
+  | func-cauchy => {?hidden}
+  | func-uniform-cauchy => {?hidden}
+  | func-continuous-cauchy => {?hidden}
+  | func-uniform-top => {?hidden}
+  | func-continuous-top => {?hidden}
+  | func-uniform-universality => {?hidden}
+  | func-continuity => {?hidden}
+  | func-top => {?hidden}
+  | func-universality => {?hidden}
+  | func-weak-universality => {?hidden}
+  | func-continuity-uniform => {?hidden}
+  | func-continuity-top => {?hidden}
+  |

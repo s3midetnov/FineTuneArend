@@ -1,0 +1,26 @@
+index = 48
+
+the query:{
+  "Context": [
+    "a : E {Dom {\\this}}",
+    "f-inj : IsInj {P1.E} {P2.E} f.func",
+    "p1 : f.func a = f.func b",
+    "p : a < b",
+    "P1 : BiorderedSet",
+    "this : StrictPosetHom P1 P2 {\n  | func => f.func\n  | func-< => {?hidden}\n}",
+    "P2 : Dec",
+    "b : E {Dom {\\this}}"
+  ],
+  "Expected type": "func {\\this} a P2.< func {\\this} b",
+  "Expression": "absurd (<-irreflexive (rewrite (f-inj p1) in p))",
+  "Premises": [
+    "\\func transport {A : \\Type} (B : A -> \\Type) {a a' : A} (p : a = a') (b : B a) : B a' => coe (\\lam (i : I) => B (p @ i)) b right",
+    "| <-irreflexive {x : E} : Not (x < x)",
+    "| func (E {Dom}) : E {Cod}",
+    "| E : \\Set",
+    "| \\infix 4 < E E : \\Prop",
+    "\\func absurd {A : \\Type} (_ : Empty) : A "
+  ]
+}
+model output: 
+P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b P2.< func {\this} a P2.< func {\this} b

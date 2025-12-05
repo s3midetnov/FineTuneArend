@@ -1,0 +1,33 @@
+index = 95
+
+the query:{
+  "Context": [
+    "M : Monoid",
+    "env : V -> M.E",
+    "l : List V",
+    "s : List V",
+    "V : \\Set"
+  ],
+  "Expected type": "interpretNF {M} {V} env (l ++ s) = interpretNF {M} {V} env l M.* interpretNF {M} {V} env s",
+  "Expression": "interpretNF_++ {M}",
+  "Premises": [
+    "\\lemma interpretNF_++ \\hlevels  {M : Monoid} {V : \\Set} {env : V -> M.E} {t s : List V} :\n  interpretNF {M} {V} env (t ++ s) = interpretNF {M} {V} env t M.* interpretNF {M} {V} env s ",
+    "| \\infixl 7 * E E : E",
+    "\\func interpretNF \\hlevels  {M2 : Monoid} {V1 : \\Set} (_ : V1 -> M.E) (_ : List V1) : M.E \n  | {M}, {V}, env, nil => M.ide\n  | {M}, {V}, env, x :: nil => env x\n  | {M}, {V}, env, x :: l => env x M.* interpretNF {M} {V} env l",
+    "| E : \\Set",
+    "\\func \\infixr 5 ++ {A1 : \\Type} (_ _ : List A1) : List A1 \n  | {A}, nil, ys => ys\n  | {A}, a :: xs, ys => a :: xs ++ ys"
+  ]
+}
+model output: 
+<<<Proof:>>> \new Proof (interpretNF_++_1) {
+  | env => env
+  | nil => env
+  | x :: nil => env x
+  | x :: l => env x M.* interpretNF {M} {V} env l
+} === interpretNF_++_1 env l M.* interpretNF_++_1 env s <<<Expected type:>>> interpretNF {M} {V} env (l ++ s) = interpretNF {M} {V} env l M.* interpretNF {M} {V} env s <<<Proof:>>> \new Proof (interpretNF_++_1) {
+  | env => env
+  | nil => env
+  | x :: nil => env x
+  | x :: l => env x M.* interpretNF_++_1 env l
+} === interpretNF_++_1 env l M.* interpretNF_++_1 env s <<<Expected type:>>> interpretNF {M} {V} env (l ++ s) = interpretNF {M} {V} env l M.* interpretNF {M} {V} env s <<<Proof:>>> \new Proof (interpretNF_++_1) {
+  |

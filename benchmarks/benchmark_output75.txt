@@ -1,0 +1,29 @@
+index = 75
+
+the query:{
+  "Context": [
+    "this : RealBanachAlgebra"
+  ],
+  "Expected type": "CoverMap UnitBall this {\n  | func => \\lam (x : E {Dom {\\this}}) => value {limit {NatBSemilattice} (\\lam (p0 : E) => zfunc p0 x.1)}\n    (funcConv-pointwise {NatBSemilattice} {UnitBall} (\\lam (n : E) (s : E) => zfunc n s.1) zfunc-funcConv {x})\n}",
+  "Expression": "funcLimit {_} {UnitBall {this}} (\\lam n s => zfunc {this} n s.1) (zfunc-funcConv {this})",
+  "Premises": [
+    "| value isDefined : E",
+    "\\lemma zfunc-funcConv \\hlevels  {this : RealBanachAlgebra} : IsFuncConvergent {NatBSemilattice} {UnitBall} (\\lam (n : E) (s : E) => zfunc n s.1) ",
+    "\\func UnitBall \\hlevels  {this1 : RealBanachAlgebra} : ExPseudoMetricSpace (Total {E} (\\lam (x : E) => norm (ide - x) <= fromRat ide)) {\n  | isOpen => \\lam (U : Set E) =>\n    TruncP (\\Sigma (V : Set E) (isOpen V) (U = (\\lam (p0 : Total {E} (\\lam (x : E) => norm (ide - x) <= fromRat ide)) => p0.1) ^-1 V))\n  | isCauchy => isCauchy\n  | isUniform => isUniform\n  | dist => \\lam (x : E {\\this}) (x' : E {\\this}) => dist x.1 x'.1\n} => ExPseudoMetricTransfer {Total {E} (\\lam (x : E) => norm (ide - x) <= fromRat ide)}\n  (\\lam (p0 : Total {E} (\\lam (x : E) => norm (ide - x) <= fromRat ide)) => p0.1)",
+    "\\instance NatBSemilattice \\hlevels  : BottomJoinSemilattice Nat {\n  | <= => (<=)\n  | join => join {NatSemiring}\n  | bottom => 0\n} => \\new BottomJoinSemilattice {\n  | <=-refl => {?hidden}\n  | <=-transitive => {?hidden}\n  | <=-antisymmetric => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | bottom-univ => {?hidden}\n}",
+    "\\lemma funcLimit \\hlevels  {I : DirectedSet} {X : CoverSpace} {Y : CompleteCoverSpace} (f : I.E -> X.E -> Y.E) (fc : IsFuncConvergent {I} {X} {Y} f) :\nCoverMap X Y {\n  | func => \\lam (x : E {Dom {\\this}}) => value {limit {I} {Y} (\\lam (p0 : I.E) => f p0 x)} (funcConv-pointwise {I} {X} {Y} f fc {x})\n} ",
+    "\\func limit \\hlevels  {I : DirectedSet} {X : CompleteCoverSpace} (f : I.E -> X.E) : Partial X.E {\n  | isDefined => IsConvergent {I} {X} f\n  | value => \\lam (fc : isDefined {\\this}) => func {completion-lift {DirectedCoverSpace I} {X} fc} (infPoint {I})\n} => \\new Partial",
+    "\\class CoverMap \\extends PrecoverMap, StronglyCauchyMap \\hlevels  {\n  | func-weak-cauchy => \\lam (F1 : WeaklyCauchyFilter Dom) =>\n  \\new WeaklyCauchyFilter Cod (\\lam (V : E {A {SetFilter-map {E {Dom}} {E {Cod}} func F1}}) => F.F (func ^-1 V)) {\n    | filter-mono => {?hidden}\n    | filter-top => {?hidden}\n    | filter-meet => {?hidden}\n    | isWeaklyProper => {?hidden}\n    | isCauchyFilter => {?hidden}\n  }\n}",
+    "| E : \\Set",
+    "\\func zfunc \\hlevels  {this : RealBanachAlgebra} (n : Nat) (x : E) : E => ide - yfunc n x",
+    "| Dom : BaseSet",
+    "\\lemma funcConv-pointwise \\hlevels  {I : DirectedSet} {X Y : CoverSpace} (f : I.E -> X.E -> Y.E) (_ : IsFuncConvergent {I} {X} {Y} f) {x : X.E} :\n  IsConvergent {I} {Y} (\\lam (p0 : I.E) => f p0 x) "
+  ]
+}
+model output: 
+<<<Expected type:>>> \new CoverMap (\lam (x : E {Dom {\this}}) => value {limit {NatBSemilattice} (\lam (p0 : E) => zfunc p0 x.1)}
+  (funcConv-pointwise {NatBSemilattice} {UnitBall} (\lam (n : E) (s : E) => zfunc n s.1) zfunc-funcConv {x}))
+  (\lam (x : E {Dom {\this}}) => value {limit {NatBSemilattice} (\lam (p0 : E) => zfunc p0 x.1)}
+    (funcConv-pointwise {NatBSemilattice} {UnitBall} (\lam (n : E) (s : E) => zfunc n s.1) zfunc-funcConv {x})) {
+  | func-weak-cauchy => \lam (F1 : WeaklyCauchyFilter Dom) => \new WeaklyCauchyFilter Cod (\lam (V : E {A {SetFilter-map {E {Dom}} {E {Cod}} func F1}}) => F.F (func ^-1 V)) {
+    | filter-m

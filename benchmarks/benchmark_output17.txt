@@ -1,0 +1,29 @@
+index = 17
+
+the query:{
+  "Context": [
+    "context : List env.Sort",
+    "env : FSignature",
+    "point : env.Sort"
+  ],
+  "Expected type": "MetaContext env.Sort {\n  | metaname => \\lam (s : MetaContext.Sort {\\this}) => s = point\n  | m-domain => \\lam {s : MetaContext.Sort {\\this}} (_ : metaname {\\this} s) => context\n}",
+  "Expression": "\\new MetaContext {\n  | Sort => Sort\n  | metaname => \\lam s => s = point\n  | m-domain => \\lam eq => context\n}",
+  "Premises": [
+    "\\class MetaContext \\hlevels  {\n  | Sort : \\Set\n  | metaname Sort : \\Set\n  | m-domain {s : Sort} (metaname s) : List Sort\n}",
+    "| Sort : \\Set",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "| metaname Sort : \\Set",
+    "| Sort : \\Set"
+  ]
+}
+model output: 
+<<<Expected value:>>> \lam {s : MetaContext.Sort {\this}} => s = point <<<Proof:>>> \case \infix 1 = {A : \Type} (a a' : A) : \Type => a = a' \with {
+  | {A}, {a}, {a'}, idp => idp {a} {a'}
+} \infix 1 = {A : \Type} (a a' : A) \with {
+  | {A}, {a}, {a'}, idp => idp {a} {a'}
+} \infix 1 = {A : \Type} (a a' : A) \with {
+  | {A}, {a}, {a'}, idp => idp {a} {a'}
+} \infix 1 = {A : \Type} (a a' : A) \with {
+  | {A}, {a}, {a'}, idp => idp {a} {a'}
+} \infix 1 = {A : \Type} (a a' : A) \with {
+  | {A}, {a}, {a'}, idp => idp {a} {

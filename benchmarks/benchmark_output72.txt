@@ -1,0 +1,53 @@
+index = 72
+
+the query:{
+  "Context": [
+    "n : Nat",
+    "k : Nat"
+  ],
+  "Expected type": "pos k IntEuclidean.mod pos (suc n) = k Nat.mod suc n",
+  "Expression": "natMod=mod k (suc n)",
+  "Premises": [
+    "suc Nat",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\func \\infixl 8 mod \\plevels  \\hlevels  (n m : Nat) : Nat => n mod m",
+    "\\data Nat \\plevels  \\hlevels  \n  | zero\n  | suc Nat",
+    "\\lemma natMod=mod \\plevels  \\hlevels  (x n : Nat) : pos x IntEuclidean.mod pos n = x Nat.mod n ",
+    "\\func \\infixl 8 mod \\plevels  \\hlevels  (x y : Int) : Nat => (natDivMod x y).2",
+    "pos Nat"
+  ]
+}
+model output: 
+<<<Proof:>>> \new Nat \case \with {
+  | zero => zero
+  | suc n => suc n
+} \with {
+  | pos x, pos n => pos (x IntEuclidean.mod n)
+} \in
+  \case \with {
+    | zero => zero
+    | suc n => suc n
+  } \with {
+    | pos x, pos n => pos (x IntEuclidean.mod n)
+  } \in
+  \case \with {
+    | zero => zero
+    | suc n => suc n
+  } \with {
+    | pos x, pos n => pos (x IntEuclidean.mod n)
+  } \in
+  \case \with {
+    | zero => zero
+    | suc n => suc n
+  } \with {
+    | pos x, pos n => pos (x IntEuclidean.mod n)
+  } \in
+  \case \with {
+    | zero => zero
+    | suc n => suc n
+  } \with {
+    | pos x, pos n => pos (x IntEuclidean.mod n)
+  } \in
+  \case \with {
+    | zero => zero
+    | suc n =>

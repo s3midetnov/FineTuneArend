@@ -1,0 +1,22 @@
+index = 76
+
+the query:{
+  "Context": [
+    "Q : Dec",
+    "z1<=a1 : z.1 <= a.1",
+    "a : Interval Q",
+    "z : Interval Q"
+  ],
+  "Expected type": "Cover {RealPres Q} a {\\Sigma} (\\lam (_ : \\Sigma) => (z.1, a.2))",
+  "Expression": "<=-cover {_} {a} {(z.1, a.2)} (z1<=a1, <=-refl)",
+  "Premises": [
+    "| <=-refl {x : E} : x <= x",
+    "\\data Cover \\hlevels  {P : FramePres} P.E {J : \\Set} (J -> P.E) : \\Prop \n  | cover-basic (P.BasicCover {J} x g)\n  | cover-inj (j : J) (g j = x)\n  | cover-trans {I : \\Set} {f : I -> P.E} (Cover {P} x {I} f) (\\Pi (i : I) -> Cover {P} (f i) {J} g)\n  | cover-proj1 {a b : P.E} (x = P.conj a b) (j : J) (g j = a)\n  | cover-idemp (j : J) (g j = P.conj x x)\n  | cover-comm {a b : P.E} (x = P.conj a b) (j : J) (g j = P.conj b a)\n  | cover-ldistr {a b : P.E} (x = P.conj a b) {f : J -> P.E} (Cover {P} b {J} f) (\\Pi (j : J) -> g j = P.conj a (f j))",
+    "\\lemma <=-cover \\hlevels  {Q : Dec} {x y : Interval Q} (_ : x <= y) : Cover1 {RealPres Q} x y ",
+    "| \\infix 4 <= E E : \\Prop",
+    "| E : \\Set",
+    "\\instance RealPres \\hlevels  (Q : Dec) : FramePres (Interval Q) {\n  | conj => (\u2227)\n  | BasicCover => Indexing {\\Sigma (x : Bool) (if {\\Set} x (\\Sigma (p r q s : Q.E) (p Q.< r) (r Q.< q) (q Q.< s)) (\\Sigma Q.E Q.E))} {Interval Q}\n    (\\lam (p0 : \\Sigma (x : Bool) (if {\\Set} x (\\Sigma (p r q s : Q.E) (p Q.< r) (r Q.< q) (q Q.< s)) (\\Sigma Q.E Q.E))) =>\n    (\\case p0 \\with {\n      | (true, (p, r, q, s, _x, _x, _x)) => (Fin 2, (p, s), \\lam (p0 : Fin 2) => (\\case p0 \\with {\n        | zero => (p, q)\n        | suc zero => (r, s)\n      }))\n      | (false, (p, q)) => (\\Sigma (r s : Q.E) (p Q.< r) (r Q.< s) (s Q.< q), (p, q),\n        \\lam (t : \\Sigma (r s : Q.E) (p Q.< r) (r Q.< s) (s Q.< q)) => (t.1, t.2))\n    }))\n} => \\new FramePres"
+  ]
+}
+model output: 
+z1<=a1 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.2 z.2 <= a.

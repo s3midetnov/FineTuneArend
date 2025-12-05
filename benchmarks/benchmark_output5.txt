@@ -1,0 +1,24 @@
+index = 5
+
+the query:{
+  "Context": [
+    "l' : Array (\\Sigma R.E M)",
+    "R : Semiring",
+    "f : M -> R.E",
+    "M : \\Set",
+    "l : Array (\\Sigma R.E M)"
+  ],
+  "Expected type": "BigSum {R}\n  (map {\\Sigma R.E M} {R.E} (\\lam (s1 : \\Sigma R.E M) => s1.1 R.* f s1.2) l ++ map {\\Sigma R.E M} {R.E} (\\lam (s1 : \\Sigma R.E M) => s1.1 R.* f s1.2) l') = BigSum {R} (map {\\Sigma R.E M} {R.E} (\\lam (s1 : \\Sigma R.E M) => s1.1 R.* f s1.2) l) R.+ BigSum {R} (map {\\Sigma R.E M} {R.E} (\\lam (s1 : \\Sigma R.E M) => s1.1 R.* f s1.2) l')",
+  "Expression": "BigSum_++ {R}",
+  "Premises": [
+    "| \\infixl 7 * E E : E",
+    "| \\infixl 6 + E E : E",
+    "\\func \\infixr 5 ++ {A1 : \\Type} (_ _ : Array A1) : Array A1 \n  | {A}, nil, ys => ys\n  | {A}, :: {n} a xs, ys => a :: xs ++ ys",
+    "| E : \\Set",
+    "\\func BigSum \\hlevels  {this : AddMonoid} (l : Array E) : E => Big {E} {E} (+) zro l",
+    "\\lemma BigSum_++ \\hlevels  {this : AddMonoid} {l l' : Array E} : BigSum (l ++ l') = BigSum l + BigSum l' ",
+    "\\func map {A B : \\Type} (f : A -> B) (as : Array A) : Array B as.len (\\lam (i : Fin as.len) => f (as.at i)) => \\new DArray"
+  ]
+}
+model output: 
+R.+ BigSum {R} (map {\Sigma R.E M} {R.E} (\lam (s1 : \Sigma R.E M) => s1.1 R.* f s1.2) l) R.+ BigSum {R} (map {\Sigma R.E M} {R.E} (\lam (s1 : \Sigma R.E M) => s1.1 R.* f s1.2) l) R.+ BigSum {R} (map {\Sigma R.E M} {R.E} (\lam (s1 : \Sigma R.E M) => s1.1 R.* f s1.2) l) R.+ BigSum {R} (map {\Sigma R.E M} {R.E} (\lam (s1 : \Sigma R.E M) => s1.1 R.* f s1.2) l) R.+ BigSum {R} (map {\Sigma R.E M} {R.E} (\lam (s1 : \Sigma R.E M) => s1.1 R.* f s1.2) l) R.+ BigSum {R} (map {\Sigma R.E M} {R.E} (\lam (s1 : \

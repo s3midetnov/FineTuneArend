@@ -1,0 +1,23 @@
+index = 79
+
+the query:{
+  "Context": [
+    "U' : Set X",
+    "X : \\hType",
+    "U<=V : U \u2286 V",
+    "U'<=V' : U' \u2286 V'",
+    "U : Set X",
+    "V : Set X",
+    "V' : Set X"
+  ],
+  "Expected type": "U \u2227 U' \u2286 V \u2227 V'",
+  "Expression": "meet-monotone U<=V U'<=V'",
+  "Premises": [
+    "\\type Subset \\alias \\infix 4 \u2286 \\hlevels  {X : \\hType} (U V : Set X) : \\Prop => \\Pi {x : X} -> U x -> V x",
+    "\\lemma meet-monotone \\hlevels  {this : MeetSemilattice} {x y x' y' : E} (_ : x <= x') (_ : y <= y') : x \u2227 y <= x' \u2227 y' ",
+    "\\instance SetLattice \\hlevels  (A : \\hType) : Locale (Set A) {\n  | <= => (\u2286)\n  | meet => \\lam (U : E {\\this}) (V : E {\\this}) (a : A) => \\Sigma (U a) (V a)\n  | top => \\lam (_ : A) => \\Sigma\n  | Join => \\lam {J : \\Set} (f : J -> E {\\this}) (a : A) => TruncP (\\Sigma (j : J) (f j a))\n} => \\new Locale {\n  | <=-refl => {?hidden}\n  | <=-transitive => {?hidden}\n  | <=-antisymmetric => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | top-univ => {?hidden}\n  | Join-cond => {?hidden}\n  | Join-univ => {?hidden}\n  | Join-ldistr>= => {?hidden}\n}",
+    "| meet \\alias \\infixl 7 \u2227 E E : E"
+  ]
+}
+model output: 
+<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<Expected type:>>> U ∧ U' ⊆ V ∧ V'<<<

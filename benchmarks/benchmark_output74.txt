@@ -1,0 +1,18 @@
+index = 74
+
+the query:{
+  "Context": [
+    "E : StrictIntegralDomain",
+    "a : E {f.Cod}"
+  ],
+  "Expected type": "E.ide E.* a = a",
+  "Expression": "ide-left {_} {a}",
+  "Premises": [
+    "| \\infixl 7 * E E : E",
+    "| ide-left {x : E} : ide * x = x",
+    "| ide : E",
+    "| E : \\Set"
+  ]
+}
+model output: 
+<<<Expected evaluation:>>> ide-left {E} a * a = a * a <<<Expected result:>>> ide-left {E} a * a = a * a <<<Expected result type:>>> E.ide E.* E.E <<<Expected result evaluation:>>> ide-left {E} a * a = a * a <<<Expected result type evaluation:>>> E.ide E.* E.E <<<Expected result evaluation type:>>> E.E <<<Expected result evaluation right:>>> a * a <<<Expected result evaluation right type:>>> E.E <<<Expected result evaluation right evaluation:>>> a <<<Expected result evaluation right evaluation type:>>> E.E <<<Expected result evaluation left:>>> a <<<Expected result evaluation left type:>>> E.E <<<Expected result evaluation left evaluation:>>> a <<<Expected result evaluation left evaluation type:>>> E.E <<<Expected result evaluation right-right:>>> a * a <<<Expected result evaluation right-right type:>>> E.E <<<Expected result evaluation right-right evaluation:>>> a <<<Expected result evaluation right-right evaluation type:>>> E.E <<<Expected result evaluation right-left:>>> a * a <<<Expected result evaluation right-left type:>>> E.E <<<Expected result evaluation left-right:>>> a * a <<<Expected result evaluation left-right type:>>> E.E <<<Expected result evaluation

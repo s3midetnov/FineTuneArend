@@ -1,0 +1,42 @@
+index = 97
+
+the query:{
+  "Context": [
+    "b : Bool",
+    "s : S.E",
+    "a : \\Sigma S.E Bool",
+    "x : List (\\Sigma S.E Bool)",
+    "S : DecSet"
+  ],
+  "Expected type": "(\\case S.decideEq s s, b xor not b \\with {\n  | yes e, true => (a.1, a.2) :: x\n  | d, b1 => (s, b) :: (s, not b) :: (a.1, a.2) :: x\n}) = a :: x",
+  "Expression": "rewrite helper1 (rewrite helper2 idp)",
+  "Premises": [
+    "\\data Dec \\plevels  \\hlevels  \\Prop \n  | yes E\n  | no (Not E)",
+    "\\func helper1 \\hlevels  {S : DecSet} {x : S.E} : S.decideEq x x = yes {x = x} (idp {S.E} {x}) \n=> \\case S.decideEq x x, idp {Dec (x = x)} {S.decideEq x x} \\with {\n  | yes e, p => pmap {x = x} {Dec (x = x)} (yes {x = x}) {e} {idp {S.E} {x}} (set-pi {S.E} {x} {x} {e} {idp {S.E} {x}})\n  | no n, p => absurd {no {x = x} n = yes {x = x} (idp {S.E} {x})} (n (idp {S.E} {x}))\n}",
+    "true",
+    "\\func not \\plevels  \\hlevels  (_ : Bool) : Bool \n  | true => false\n  | false => true",
+    "\\func idp {A : \\Type} {a : A} : a = a => path (\\lam (_ : I) => a)",
+    "\\data Bool \\plevels  \\hlevels  \n  | false\n  | true",
+    "\\func helper2 \\plevels  \\hlevels  (p : Bool) : p xor not p = true => \\case p \\with {\n  | false => idp {Bool} {false xor not false}\n  | true => idp {Bool} {true xor not true}\n}",
+    "\\func \\infixl 2 xor \\plevels  \\hlevels  (_ _ : Bool) : Bool \n  | false, false => false\n  | false, true => true\n  | true, false => true\n  | true, true => false",
+    "yes E",
+    "\\func transportInv {A : \\Type} (B : A -> \\Type) {a a' : A} (_ : a = a') (_ : B a') : B a \n  | {A}, B, {a}, {a'}, idp, b => b",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "| E : \\Set",
+    "\\field decideEq (x y : E) : Dec (x = y)",
+    "\\data List \\Type \n  | nil\n  | \\infixr 5 :: A (List A)",
+    "\\infixr 5 :: A (List A)"
+  ]
+}
+model output: 
+<<<break>>> (\case S.decideEq s s, b xor not b \with {
+  | yes e, true => (a.1, a.2) :: x
+  | d, b1 => (s, b) :: (s, not b) :: (a.1, a.2) :: x
+}) = a :: x <<<break>>> (\case S.decideEq s s, b xor not b \with {
+  | yes e, true => (a.1, a.2) :: x
+  | d, b1 => (s, b) :: (s, not b) :: (a.1, a.2) :: x
+}) = a :: x <<<break>>> (\case S.decideEq s s, b xor not b \with {
+  | yes e, true => (a.1, a.2) :: x
+  | d, b1 => (s, b) :: (s, not b) :: (a.1, a.2) :: x
+}) = a :: x <<<break>>> (\case S.decideEq s s, b xor not b \with {
+  | yes e, true => (a.1,

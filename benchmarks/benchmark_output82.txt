@@ -1,0 +1,37 @@
+index = 82
+
+the query:{
+  "Context": [
+    "d : DArray {l.len} (\\lam (j : Fin l.len) => LDiv z (l.at j))",
+    "this : BezoutRing",
+    "l : Array E",
+    "c : \\Sigma (l1 : Array (\\Sigma E (Fin l.len)))\n  (ide = BigSum (map {\\Sigma E (Fin l.len)} {E} (\\lam (p : \\Sigma E (Fin l.len)) => p.1 * l.at p.2) l1))",
+    "z : E"
+  ],
+  "Expected type": "Inv z (inv {transportInv {E} (\\lam (x : E) => LDiv z x) {ide}\n  {BigSum (map {\\Sigma E (Fin l.len)} {E} (\\lam (p : \\Sigma E (Fin l.len)) => p.1 * l.at p.2) c.1)} c.2\n  (LDiv_BigSum {z} {map {\\Sigma E (Fin l.len)} {E} (\\lam (p : \\Sigma E (Fin l.len)) => p.1 * l.at p.2) c.1}\n    (\\lam (j : Fin (len {map {\\Sigma E (Fin l.len)} {E} (\\lam (p : \\Sigma E (Fin l.len)) => p.1 * l.at p.2) c.1})) =>\n      factor-right {z} {(at {c.1} j).1} {l.at (at {c.1} j).2} (d.at (at {c.1} j).2)))})",
+  "Expression": "ldiv (later $ rewrite c.2 $ LDiv_BigSum {this} (\\lam j => later $ factor-right $ d (c.1 j).2))",
+  "Premises": [
+    "| len : Nat",
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "\\lemma factor-right \\hlevels  {M : CMonoid} {x y z : M.E} (x|z : LDiv {M} x z) : LDiv {M} x (y M.* z) (x|z.inv M.* y) ",
+    "\\func LDiv_BigSum \\hlevels  {this2 : Semiring} {a : E} {l : Array E} (p : \\Pi (j : Fin l.len) -> LDiv a (l.at j)) :\n  LDiv a (BigSum l) (BigSum (\\new Array E l.len (\\lam (j : Fin l.len) => inv {p j}))) => \\new LDiv {\n  | inv-right => {?hidden}\n}",
+    "| ide : E",
+    "\\class LDiv \\extends DivBase \\hlevels  {\n  | inv-right : val * inv = elem\n}",
+    "\\class Inv \\extends LInv, RInv \\hlevels ",
+    "| inv : E {M}",
+    "\\func BigSum \\hlevels  {this : AddMonoid} (l : Array E) : E => Big {E} {E} (+) zro l",
+    "\\func map {A B : \\Type} (f : A -> B) (as : Array A) : Array B as.len (\\lam (i : Fin as.len) => f (as.at i)) => \\new DArray",
+    "| \\infixl 7 * E E : E",
+    "\\lemma ldiv \\hlevels  {M : CMonoid} {x : M.E} (d : LDiv {M} x M.ide) : Inv {M} x d.inv ",
+    "\\func transportInv {A : \\Type} (B : A -> \\Type) {a a' : A} (_ : a = a') (_ : B a') : B a \n  | {A}, B, {a}, {a'}, idp, b => b",
+    "| at (j : Fin len) : A j",
+    "| E : \\Set"
+  ]
+}
+model output: 
+(inv {transportInv {E} (\lam (x : E) => LDiv z x) {ide}
+  {BigSum (map {\Sigma E (Fin l.len)} {E} (\lam (p : \Sigma E (Fin l.len)) => p.1 * l.at p.2) c.1)} c.2
+  (LDiv_BigSum {z} {map {\Sigma E (Fin l.len)} {E} (\lam (p : \Sigma E (Fin l.len)) => p.1 * l.at p.2) c.1}
+    (\lam (j : Fin (len {map {\Sigma E (Fin l.len)} {E} (\lam (p : \Sigma E (Fin l.len)) => p.1 * l.at p.2) c.1})) =>
+      factor-right {z} {(at {c.1} j).1} {l.at (at {c.1} j).2} (d.at (at {c.1} j).2)))}) (inv {transportInv {E} (\lam (x : E) => LDiv z x) {ide}
+  {BigSum (map {\Sigma E (Fin

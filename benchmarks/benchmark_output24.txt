@@ -1,0 +1,80 @@
+index = 24
+
+the query:{
+  "Context": [],
+  "Expected type": "EuclideanSemiringData Nat {\n  | zro => 0\n  | + => (+)\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | +-comm => {?hidden}\n  | * => (*)\n  | *-assoc => {?hidden}\n  | ldistr => {?hidden}\n  | rdistr => {?hidden}\n  | zro_*-left => {?hidden}\n  | zro_*-right => {?hidden}\n  | ide => 1\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | natCoef => \\lam (n : Nat) => n\n  | natCoefZero => {?hidden}\n  | natCoefSuc => {?hidden}\n  | *-comm => {?hidden}\n  | # => (#)\n  | #-irreflexive => {?hidden}\n  | #-symmetric => {?hidden}\n  | #-comparison => {?hidden}\n  | tightness => {?hidden}\n  | decideEq => decideEq\n  | nonEqualApart => {?hidden}\n  | euclideanMap => \\lam (n : E {\\this}) => n\n  | divMod => Nat.divMod\n  | isDivMod => {?hidden}\n  | isEuclideanMap => {?hidden}\n  | summandDiv => summandDiv\n}",
+  "Expression": "\\new EuclideanSemiringData {\n  | CSemiring => NatSemiring\n  | euclideanMap => \\lam n => n\n  | divMod => divMod\n  | isDivMod => divModProp\n  | isEuclideanMap => \\lam n m m/=0 _ => (\\scase \\elim m, m/=0 \\with {\n    | 0, c => absurd (c idp)\n    | suc m, _ => fin_< (n mod suc m)\n  })\n  | decideEq => decideEq {NatSemiring}\n  | summandDiv => summandDiv\n}",
+  "Premises": [
+    "\\lemma nonEqualApartImpl \\hlevels  {this : DecSet} {x : E} {y : E} (_ : x /= y) : x # y ",
+    "\\lemma #-symmetric \\hlevels  {this : DecSet} {x : E} {y : E} (_ : x # y) : y # x ",
+    "suc Nat",
+    "| +-assoc {x y z : E} : x + y + z = x + (y + z)",
+    "\\lemma fin_< \\plevels  \\hlevels  {n : Nat} (x : Fin n) : x < n ",
+    "| *-comm {x y : E} : x * y = y * x",
+    "\\func \\infixl 7 * \\plevels  \\hlevels  (_ _ : Nat) : Nat \n  | x, 0 => 0\n  | x, suc y => x * y + x",
+    "\\lemma #-irreflexive \\hlevels  {this : DecSet} {x : E} (_ : x # x) : Empty ",
+    "\\func # \\hlevels  {this : DecSet} (x : E) (y : E) : \\Prop => x /= y",
+    "| E : \\Set",
+    "| *-assoc {x y z : E} : x * y * z = x * (y * z)",
+    "| ide-right {x : E} : x * ide = x",
+    "\\class EuclideanSemiringData \\extends CSemiring, DecSet \\hlevels  {\n  | euclideanMap E : Nat\n  | divMod E E : \\Sigma E E\n  | isDivMod (x y : E) : y * (divMod x y).1 + (divMod x y).2 = x\n  | isEuclideanMap (x y : E) (y /= zro) ((divMod x y).2 /= zro) : euclideanMap (divMod x y).2 < euclideanMap y\n  | summandDiv {x y z d : E} (d /= zro) (d * x + y = d * z) : LDiv d y\n}",
+    "| ide-left {x : E} : ide * x = x",
+    "\\func idp {A : \\Type} {a : A} : a = a => path (\\lam (_ : I) => a)",
+    "| divMod E E : \\Sigma E E",
+    "\\data Nat \\plevels  \\hlevels  \n  | zero\n  | suc Nat",
+    "\\func Not (A : \\Type) : \\Prop => A -> Empty",
+    "\\data \\infix 4 < \\plevels  \\hlevels  (_ _ : Nat) \\with\n  | 0, suc n => zero<suc\n  | suc n, suc m => suc<suc (n < m)",
+    "\\func \\infixl 6 + \\plevels  \\hlevels  (_ _ : Nat) : Nat \n  | x, 0 => x\n  | x, suc y => suc (x + y)",
+    "| zro-right {x : E} : x + zro = x",
+    "| natCoefZero : natCoef 0 = zro",
+    "| \\infix 4 < E E : \\Prop",
+    "\\func absurd {A : \\Type} (_ : Empty) : A ",
+    "| zro : E",
+    "| ldistr {x y z : E} : x * (y + z) = x * y + x * z",
+    "\\lemma tightness \\hlevels  {this : DecSet} {x : E} {y : E} (_ : Not (x # y)) : x = y ",
+    "\\func \\infix 1 /= {A : \\Type} (a a' : A) : \\Prop => Not (a = a')",
+    "| natCoefSuc (n : Nat) : natCoef (suc n) = natCoef n + ide",
+    "\\func divMod \\plevels  \\hlevels  (_ _ : Nat) : \\Sigma Nat Nat ",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\instance NatSemiring \\hlevels  : LinearlyOrderedCSemiring.Dec Nat {\n  | zro => 0\n  | + => (Nat.+)\n  | * => (Nat.*)\n  | ide => 1\n  | natCoef => \\lam (n : Nat) => n\n  | < => (NatOrder.<)\n  | meet => meet\n  | join => join\n  | # => (#)\n  | decideEq => \\lam (x : E {\\this}) (y : E {\\this}) => (\\case trichotomy {\\this} x y \\with {\n    | less x<y => no {x = y} (\\lam (x=y : x = y) => StrictPoset.<-irreflexive\n      {\\this} {y} (transport {E {\\this}} (\\lam (_x : E {\\this}) => _x StrictPoset.< y) {x} {y} x=y x<y))\n    | equals x=y => yes {x = y} x=y\n    | greater y<x => no {x = y} (\\lam (x=y : x = y) =>\n      StrictPoset.<-irreflexive {\\this} {y} (transport {E {\\this}} ((StrictPoset.<) {\\this} y) {x} {y} x=y y<x))\n  })\n  | trichotomy => \\lam (n : E {\\this}) (m : E {\\this}) => (\\case n - m, idp {Int} {n - m} \\with {\n    | pos 0, p => equals {n} {m} (triEquals {n} {m} p)\n    | pos (suc d), p => greater {n} {m} (triGreater {n} {m} {d} p)\n    | neg (suc d), p => less {n} {m} (triLess {n} {m} {d} p)\n  })\n} => \\new LinearlyOrderedCSemiring.Dec {\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | +-comm => {?hidden}\n  | *-assoc => {?hidden}\n  | ldistr => {?hidden}\n  | rdistr => {?hidden}\n  | zro_*-left => {?hidden}\n  | zro_*-right => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | natCoefZero => {?hidden}\n  | natCoefSuc => {?hidden}\n  | <-irreflexive => {?hidden}\n  | <-transitive => {?hidden}\n  | <_+-left => {?hidden}\n  | zro<ide => {?hidden}\n  | <_*_positive-left => {?hidden}\n  | <_*_negative-left => {?hidden}\n  | *-comm => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | #-irreflexive => {?hidden}\n  | #-symmetric => {?hidden}\n  | #-comparison => {?hidden}\n  | tightness => {?hidden}\n  | nonEqualApart => {?hidden}\n}",
+    "\\lemma #-comparison \\hlevels  {this : DecSet} (x : E) (y : E) (z : E) (_ : x # z) : x # y || y # z ",
+    "\\func \\infixl 8 mod \\plevels  \\hlevels  (n m : Nat) : Nat => n mod m",
+    "| zro-left {x : E} : zro + x = x",
+    "| rdistr {x y z : E} : (x + y) * z = x * z + y * z",
+    "| zro_*-right {x : E} : x * zro = zro",
+    "\\lemma divModProp \\plevels  \\hlevels  (n m : Nat) : m * n div m + n mod m = n ",
+    "| +-comm {x y : E} : x + y = y + x",
+    "\\field decideEq (x y : E) : Dec (x = y)",
+    "| zro_*-left {x : E} : zro * x = zro",
+    "\\func summandDiv {x1 y2 z1 d : Nat} (_ : d /= 0) (_ : d Nat.* x1 Nat.+ y2 = d Nat.* z1) : LDiv {NatSemiring} d y2 \n  | {x}, {y}, {z}, {0}, d/=0, dx+y=dz => absurd {LDiv {NatSemiring} 0 y} (d/=0 (idp {Nat} {0}))\n  | {x}, {y}, {z}, {suc n}, d/=0, dx+y=dz => \\new LDiv {NatSemiring} (suc n) y (y div suc n) {\n    | inv-right => {?hidden}\n  }"
+  ]
+}
+model output: 
+<<<Expected value:>>> \new EuclideanSemiringData {\this} {
+  | zro => 0
+  | + => (+)
+  | zro-left => {?hidden}
+  | zro-right => {?hidden}
+  | +-assoc => {?hidden}
+  | +-comm => {?hidden}
+  | * => (*)
+  | *-assoc => {?hidden}
+  | ldistr => {?hidden}
+  | rdistr => {?hidden}
+  | zro_*-left => {?hidden}
+  | zro_*-right => {?hidden}
+  | ide => 1
+  | ide-left => {?hidden}
+  | ide-right => {?hidden}
+  | natCoef => \lam (n : Nat) => n
+  | natCoefZero => {?hidden}
+  | natCoefSuc => {?hidden}
+  | *-comm => {?hidden}
+  | # => (#)
+  | #-irreflexive => {?hidden}
+  | #-symmetric => {?hidden}
+  | #-comparison => {?hidden}
+  | tightness => {?hidden}
+  | decideEq => decideEq
+  | nonEqualApart => {?hidden}
+  | euclideanMap => \lam (n : E {\this}) => n

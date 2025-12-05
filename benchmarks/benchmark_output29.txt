@@ -1,0 +1,23 @@
+index = 29
+
+the query:{
+  "Context": [
+    "b : L.E",
+    "a : L.E",
+    "L : Locale",
+    "p : open {L} b <= open {L} a"
+  ],
+  "Expected type": "L.top L.\u2227 a L.<= b",
+  "Expression": "exponent.2 (conv p)",
+  "Premises": [
+    "\\lemma conv {L : Locale} {a : L.E} {j : Nucleus {L}} (_ : open {L} a <= j) : L.top L.<= j.nucleus a ",
+    "| top : E",
+    "| \\infix 4 <= E E : \\Prop",
+    "| L : Locale",
+    "| meet \\alias \\infixl 7 \u2227 E E : E",
+    "\\func open \\hlevels  {this2 : Locale} (a : E) : Nucleus ((-->) a) => \\new Nucleus {\n  | nucleus-meet => {?hidden}\n  | nucleus-meet>= => {?hidden}\n  | nucleus-<= => {?hidden}\n  | nucleus-unit => {?hidden}\n  | nucleus-join>= => {?hidden}\n  | nucleus-join => {?hidden}\n}",
+    "\\lemma exponent \\hlevels  {this : Locale} {x y z : E} : x \u2227 y <= z <-> x <= y --> z "
+  ]
+}
+model output: 
+L.∧ p L.<= b L.∧ p L.∧ a L.<= b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p L.∧ b L.∧ p L.∧ a L.∧ p

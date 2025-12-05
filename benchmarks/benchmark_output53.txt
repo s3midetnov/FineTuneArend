@@ -1,0 +1,37 @@
+index = 53
+
+the query:{
+  "Context": [
+    "cs : Nat -> X.E",
+    "X : ExPseudoNormedRing"
+  ],
+  "Expected type": "TruncP (\\Sigma (b : Rat) (b > fromInt (neg 1)) (IsConvUpperSeries (\\lam (j : Nat) => X.norm (cs j) * fromRat (pow {RatValuedRing} b j))))",
+  "Expression": "inP (0, idp, powerSeries_0 (\\lam j => norm-bounded _))",
+  "Premises": [
+    "| \\infix 4 > E E : \\Prop",
+    "\\instance RatValuedRing \\hlevels  : PseudoValuedRing Rat {\n  | isOpen => isOpen {RatNormed}\n  | isCauchy => Closure {E} PreuniformSpace.isUniform\n  | isUniform => ExPseudoMetricSpace.isUniform {RatNormed}\n  | dist => dist {RatNormed}\n  | zro => rat (pos 0) 1 {?hidden} {?hidden}\n  | + => (+)\n  | negative => negative\n  | norm => \\lam (a : E) => Real.fromRat (abs {RatField} a)\n  | * => (RatField.*)\n  | ide => rat (pos 1) 1 {?hidden} {?hidden}\n  | natCoef => \\lam (n : Nat) => rat (pos n) 1 {?hidden} {?hidden}\n} => \\new PseudoValuedRing {\n  | cauchy-open => {?hidden}\n  | uniform-cauchy => {?hidden}\n  | dist-refl => {?hidden}\n  | dist-symm => {?hidden}\n  | dist-triang => {?hidden}\n  | dist-uniform => {?hidden}\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | negative-left => {?hidden}\n  | +-comm => {?hidden}\n  | norm_zro => {?hidden}\n  | norm_negative => {?hidden}\n  | norm_+ => {?hidden}\n  | norm-dist => {?hidden}\n  | *-assoc => {?hidden}\n  | ldistr => {?hidden}\n  | rdistr => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | natCoefZero => {?hidden}\n  | natCoefSuc => {?hidden}\n  | norm_* => {?hidden}\n  | norm_ide => {?hidden}\n}",
+    "\\func fromRat \\plevels  \\hlevels  (x : Rat) : ExUpperReal ((<) x) => \\new ExUpperReal {\n  | U-closed => {?hidden}\n  | U-rounded => {?hidden}\n}",
+    "\\func idp {A : \\Type} {a : A} : a = a => path (\\lam (_ : I) => a)",
+    "\\instance RatField : DiscreteOrderedField Rat {\n  | zro => rat (pos 0) 1 {?hidden} {?hidden}\n  | + => (RatField.+)\n  | * => (RatField.*)\n  | negative => RatField.negative\n  | ide => rat (pos 1) 1 {?hidden} {?hidden}\n  | natCoef => \\lam (n : Nat) => rat (pos n) 1 {?hidden} {?hidden}\n  | decideEq => \\lam (x : E {\\this}) (y : E {\\this}) => (\\case decideEq (ratNom x) (ratNom y), decideEq (ratDenom x) (ratDenom y) \\with {\n    | yes p, yes q => yes {x = y} (ext {x} {y} p q)\n    | no p, d => no {x = y} (\\lam (x=y : x = y) => p (pmap {Rat} {Int} ratNom {x} {y} x=y))\n    | d, no q => no {x = y} (\\lam (x=y : x = y) => q (pmap {Rat} {Nat} ratDenom {x} {y} x=y))\n  })\n  | meet => meet\n  | join => join\n  | isPos => \\lam (x : E {\\this}) => isPos (ratNom x)\n  | #0=>eitherPosOrNeg => \\lam {x : E {\\this}} (xInv : #0 {\\this} x) => (\\case x, xInv \\with {\n    | rat n1 d1 d1/=0 r1, (rat n2 d2 d2/=0 r2, il, p) => #0=>eitherPosOrNeg {n1}\n      (\\lam (n1=0 : n1 = zro) => (\\case inv {Rat} {makeRat zro (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden})}\n        {makeRat' zro (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden})}\n        (simp {zro} {d2 Nat.* d1} {productNonZero {d2} {d1} {?hidden} {?hidden}}) *> transport {Int}\n        (\\lam (x : E) => makeRat x (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden}) = rat (pos 1) 1 {?hidden} {?hidden})\n        {n2 Semigroup.* zro} {zro} (zro_*-right {n2}) (transport {Int}\n          (\\lam (x : E) => makeRat (n2 IntRing.* x) (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden}) = rat (pos 1) 1 {?hidden} {?hidden})\n          {n1} {zro} n1=0 il) \\with {}))\n  })\n  | finv => RatField.finv\n  | eitherZeroOrInv => \\lam (x : E {\\this}) => (\\case decideEq {\\this} x (zro {\\this}) \\with {\n    | yes x=0 => byLeft {x = zro {\\this}} {Inv x} x=0\n    | no x/=0 => byRight {x = zro {\\this}} {Inv x} (rmake {x} (DiscreteField.finv {\\this} x) (finv-right {\\this} {x} x/=0))\n  })\n} => \\new DiscreteOrderedField {\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | +-comm => {?hidden}\n  | *-assoc => {?hidden}\n  | ldistr => {?hidden}\n  | rdistr => {?hidden}\n  | negative-left => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | natCoefZero => {?hidden}\n  | natCoefSuc => {?hidden}\n  | zeroProduct => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | zro/>0 => {?hidden}\n  | positive_+ => {?hidden}\n  | ide>zro => {?hidden}\n  | positive_* => {?hidden}\n  | *-comm => {?hidden}\n  | finv_zro => {?hidden}\n  | finv-right => {?hidden}\n}",
+    "\\data Nat \\plevels  \\hlevels  \n  | zero\n  | suc Nat",
+    "inP A",
+    "neg Nat  {\n  | 0 => pos 0\n}",
+    "\\func signum \\plevels  \\hlevels  (_ : Int) : Int \n  | pos 0 => pos 0\n  | pos (suc n) => pos 1\n  | neg (suc n) => neg 1",
+    "\\func fromInt \\plevels  \\hlevels  (x : Int) : Rat => rat x 1 {?hidden} {?hidden}",
+    "| norm E : ExUpperReal",
+    "| norm-bounded (x : E) : IsBounded {norm x}",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I",
+    "| zro : E",
+    "| \\infixl 7 * E E : E",
+    "\\lemma powerSeries_0 \\hlevels  {cs : Series ExUpperReal} (_ : \\Pi (j : Nat) -> TruncP (\\Sigma (B : Rat) (U {cs j} B))) :\n  IsConvUpperSeries (\\lam (j : Nat) => cs j * fromRat (pow {RatField} zro j)) ",
+    "\\func \\infixl 6 - \\hlevels  {G : AddGroup} (x y : G.E) : G.E => x G.+ G.negative y",
+    "\\data Rat \\plevels  \\hlevels  \n  | rat (nom : Int) (denom : Nat) (\\property (denom /= 0)) (\\property (gcd {NatEuclidean} (iabs nom) denom = 1))",
+    "\\func IsConvUpperSeries \\hlevels  (S : Series ExUpperReal) : \\Prop => \\Pi {eps : Rat} ->\n  zro < eps -> TruncP (\\Sigma (N : Nat) (\\Pi {n : Nat} -> N <= n -> U {midSum {ExUpperRealAbMonoid} S N n} eps))",
+    "\\data Int \\plevels  \\hlevels  \n  | pos Nat\n  | neg Nat  {\n    | 0 => pos 0\n  }",
+    "\\instance ExUpperRealSemigroup \\hlevels  : CSemigroup ExUpperReal {\n  | * => (ExUpperReal.*)\n} => \\new CSemigroup {\n  | *-assoc => {?hidden}\n  | *-comm => {?hidden}\n}",
+    "\\func ratNom \\plevels  \\hlevels  (_ : Rat) : Int \n  | rat n denom denom/=0 reduced => n",
+    "\\func pow \\hlevels  {this2 : Monoid} (_ : E) (_ : Nat) : E \n  | {this}, a, 0 => ide\n  | {this}, a, suc n => pow a n * a"
+  ]
+}
+model output: 
+<<<Expected:>>> TruncP (\Sigma (b : Rat) (b > fromInt (neg 1)) (IsConvUpperSeries (\lam (j : Nat) => X.norm (cs j) * fromRat (pow {RatValuedRing} b j))))<<<Actual:>>> TruncP (\Sigma (b : Rat) (b > fromInt (neg 1)) (IsConvUpperSeries (\lam (j : Nat) => X.norm (cs j) * fromRat (pow {RatValuedRing} b j))))<<<Actual type:>>> TruncP (\Sigma (b : Rat) (b > fromInt (neg 1)) (IsConvUpperSeries (\lam (j : Nat) => X.norm (cs j) * fromRat (pow {RatValuedRing} b j))))<<<Actual:>>> TruncP (\Sigma (b : Rat) (b > fromInt (neg 1)) (IsConvUpperSeries (\lam (j : Nat) => X.norm (cs j) * fromRat (pow {RatValuedRing} b j))))<<<Actual type:>>> TruncP (\Sigma (b : Rat) (b > from

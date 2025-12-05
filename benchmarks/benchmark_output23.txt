@@ -1,0 +1,22 @@
+index = 23
+
+the query:{
+  "Context": [
+    "this : LinearlyOrderedSemiring",
+    "a : E",
+    "b : E",
+    "c : E",
+    "c>=0 : zro <= c"
+  ],
+  "Expected type": "a \u2227 b * c <= b * c",
+  "Expression": "<=_*_positive-left {this} (meet-right {this}) c>=0",
+  "Premises": [
+    "| \\infixl 7 * E E : E",
+    "| meet \\alias \\infixl 7 \u2227 E E : E",
+    "| <=_*_positive-left {x y z : E} (x <= y) (zro <= z) : x * z <= y * z",
+    "| meet-right {x y : E} : x \u2227 y <= y",
+    "\\type \\infix 4 <= \\hlevels  {A : StrictPoset} (a a' : A.E) : \\Prop => Not (a' A.< a)"
+  ]
+}
+model output: 
+* c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c * c

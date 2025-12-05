@@ -1,0 +1,36 @@
+index = 67
+
+the query:{
+  "Context": [
+    "S : P.E -> \\Prop",
+    "P : Poset"
+  ],
+  "Expected type": "Poset (\\Sigma (x : P.E) (S x)) {\n  | <= => \\lam (x : E {\\this}) (y : E {\\this}) => x.1 P.<= y.1\n  | <=-refl => {?hidden}\n  | <=-transitive => {?hidden}\n  | <=-antisymmetric => {?hidden}\n}",
+  "Expression": "\\new Poset {\n  | E => \\Sigma (x : P) (S x)\n  | <= => \\lam x y => x.1 <= y.1\n  | <=-refl => <=-refl\n  | <=-transitive => (<=\u2218)\n  | <=-antisymmetric => \\lam p q => ext (<=-antisymmetric p q)\n}",
+  "Premises": [
+    "| <=-refl {x : E} : x <= x",
+    "\\lemma prop-dpi \\plevels  \\hlevels  (A : I -> \\Prop) (a : A left) (a' : A right) : Path A a a' ",
+    "| \\infix 4 <= E E : \\Prop",
+    "| E : \\Set",
+    "\\class Poset \\extends Preorder, Cat \\hlevels  {\n  | <=-antisymmetric {x y : E} (x <= y) (y <= x) : x = y\n  | univalence => makeUnivalence (\\lam (e : Iso) => (<=-antisymmetric {e.dom} {e.cod} e.f e.hinv,\n    prop-pi {e.dom <= e.cod} {transport {Ob} (Hom e.dom) {e.dom} {e.cod} (<=-antisymmetric {e.dom} {e.cod} e.f e.hinv) (id e.dom)}\n      {e.f}))\n}",
+    "| <=-antisymmetric {x y : E} (x <= y) (y <= x) : x = y",
+    "| <=-transitive \\alias \\infixr 9 <=\u2218 {x y z : E} (x <= y) (y <= z) : x <= z"
+  ]
+}
+model output: 
+<<<Proof:>>> \new Poset (\Sigma (x : P.E) (S x)) {
+  | <= => \lam (x : E {\this}) (y : E {\this}) => x.1 P.<= y.1
+  | <=-refl => {?hidden}
+  | <=-transitive => {?hidden}
+  | <=-antisymmetric => {?hidden}
+} \plevels  \hlevels  (\lam (x : E {\this}) => x.1) \with {
+  | <= => \lam (x : E {\this}) (y : E {\this}) => x.1 P.<= y.1
+  | <=-refl => {?hidden}
+  | <=-transitive => {?hidden}
+  | <=-antisymmetric => {?hidden}
+} \new Poset (\Sigma (x : P.E) (S x)) {
+  | <= => \lam (x : E {\this}) (y : E {\this}) => x.1 P.<= y.1
+  | <=-refl => {?hidden}
+  | <=-transitive => {?hidden}
+  | <=-antisymmetric => {?hidden}
+} \plevels  \hlevels

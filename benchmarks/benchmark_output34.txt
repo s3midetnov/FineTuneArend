@@ -1,0 +1,36 @@
+index = 34
+
+the query:{
+  "Context": [
+    "y : RegularCauchyFilter X",
+    "p : \\Pi (x y : X.E) -> f.func (pointCF {X} x, pointCF {X} y) = g.func (pointCF {X} x, pointCF {X} y)",
+    "x : RegularCauchyFilter X",
+    "f : ContMap (Completion X \u2a2f Completion X) (Completion X)",
+    "X : CoverSpace",
+    "g : ContMap (Completion X \u2a2f Completion X) (Completion X)"
+  ],
+  "Expected type": "f.func (x, y) = g.func (x, y)",
+  "Expression": "dense-lift-unique\n  (prod completion completion) (isDense isDenseEmbedding.1 isDenseEmbedding.1) f g (\\lam s => p s.1 s.2) (x, y)",
+  "Premises": [
+    "\\func completion \\hlevels  {S : CoverSpace} : CoverMap S (coverSpace {S}) {\n  | func => pointCF {S}\n} => \\new CoverMap {\n  | func-cont => {?hidden}\n  | func-cover => {?hidden}\n}",
+    "\\instance CoverSpaceHasProduct \\hlevels  : HasProduct CoverSpace {\n  | Product => ProductCoverSpace\n} => \\new HasProduct",
+    "\\func coverSpace \\hlevels  {X1 : CoverSpace} : CoverSpace (RegularCauchyFilter X1) {\n  | isOpen => PrecoverSpace.isOpen\n  | isCauchy => isCCauchy {X1}\n} => \\new CoverSpace {\n  | open-top => {?hidden}\n  | open-inter => {?hidden}\n  | open-Union => {?hidden}\n  | cauchy-cover => {?hidden}\n  | cauchy-top => {?hidden}\n  | cauchy-refine => {?hidden}\n  | cauchy-glue => {?hidden}\n  | cauchy-open => {?hidden}\n  | isRegular => {?hidden}\n}",
+    "| Cod : BaseSet",
+    "\\lemma dense-lift-unique \\hlevels  {X Y : TopSpace} {Z : HausdorffTopSpace} (f : ContMap X Y) (_ : IsDense {f}) (g h : ContMap Y Z)\n  (_ : \\Pi (x : X.E) -> g.func (f.func x) = h.func (f.func x)) (y : Y.E) : g.func y = h.func y ",
+    "| Product \\alias \\infixl 7 \u2a2f E E : E",
+    "\\func prod \\hlevels  {X Y X' Y' : CoverSpace} (f : CoverMap X Y) (g : CoverMap X' Y') : CoverMap (X \u2a2f X') (Y \u2a2f Y') {\n  | func => \\lam (z : E {Dom {\\this}}) => (func {f \u2218 proj1 {X} {X'}} z, func {g \u2218 proj2 {X} {X'}} z)\n} => tuple {Y} {Y'} {X \u2a2f X'} (f \u2218 proj1 {X} {X'}) (g \u2218 proj2 {X} {X'})",
+    "\\instance Completion \\hlevels  (X : CoverSpace) : CompleteCoverSpace (RegularCauchyFilter X) {\n  | isOpen => PrecoverSpace.isOpen {coverSpace {X}}\n  | isCauchy => isCCauchy {X}\n} => \\new CompleteCoverSpace {\n  | open-top => {?hidden}\n  | open-inter => {?hidden}\n  | open-Union => {?hidden}\n  | cauchy-cover => {?hidden}\n  | cauchy-top => {?hidden}\n  | cauchy-refine => {?hidden}\n  | cauchy-glue => {?hidden}\n  | cauchy-open => {?hidden}\n  | isRegular => {?hidden}\n  | isHausdorff => {?hidden}\n  | isSeparatedCoverSpace => {?hidden}\n  | isComplete => {?hidden}\n}",
+    "\\lemma isDense \\hlevels  {X X' Y Y' : TopSpace} {f : ContMap X Y} {g : ContMap X' Y'} (_ : IsDense {f}) (_ : IsDense {g}) :\n  IsDense {prod {X} {X'} {Y} {Y'} f g} ",
+    "\\lemma isDenseEmbedding \\hlevels  {S : CoverSpace} : IsDenseEmbedding {completion {S}} ",
+    "| E : \\Set",
+    "| func (E {Dom}) : E {Cod}",
+    "| Dom : BaseSet"
+  ]
+}
+model output: 
+<<<Proof:>>> \new IsDenseEmbedding {
+  | func => \lam (z : E {Dom {\this}}) => (f.func z, g.func z)
+} => \new IsDenseEmbedding {
+  | func-cont => {?hidden}
+  | func-cover => {?hidden}
+} (isDenseEmbedding {f}) (isDenseEmbedding {g}) (dense-lift-unique {f} {g} (prod {X} {X'} {Y} {Y'} f g) (isDense {f}) (isDense {g})) (isDense {prod {X} {X'} {Y} {Y'} f g}) (isDense {f}) (isDense {g}) (isDense {prod {X} {X'} {Y} {Y'} f g}) (isDense {f}) (isDense {g}) (isDense {prod {X} {X'} {Y} {Y'} f g}) (isDense {f}) (isDense {g}) (isDense {prod {X} {X'} {Y} {Y'} f g}) (isDense

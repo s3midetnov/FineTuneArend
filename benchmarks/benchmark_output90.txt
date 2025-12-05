@@ -1,0 +1,25 @@
+index = 90
+
+the query:{
+  "Context": [
+    "x : Ob",
+    "z : Ob",
+    "this : PrecatWithBprod",
+    "y : Ob"
+  ],
+  "Expected type": "proj1 {x} {apex {Bprod y z}} \u2218 pair {x} {apex {Bprod y z}} {apex {Bprod (apex {Bprod x y}) z}} (proj1 {x} {y} \u2218 proj1 {apex {Bprod x y}} {z})\n  (pair {y} {z} {apex {Bprod (apex {Bprod x y}) z}} (proj2 {x} {y} \u2218 proj1 {apex {Bprod x y}} {z}) (proj2 {apex {Bprod x y}} {z})) = proj1 {x} {y} \u2218 proj1 {apex {Bprod x y}} {z}",
+  "Expression": "beta1 {this} _ _",
+  "Premises": [
+    "| apex : Ob {D}",
+    "| Hom Ob Ob : \\Set",
+    "\\func proj1 \\plevels obj >= hom \\hlevels  {this : PrecatWithBprod} {x y : Ob} : Hom {D {Bprod x y}} (apex {Bprod x y}) (G {Bprod x y} 0) => proj {Bprod x y} 0",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\lemma beta1 \\plevels obj >= hom \\hlevels  {this : PrecatWithBprod} {x y z : Ob} (f : Hom z x) (g : Hom z y) : proj1 {x} {y} \u2218 pair {x} {y} {z} f g = f ",
+    "| \\infixl 8 o \\alias \\infixl 8 \u2218 {X Y Z : Ob} (Hom Y Z) (Hom X Y) : Hom X Z",
+    "\\func proj2 \\plevels obj >= hom \\hlevels  {this : PrecatWithBprod} {x y : Ob} : Hom {D {Bprod x y}} (apex {Bprod x y}) (G {Bprod x y} 1) => proj {Bprod x y} 1",
+    "| Bprod (x y : Ob) : Product {Fin 2} (at {x :: y :: nil})",
+    "\\func pair \\plevels obj >= hom \\hlevels  {this : PrecatWithBprod} {x y z : Ob} (f : Hom z x) (g : Hom z y) : Hom z (apex {Bprod x y}) \n=> tupleMap {Bprod x y} {z} (\\lam (p0 : J {Bprod x y}) => (\\case p0 \\with {\n  | zero => f\n  | suc zero => g\n}))"
+  ]
+}
+model output: 
+<<<break>>> proj1 {x} {apex {Bprod y z}} ∘ pair {x} {apex {Bprod y z}} {apex {Bprod (apex {Bprod x y}) z}} (proj1 {x} {y} ∘ proj1 {apex {Bprod x y}} {z}) (proj2 {apex {Bprod x y}} {z}) <<<break>>> proj1 {x} {apex {Bprod y z}} ∘ pair {x} {apex {Bprod y z}} {apex {Bprod (apex {Bprod x y}) z}} (proj1 {x} {y} ∘ proj1 {apex {Bprod x y}} {z}) (proj2 {apex {Bprod x y}} {z}) <<<break>>> proj1 {x} {apex {Bprod y z}} ∘ pair {x} {apex {Bprod y z}} {apex {Bprod (apex {Bprod x y}) z}} (proj1 {x} {y} ∘ proj1 {apex {Bprod x y}} {z}) (proj2 {

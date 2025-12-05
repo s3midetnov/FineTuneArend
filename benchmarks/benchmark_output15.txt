@@ -1,0 +1,48 @@
+index = 15
+
+the query:{
+  "Context": [
+    "k : Fin n",
+    "l : Array R.E n",
+    "n : Nat",
+    "R : CRing",
+    "N : Matrix R.E n n"
+  ],
+  "Expected type": "Array R.E n (\\lam (j : Fin n) => l.at j R.* at {at {N} j} k)",
+  "Expression": "\\lam j => l j * N j k",
+  "Premises": [
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "| \\infixl 7 * E E : E",
+    "| at (j : Fin len) : A j",
+    "\\class DArray {\n  | len : Nat\n  | A (Fin len) : \\Type\n  | at (j : Fin len) : A j\n}",
+    "| E : \\Set"
+  ]
+}
+model output: 
+n E E<|endoftext|>#lang cring
+
+  | at (j : Fin len) : A j
+  | len : Nat
+  | A (Fin len) : \\Type
+  | E : \\Set
+  | at (j : Fin len) : A j
+  | E : \\Set
+  | at (j : Fin len) : A j
+  | E : \\Set
+  | at (j : Fin len) : A j
+  | E : \\Set
+  | at (j : Fin len) : A j
+  | E : \\Set
+  | at (j : Fin len) : A j
+  | E : \\Set
+  | at (j : Fin len) : A j
+  | E : \\Set
+  | at (j : Fin len) : A j
+  | E : \\Set
+  | at (j : Fin len) : A j
+  | E : \\Set
+  | at (j : Fin len) : A j
+  | E : \\Set
+  | at (j : Fin len) : A j
+  | E : \\Set
+  | at (j : Fin len) :

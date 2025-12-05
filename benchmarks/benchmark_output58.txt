@@ -1,0 +1,54 @@
+index = 58
+
+the query:{
+  "Context": [
+    "G : CGroup",
+    "env : Array G.E cs.len",
+    "a : G.E",
+    "cs : Array Int n",
+    "n : Nat",
+    "m : Nat"
+  ],
+  "Expected type": "sBigProd {G} (toArray {G} (pos (suc m) :: cs) (a :: env)) = interpretNF' {G} (pos (suc m) :: cs) (a :: env)",
+  "Expression": "monoid {(sBigProd_:: {G}, interpretNF-correct {G} (_ :: cs), inv (pow-left {G}))}",
+  "Premises": [
+    "suc Nat",
+    "\\func ipow \\hlevels  {this2 : Group} (_ : E) (_ : Int) : E \n  | {this}, a, pos n => pow a n\n  | {this}, a, neg n => pow (inverse a) n",
+    "| interpretNF {n : Nat} (Fin n -> M) (NF n) : M",
+    "nil",
+    "\\class DArray {\n  | len : Nat\n  | A (Fin len) : \\Type\n  | at (j : Fin len) : A j\n}",
+    "| \\infixl 2 >>= {m n : Nat} (NF m) (Fin m -> NF n) : NF n",
+    "\\lemma sBigProd_:: \\hlevels  {G : CGroup} {a : G.E} {l : Array G.E} : sBigProd {G} (a :: l) = a G.* sBigProd {G} l ",
+    "\\func Big {A1 B1 : \\Type} (_ : A1 -> B1 -> B1) (_ : B1) (_ : Array A1) : B1 \n  | {A}, {B}, op, b, nil => b\n  | {A}, {B}, op, b, :: {n} a l => op a (Big {A} {B} op b l)",
+    "\\infixl 7 :* (_ _ : Term n)",
+    "| \\infixl 7 * E E : E",
+    "| nfVar {n : Nat} (Fin n) : NF n",
+    "\\lemma interpretNF-correct \\hlevels  {G : CGroup} (cs : Array Int) {env : Array G.E cs.len} : sBigProd {G} (toArray {G} cs env) = interpretNF' {G} cs env ",
+    "\\func sBigProd \\hlevels  {G2 : CGroup} (_ : Array G.E) : G.E \n  | {G}, nil => G.ide\n  | {G}, :: {0} a nil => a\n  | {G}, :: {n} a l => a G.* sBigProd {G} l",
+    "| at (j : Fin len) : A j",
+    "\\lemma terms-equality \\hlevels  {this : SolverModel} (env : Array M) (t s : Term env.len)\n  (_ : interpretNF {env.len} env.at (normalize {env.len} t) = interpretNF {env.len} env.at (normalize {env.len} s)) :\n  interpret {env.len} env.at t = interpret {env.len} env.at s ",
+    "| normalize {n : Nat} (Term n) : NF n",
+    "| E : \\Set",
+    "\\func toArray \\hlevels  {G4 : CGroup} (cs3 : Array Int) (_ : Array G.E cs.len) : Array G.E \n  | {G}, nil, nil => nil\n  | {G}, :: {n} (pos 0) cs, a :: env => toArray {G} cs env\n  | {G}, :: {n} (pos (suc n1)) cs, a :: env => a :: toArray {G} (pos n1 :: cs) (a :: env)\n  | {G}, :: {n} (neg (suc n1)) cs, a :: env => G.inverse a :: toArray {G} (neg n1 :: cs) (a :: env)",
+    "var (Fin n)",
+    "\\func \\infixr 9 *> {A : \\Type} {a a' a'' : A} (_ : a = a') (_ : a' = a'') : a = a'' \n  | {A}, {a}, {a'}, {a''}, p, idp => p",
+    "\\lemma pow-left \\hlevels  {this : Monoid} {a : E} {n : Nat} : a * pow a n = pow a n * a ",
+    "\\func MonoidSolverModel \\hlevels  (M1 : Monoid) : SubstSolverModel M.E {\n  | Term => MonoidSolverModel.Term\n  | NF => \\lam (n : Nat) => List (Fin n)\n  | normalize => \\lam {n : Nat} (t : SolverModel.Term {\\this} n) => normalize-aux {n} t (nil {Fin n})\n  | interpret => MonoidSolverModel.interpret {M1}\n  | interpretNF => \\lam {n : Nat} => MonoidSolverModel.interpretNF {M1} {Fin n}\n  | nfVar => \\lam {n : Nat} (v : Fin n) => v :: nil {Fin n}\n  | >>= => \\lam {m : Nat} {n : Nat} => (>>=)\n} => \\new SubstSolverModel {\n  | interpretNF-consistent => {?hidden}\n  | >>=-consistent => {?hidden}\n}",
+    "| len : Nat",
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "| ide : E",
+    "\\func fcase {A : \\Type} {n : Nat} (_ : A) (_ : Fin n -> A) (_ : Fin (suc n)) : A \n  | {A}, {n}, a, f, zero => a\n  | {A}, {n}, a, f, suc j => f j",
+    "| NF Nat : \\Set",
+    "pos Nat",
+    "\\lemma terms-equality-conv \\hlevels  {this : SolverModel} (env : Array M) (t s : Term env.len)\n  (_ : interpret {env.len} env.at t = interpret {env.len} env.at s) :\n  interpretNF {env.len} env.at (normalize {env.len} t) = interpretNF {env.len} env.at (normalize {env.len} s) ",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\func interpretNF' \\hlevels  {G : CGroup} (l : Array Int) (env : Array G.E l.len) : G.E \n  => BigProd {G} (\\new Array G.E l.len (\\lam (j : Fin l.len) => ipow {G} (env.at j) (l.at j)))",
+    "\\data Int \\plevels  \\hlevels  \n  | pos Nat\n  | neg Nat  {\n    | 0 => pos 0\n  }",
+    "\\func inv {A1 : \\Type} {a1 a' : A1} (_ : a1 = a') : a' = a1 \n  | {A}, {a}, {a'}, idp => idp {A} {a}",
+    "\\lemma apply-axiom \\hlevels  {this : SubstSolverModel} (env : Array M) (t s : Term env.len)\n  (_ : interpret {env.len} env.at t = interpret {env.len} env.at s) (pattern : NF (suc env.len)) :\n  interpretNF {env.len} env.at (pattern >>= fcase {NF env.len} {env.len} (normalize {env.len} t) (nfVar {env.len})) = interpretNF {env.len} env.at (pattern >>= fcase {NF env.len} {env.len} (normalize {env.len} s) (nfVar {env.len})) ",
+    "\\infixr 5 :: A (List A)",
+    "\\func pow \\hlevels  {this2 : Monoid} (_ : E) (_ : Nat) : E \n  | {this}, a, 0 => ide\n  | {this}, a, suc n => pow a n * a"
+  ]
+}
+model output: 
+>>= fcase {NF (pos (suc m) :: cs) (a :: env)} {pos (suc m) :: cs} (normalize {pos (suc m) :: cs} (a :: env)) >>= fcase {NF (pos (suc m) :: cs) (a :: env)} {pos (suc m) :: cs} (normalize {pos (suc m) :: cs} (a :: env)) >>= fcase {NF (pos (suc m) :: cs) (a :: env)} {pos (suc m) :: cs} (normalize {pos (suc m) :: cs} (a :: env)) >>= fcase {NF (pos (suc m) :: cs) (a :: env)} {pos (suc m) :: cs} (normalize {pos (suc m) :: cs} (a :: env)) >>= fcase {NF (pos (suc m) :: cs) (a :: env)} {pos (suc m) :: cs} (normalize {pos (suc m) :: cs} (a :: env)) >>= fcase {NF (pos (suc m) :: cs) (a :: env)} {

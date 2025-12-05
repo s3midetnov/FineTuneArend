@@ -1,0 +1,32 @@
+index = 19
+
+the query:{
+  "Context": [
+    "r : \\Sigma (b : R.E) (k : Nat) (k /= 0) (b R.* b = b) (LDiv {R} (pow {R} a k) b) (LDiv {R} b (pow {R} a k))",
+    "R : CRing",
+    "a : R.E",
+    "r1=1 : r.1 = R.ide"
+  ],
+  "Expected type": "Inv {R} (pow {R} a (suc (pred r.2))) (inv {r.5})",
+  "Expression": "rewrite (inv $ suc_pred r.3) (lmake (inv {r.5}) (*-comm *> inv-right {r.5} *> r1=1))",
+  "Premises": [
+    "\\lemma suc_pred \\plevels  \\hlevels  {n : Nat} (_ : n /= 0) : suc (pred n) = n ",
+    "suc Nat",
+    "\\func transport {A : \\Type} (B : A -> \\Type) {a a' : A} (p : a = a') (b : B a) : B a' => coe (\\lam (i : I) => B (p @ i)) b right",
+    "\\lemma lmake \\hlevels  {M : CMonoid} {x : M.E} (y : M.E) (_ : y M.* x = M.ide) : Inv {M} x y ",
+    "| ide : E",
+    "\\data Nat \\plevels  \\hlevels  \n  | zero\n  | suc Nat",
+    "\\class Inv \\extends LInv, RInv \\hlevels ",
+    "| inv : E {M}",
+    "| inv-right : val * inv = elem",
+    "| \\infixl 7 * E E : E",
+    "| *-comm {x y : E} : x * y = y * x",
+    "\\func pred \\plevels  \\hlevels  (_ : Nat) : Nat \n  | 0 => 0\n  | suc x' => x'",
+    "\\func inv {A1 : \\Type} {a1 a' : A1} (_ : a1 = a') : a' = a1 \n  | {A}, {a}, {a'}, idp => idp {A} {a}",
+    "| E : \\Set",
+    "\\func \\infixr 9 *> {A : \\Type} {a a' a'' : A} (_ : a = a') (_ : a' = a'') : a = a'' \n  | {A}, {a}, {a'}, {a''}, p, idp => p",
+    "\\func pow \\hlevels  {this2 : Monoid} (_ : E) (_ : Nat) : E \n  | {this}, a, 0 => ide\n  | {this}, a, suc n => pow a n * a"
+  ]
+}
+model output: 
+(pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (pow {R} a (suc (pred r.2))) (

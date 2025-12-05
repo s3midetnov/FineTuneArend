@@ -1,0 +1,75 @@
+index = 20
+
+the query:{
+  "Context": [
+    "d : CRingData {R} (u :: at {A} 0 !! 0 :: v :: at {A} 1 !! 0 :: s :: t :: nil) {\n  | interpretNF_negate => {?hidden}\n}",
+    "p : at {at {A} 0} 0 R.* u = at {at {A} 1} 0 R.* v",
+    "v : R.E",
+    "t : R.E",
+    "u : R.E",
+    "R : CRing",
+    "A : Matrix R.E 2 2",
+    "s : R.E",
+    "q : s R.* u R.+ t R.* v = R.ide"
+  ],
+  "Expected type": "idealElem {R}\n  (map {\\Sigma R.E (gen : R.E) (gen = R.zro)} {\\Sigma R.E R.E} (\\lam (x : \\Sigma R.E (gen : R.E) (gen = R.zro)) => (x.1, x.2))\n    ((interpret {d} (:negative {E {d.C}} {Fin (len {vars {d.mData}})} (coef {E {d.C}} {Fin (len {vars {d.mData}})} (pos 1))),\n      at {at {A} 0} 0 R.* u R.+ R.negative (at {at {A} 1} 0 R.* v),\n      toZero {R} {at {at {A} 0} 0 R.* u} {at {at {A} 1} 0 R.* v} p) :: (interpret {d} (coef {E {d.C}} {Fin (len {vars {d.mData}})} (pos 0)), s R.* u R.+ t R.* v R.+ R.negative R.ide,\n        toZero {R} {s R.* u R.+ t R.* v} {R.ide} q) :: nil {\\Sigma R.E (gen : R.E) (gen = R.zro)})) = R.zro",
+  "Expression": "gensZeroToIdealZero ((interpret {d} (:negative (coef 1)), A !! 0 !! 0 R.* u + negative (A !! 1 !! 0 R.* v),\n  toZero {R} {A !! 0 !! 0 R.* u} {A !! 1 !! 0 R.* v} p) :: (interpret {d} (coef 0), s R.* u R.+ t R.* v + negative R.ide, toZero {R} {s R.* u R.+ t R.* v} {R.ide} q) :: nil)",
+  "Premises": [
+    "| len : Nat",
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "| \\infixl 6 + E E : E",
+    "\\func idealElem \\hlevels  {R2 : CRing} (_ : List (\\Sigma R.E R.E)) : R.E \n  | {R}, nil => R.zro\n  | {R}, (c, gen) :: xs => c R.* gen R.+ idealElem {R} xs",
+    "| C : Semiring",
+    "| ide : E",
+    "coef C",
+    "nil",
+    "\\func map {A1 B2 : \\Type} (_ : A1 -> B2) (_ : List A1) : List B2 \n  | {A}, {B}, f, nil => nil {B}\n  | {A}, {B}, f, a :: l => f a :: map {A} {B} f l",
+    ":negative (RingTerm C V)",
+    "| vars : Array (E {M})",
+    "\\lemma toZero \\hlevels  {this : AddGroup} {x y : E} (_ : x = y) : x - y = zro ",
+    "pos Nat",
+    "| zro : E",
+    "\\func interpret \\hlevels  {this7 : AlgData} (_ : RingTerm (E {C}) (Fin (len {vars {mData}}))) : E {R} \n  | {this}, coef c => func {alg} c\n  | {this}, var x => at {vars} x\n  | {this}, :zro => zro {R}\n  | {this}, :ide => ide {R}\n  | {this}, :negative t => pnegative (interpret t)\n  | {this}, t :+ s => interpret t + interpret s\n  | {this}, t :* s => interpret t * interpret s",
+    "\\field mData : MonoidData {R} vars",
+    "| \\infixl 7 * E E : E",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "| at (j : Fin len) : A j",
+    "\\lemma gensZeroToIdealZero \\hlevels  {R : CRing} (gensCoeffs : List (\\Sigma R.E (gen : R.E) (gen = R.zro))) : idealElem {R}\n  (map {\\Sigma R.E (gen : R.E) (gen = R.zro)} {\\Sigma R.E R.E} (\\lam (x : \\Sigma R.E (gen : R.E) (gen = R.zro)) => (x.1, x.2))\n    gensCoeffs) = R.zro ",
+    "| E : \\Set",
+    "| negative E : E",
+    "\\infixr 5 :: A (List A)"
+  ]
+}
+model output: 
+<<<Proof:>>> \case interpretNF_negate \with {
+  | interpretNF_negate => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+  | interpret => {?hidden}
+} \in \case interpret \with {
+

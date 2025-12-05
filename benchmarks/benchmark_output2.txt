@@ -1,0 +1,29 @@
+index = 2
+
+the query:{
+  "Context": [
+    "e : Iso",
+    "q : \\new GroupAction G1 (E {e.dom}) {\n  | ** => (**) {e.dom}\n  | **-assoc => {?hidden}\n  | id-action => {?hidden}\n} = \\new GroupAction G1 (E {e.cod}) {\n  | ** => (**) {e.cod}\n  | **-assoc => {?hidden}\n  | id-action => {?hidden}\n}",
+    "this : Cat (GroupAction G1) {\n  | Hom => EquivariantMap G1\n  | id => id-equivar {G1}\n  | o => \\lam {x y z : Ob {\\this}} (g : Hom {\\this} y z) (f : Hom {\\this} x y) => \\new EquivariantMap G1 x z {\n    | func => \\lam (a : x.E) => g.func (f.func a)\n    | func-** => {?hidden}\n  }\n  | id-left => {?hidden}\n  | id-right => {?hidden}\n  | o-assoc => {?hidden}\n  | univalence => {?hidden}\n}"
+  ],
+  "Expected type": "\\Pi {e1 : E {Dom {transport {Ob {\\this}} (Hom {\\this} e.dom) {e.dom} {e.cod} q (id {\\this} e.dom)}}} ->\n\\Pi {g : E {G {transport {Ob {\\this}} (Hom {\\this} e.dom) {e.dom} {e.cod} q (id {\\this} e.dom)}}} ->\n  func {transport {Ob {\\this}} (Hom {\\this} e.dom) {e.dom} {e.cod} q (id {\\this} e.dom)} (g ** e1) = g ** func {transport {Ob {\\this}} (Hom {\\this} e.dom) {e.dom} {e.cod} q (id {\\this} e.dom)} e1",
+  "Expression": "func-** {transport {GroupAction G} (\\lam (B : GroupAction G) => EquivariantMap G e.dom B) {e.dom} {e.cod} q (id-equivar {G} e.dom)}",
+  "Premises": [
+    "| Hom Ob Ob : \\Set",
+    "| \\infixl 8 ** (E {G}) E : E",
+    "\\func transport {A : \\Type} (B : A -> \\Type) {a a' : A} (p : a = a') (b : B a) : B a' => coe (\\lam (i : I) => B (p @ i)) b right",
+    "| func-** {e : E {Dom}} {g : E {G}} : func (g ** e) = g ** func e",
+    "| dom : Ob {C}",
+    "| G : Group",
+    "| Cod : BaseSet",
+    "| cod : Ob {C}",
+    "| id (X : Ob) : Hom X X",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "| Ob : \\hType",
+    "| E : \\Set",
+    "| func (E {Dom}) : E {Cod}",
+    "| Dom : BaseSet"
+  ]
+}
+model output: 
+<<<Proof:>>> \case \infixl 8 ** (e : E {Dom}) (g : E {G}) => g ** e, \infixl 8 **-assoc {e : E {Dom}} {g : E {G}} {h : E {G}} => g ** (h ** e) = (g ** h) ** e, \infixl 8 **-comm {e : E {Dom}} {g : E {G}} {h : E {G}} => g ** h = h ** g, \infixl 8 **-ide {e : E {Dom}} {g : E {G}} => g ** id = g, \infixl 8 **-commide {e : E {Dom}} {g : E {G}} => g ** (id ** e) = g ** e, \infixl 8 **-ide-right {e : E {Dom}} {g : E {G}} => id ** g = g, \infixl 8 **-comm-left {e : E {Dom}} {g : E {G}} => g ** h = h ** g, \infixl 8 **

@@ -1,0 +1,33 @@
+index = 68
+
+the query:{
+  "Context": [
+    "Y : Ob {C {\\this}}",
+    "null : Ob {C {\\this}}",
+    "Z : Ob {C {\\this}}",
+    "C : Precat",
+    "J : Precat",
+    "G : Functor J (VPresheafCat D C)",
+    "f : Hom {C {\\this}} o Y",
+    "g : Hom {C {\\this}} Y Z",
+    "D : CompleteCat"
+  ],
+  "Expected type": "Cone {J1} {D} (functor-at-point {C} {D} {J1} {G} Z) apex {\n  | coneMap => \\lam (j : Ob {J {\\this}}) => Func {VPresheaf.F {G.F j}} {o} {Z} (f \u2218 g) D.\u2218 coneMap j\n}",
+  "Expression": "cone {C} {D} {J} {G} (f \u2218 g)",
+  "Premises": [
+    "\\func functor-at-point \\hlevels  {C1 : Precat} {D1 : CompleteCat} {J : Precat} {G : Functor J (VPresheafCat D1 C1)} (c : C.Ob) :\nFunctor J D1 (\\lam (j : Ob {C {\\this}}) => Functor.F {VPresheaf.F {G.F j}} c) {\n  | Func => \\lam {X Y : Ob {C {\\this}}} (f : Hom {C {\\this}} X Y) => trans {G.Func {X} {Y} f} c\n} => \\new Functor {\n  | Func-id => {?hidden}\n  | Func-o => {?hidden}\n}",
+    "| apex : Ob {D}",
+    "| Func {X Y : Ob {C}} (Hom {C} X Y) : Hom {D} (F X) (F Y)",
+    "\\func L \\hlevels  {C : Precat} {D : CompleteCat} {J : Precat} {G : Functor J (VPresheafCat D C)} (c : C.Ob) :\n  Limit {J} {D} (functor-at-point {C} {D} {J} {G} c) => D.limit {J} (functor-at-point {C} {D} {J} {G} c)",
+    "| F : Functor (op {C}) D",
+    "| coneMap (j : Ob {J}) : Hom {D} apex (F {G} j)",
+    "| J : Precat",
+    "| Ob : \\hType",
+    "| \\infixl 8 o \\alias \\infixl 8 \u2218 {X Y Z : Ob} (Hom Y Z) (Hom X Y) : Hom X Z",
+    "\\class Cone \\plevels obj >= hom \\hlevels  {\n  | J : Precat\n  | D : Precat\n  | G : Functor J D\n  | apex : Ob {D}\n  | coneMap (j : Ob {J}) : Hom {D} apex (F {G} j)\n  | coneCoh {j j' : Ob {J}} (h : Hom {J} j j') : Func {G} {j} {j'} h \u2218 coneMap j = coneMap j'\n}",
+    "| F (Ob {C}) : Ob {D}",
+    "\\func cone \\hlevels  {C : Precat} {D : CompleteCat} {J1 : Precat} {G : Functor J1 (VPresheafCat D C)} {X Y : C.Ob} (f : C.Hom Y X) :\nCone {J1} {D} (functor-at-point {C} {D} {J1} {G} Y) apex {\n  | coneMap => \\lam (j : Ob {J {\\this}}) => Func {VPresheaf.F {G.F j}} {X} {Y} f D.\u2218 coneMap j\n} => \\new Cone {\n  | coneCoh => {?hidden}\n}"
+  ]
+}
+model output: 
+===coneCoh {j j' : Ob {J {\this}}} (h : Hom {J {\this}} j j') : Func {G} {j} {j'} h ∘ coneMap j = coneMap j' ===coneCoh {j j' : Ob {J {\this}}} (h : Hom {J {\this}} j j') : Func {G} {j} {j'} h ∘ coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>coneMap j = coneMap j'<<<break>>>cone

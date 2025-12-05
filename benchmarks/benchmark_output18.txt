@@ -1,0 +1,18 @@
+index = 18
+
+the query:{
+  "Context": [
+    "this : Preorder",
+    "this : Equivalence E {\n  | ~ => \\lam (x : A {\\this}) (y : A {\\this}) => \\Sigma (x <= y) (y <= x)\n  | ~-transitive => {?hidden}\n  | ~-reflexive => {?hidden}\n  | ~-symmetric => {?hidden}\n}"
+  ],
+  "Expected type": "\\Pi {x : A {\\this}} -> x ~ x",
+  "Expression": "\\lam {x} => (<=-refl {this}, <=-refl {this})",
+  "Premises": [
+    "| <=-refl {x : E} : x <= x",
+    "| \\infix 4 <= E E : \\Prop",
+    "| \\infix 4 ~ A A : \\Prop",
+    "| A : \\Set"
+  ]
+}
+model output: 
+<<<Proof:>>> \Pi {x : A {\this}} -> x <= x => x ~ x {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?hidden} {?

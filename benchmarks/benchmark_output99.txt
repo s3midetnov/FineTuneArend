@@ -1,0 +1,57 @@
+index = 99
+
+the query:{
+  "Context": [
+    "p/=0 : p /= zro",
+    "f : RingHom K R",
+    "p : Poly K",
+    "K : DiscreteField",
+    "a : R.E",
+    "R : CRing",
+    "pm : isMinPoly f a p"
+  ],
+  "Expected type": "isMonicMinPoly f a (finv {K} (leadCoef {K} p) *c p)",
+  "Expression": "(field-toMonic p/=0, (polyMapEval_*c *> pmap ((*) _) pm.1 *> zro_*-right, \\lam {q} qe => (\\case pm.2 qe \\with {\n  | inP (x, s) =>\n    inP $ make (leadCoef p *c x) $ inv *c-comm-left *> pmap ((*c) _) (inv *c-comm-right) *> inv *c-assoc *> pmap (\\lam _x => _x *c _) (finv-left {K} (\\lam q => p/=0 $ leadCoef=0-lem q)) *> ide_*c *> s\n})))",
+  "Premises": [
+    "| ide_*c {a : E} : ide {R} *c a = a",
+    "\\instance PolyRing \\hlevels  (R : Ring) : Ring (Poly R) {\n  | zro => pzero {R}\n  | + => (PolyRing.+)\n  | * => (*)\n  | negative => negative {R}\n  | ide => padd {R} (pzero {R}) R.ide\n  | natCoef => \\lam (n : Nat) => padd {R} (pzero {R}) (R.natCoef n)\n} => \\new Ring {\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | +-comm => {?hidden}\n  | *-assoc => {?hidden}\n  | ldistr => {?hidden}\n  | rdistr => {?hidden}\n  | negative-left => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | natCoefZero => {?hidden}\n  | natCoefSuc => {?hidden}\n}",
+    "\\func pmap {A B : \\Type} (f : A -> B) {a a' : A} (p : a = a') : f a = f a' => path (\\lam (i : I) => f (p @ i))",
+    "inP A",
+    "| Cod : BaseSet",
+    "\\class LDiv \\extends DivBase \\hlevels  {\n  | inv-right : val * inv = elem\n}",
+    "\\func isMonicMinPoly \\hlevels  (f : RingHom) (a : E {f.Cod}) (p : Poly f.Dom) : \\Prop => \\Sigma (isMonic {f.Dom} p) (isMinPoly f a p)",
+    "| \\infixl 7 * E E : E",
+    "\\func * {R3 : Ring} (_ _ : Poly R3) : Poly R3 \n  | {R}, pzero, q => pzero {R}\n  | {R}, padd p e, q => padd {R} (p * q) R.zro + e *c q\n  | {R}, peq i, q =>\n    (pmap {Poly R} {Poly R} ((+) (padd {R} (pzero {R}) R.zro)) {R.zro *c q} {pzero {R}} (zro_*c {R} {q}) *> path (peq {R})) @ i",
+    "\\func leadCoef \\hlevels  {R3 : Ring.Dec} (_ : Poly R3) : R.E \n  | {R}, pzero => R.zro\n  | {R}, padd p e => \\case decideEq p zro \\with {\n    | yes p => e\n    | no n => leadCoef {R} p\n  }\n  | {R}, peq i => idp {R.E} {\\case decideEq (pzero {R}) zro \\with {\n    | yes p => R.zro\n    | no n => R.zro\n  }} @ i",
+    "\\func isMinPoly \\hlevels  (f : RingHom) (a : E {f.Cod}) (p : Poly f.Dom) : \\Prop \n=> \\Sigma (polyMapEval {f.Dom} {f.Cod} (\\new f {}) p a = zro {f.Cod})\n  (\\Pi {q : Poly f.Dom} -> polyEval {f.Cod} (polyMap f q) a = zro {f.Cod} -> TruncP (LDiv {PolyRing f.Dom} p q))",
+    "| E : \\Set",
+    "\\func make \\hlevels  {M : Monoid} {a b : M.E} (c : M.E) (p : a M.* c = b) : LDiv {M} a b c => \\new LDiv {\n  | inv-right => {?hidden}\n}",
+    "\\func \\infixr 9 *> {A : \\Type} {a a' a'' : A} (_ : a = a') (_ : a' = a'') : a = a'' \n  | {A}, {a}, {a'}, {a''}, p, idp => p",
+    "\\instance PolyAlgebra \\hlevels  (R1 : CRing) : CAlgebra R1 (Poly R1) {\n  | zro => pzero {R1}\n  | + => (+)\n  | negative => negative {R1}\n  | *c => (*c)\n  | * => (*)\n  | ide => padd {R1} (pzero {R1}) R.ide\n  | natCoef => \\lam (n : Nat) => padd {R1} (pzero {R1}) (R.natCoef n)\n  | coefMap => coefMap-impl\n} => \\new CAlgebra {\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | negative-left => {?hidden}\n  | +-comm => {?hidden}\n  | *c-assoc => {?hidden}\n  | *c-ldistr => {?hidden}\n  | *c-rdistr => {?hidden}\n  | ide_*c => {?hidden}\n  | *-assoc => {?hidden}\n  | ldistr => {?hidden}\n  | rdistr => {?hidden}\n  | *c-comm-left => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | natCoefZero => {?hidden}\n  | natCoefSuc => {?hidden}\n  | coefMap_*c => {?hidden}\n  | *-comm => {?hidden}\n}",
+    "\\lemma polyMapEval_*c \\hlevels  {R : Ring} {S : CRing} {f : RingHom R S} {x : R.E} {a : S.E} {p : Poly R} :\n  polyMapEval {R} {S} f (x *c p) a = f.func x S.* polyMapEval {R} {S} f p a ",
+    "| ide : E",
+    "\\func polyEval \\hlevels  {R3 : Ring} (_ : Poly R3) (_ : R.E) : R.E \n  | {R}, pzero, a => R.zro\n  | {R}, padd p e, a => polyEval {R} p a R.* a R.+ e\n  | {R}, peq i, a => (R.zro-right {R.zro R.* a} *> R.zro_*-left {a}) @ i",
+    "\\func isMonic \\hlevels  {R : Ring} (p : Poly R) : \\Prop => TruncP (\\Sigma (n : Nat) (degree<= {R} p n) (polyCoef {R} p n = R.ide))",
+    "\\lemma finv-left {this : DiscreteField} {x : E} (_ : x /= zro) : finv x * x = ide ",
+    "\\class RingHom \\extends SemiringHom, AddGroupHom \\hlevels ",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I",
+    "\\lemma field-toMonic {K : DiscreteField} {p : Poly K} (_ : p /= zro) : isMonic {K} (K.finv (leadCoef {K} p) *c p) ",
+    "| zro : E",
+    "| finv E : E",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "| *c-comm-left {r : E {R}} {a b : E} : r *c (a * b) = r *c a * b",
+    "\\data Poly \\hlevels  AddPointed \n  | pzero\n  | padd (Poly R) R.E\n  | peq I",
+    "\\func polyMapEval \\hlevels  {A : AddPointed} {R : Ring} (f : AddPointedHom A R) (p : Poly A) (a : R.E) : R.E => polyEval {R} (polyMap f p) a",
+    "| zro_*-right {x : E} : x * zro = zro",
+    "\\func inv {A1 : \\Type} {a1 a' : A1} (_ : a1 = a') : a' = a1 \n  | {A}, {a}, {a'}, idp => idp {A} {a}",
+    "| \\infixl 7 *c (E {R}) E : E",
+    "| func (E {Dom}) : E {Cod}",
+    "\\func polyMap \\hlevels  (f3 : AddPointedHom) (_ : Poly f.Dom) : Poly f.Cod \n  | f, pzero => pzero {f.Cod}\n  | f, padd p e => padd {f.Cod} (polyMap f p) (f.func e)\n  | f, peq i => transportInv\n    {E {f.Cod}} (\\lam (x : E {f.Cod}) => padd {f.Cod} (pzero {f.Cod}) x = pzero {f.Cod}) {f.func (zro {f.Dom})} {zro {f.Cod}}\n      f.func-zro (path (peq {f.Cod})) @ i",
+    "| *c-comm-right {r : E {R}} {a b : E} : r *c (a * b) = a * (r *c b)",
+    "| Dom : BaseSet",
+    "\\lemma leadCoef=0-lem \\hlevels  {R : Dec} {p : Poly R} (_ : leadCoef {R} p = R.zro) : p = zro ",
+    "| *c-assoc {r r' : E {R}} {a : E} : r * r' *c a = r *c (r' *c a)"
+  ]
+}
+model output: 
+*> pmap {K} {R} (finv {K} (leadCoef {K} p) *c p) {K} (leadCoef {K} p) *> isMonicMinPoly f a (finv {K} (leadCoef {K} p) *c p) *> pmap {K} {R} (finv {K} (leadCoef {K} p) *c p) {K} (leadCoef {K} p) *> isMonicMinPoly f a (finv {K} (leadCoef {K} p) *c p) *> pmap {K} {R} (finv {K} (leadCoef {K} p) *c p) {K} (leadCoef {K} p) *> isMonicMinPoly f a (finv {K} (leadCoef {K} p) *c p) *> pmap {K} {R} (finv {K} (leadCoef {K} p) *c p) {K} (leadCoef {K} p) *> isMonicMinPoly f a (finv {K} (

@@ -1,0 +1,25 @@
+index = 31
+
+the query:{
+  "Context": [
+    "a : E",
+    "this : Locale",
+    "p : \\Sigma (b : E)\n  (b \u2227 a <= Join {\\Sigma (b : Subtype {open a}) (b \u2227 x <= y)} (\\lam (p0 : \\Sigma (b : Subtype {open a}) (b \u2227 x <= y)) => p0.1.1))",
+    "y : E",
+    "x : E"
+  ],
+  "Expected type": "p.1 \u2227 a \u2227 x.1 <= Join {\\Sigma (b : Subtype {open a}) (b \u2227 x <= y)} (\\lam (p0 : \\Sigma (b : Subtype {open a}) (b \u2227 x <= y)) => p0.1.1) \u2227 x.1",
+  "Expression": "meet-monotone {this} p.2 (<=-refl {this})",
+  "Premises": [
+    "| <=-refl {x : E} : x <= x",
+    "\\instance locale \\hlevels  {this2 : Nucleus} : Locale Subtype {\n  | <= => \\lam (p0 : E {\\this}) (p1 : E {\\this}) => p0.1 <= p1.1\n  | meet => \\lam (p0 : E {\\this}) (p1 : E {\\this}) => (p0.1 \u2227 p1.1,\n    transportInv {E {L}} (\\lam (x : E {L}) => x <= p0.1 \u2227 p1.1) {nucleus (p0.1 \u2227 p1.1)} {nucleus p0.1 \u2227 nucleus p1.1}\n      (nucleus-meet {p0.1} {p1.1}) (meet-monotone {L} {nucleus p0.1} {nucleus p1.1} {p0.1} {p1.1} p0.2 p1.2))\n  | top => (top {L}, top-univ {L} {nucleus (top {L})})\n  | Join => \\lam {J : \\Set} (f : J -> E {\\this}) =>\n    (nucleus (Join {L} {J} (\\lam (p0 : J) => (f p0).1)), nucleus-join>= {Join {L} {J} (\\lam (p0 : J) => (f p0).1)})\n} => \\new Locale {\n  | <=-refl => {?hidden}\n  | <=-transitive => {?hidden}\n  | <=-antisymmetric => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | top-univ => {?hidden}\n  | Join-cond => {?hidden}\n  | Join-univ => {?hidden}\n  | Join-ldistr>= => {?hidden}\n}",
+    "| Join {J : \\Set} (J -> E) : E",
+    "| \\infix 4 <= E E : \\Prop",
+    "\\lemma meet-monotone \\hlevels  {this : MeetSemilattice} {x y x' y' : E} (_ : x <= x') (_ : y <= y') : x \u2227 y <= x' \u2227 y' ",
+    "| meet \\alias \\infixl 7 \u2227 E E : E",
+    "\\type Subtype \\hlevels  {this : Nucleus} : \\Set => \\Sigma (x : E {L}) (nucleus x <= x)",
+    "\\func open \\hlevels  {this2 : Locale} (a : E) : Nucleus ((-->) a) => \\new Nucleus {\n  | nucleus-meet => {?hidden}\n  | nucleus-meet>= => {?hidden}\n  | nucleus-<= => {?hidden}\n  | nucleus-unit => {?hidden}\n  | nucleus-join>= => {?hidden}\n  | nucleus-join => {?hidden}\n}"
+  ]
+}
+model output: 
+<= y.1 ∧ a.1 <= x.1 ∧ y.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1

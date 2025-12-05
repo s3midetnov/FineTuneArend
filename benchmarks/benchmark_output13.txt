@@ -1,0 +1,54 @@
+index = 13
+
+the query:{
+  "Context": [
+    "q : Rat",
+    "d>=0 : zro <= d",
+    "X : ExPseudoMetricSpace",
+    "N : \\Sigma (n : Nat) (pow {RatField} q n < eps * finv B)",
+    "eps : Rat",
+    "q<1 : q < ide",
+    "l : X.E",
+    "dp : \\Pi (n : Nat) -> X.dist l (f (suc n)) <= d * X.dist l (f n)",
+    "lf0<B : U {X.dist l (f 0)} B",
+    "B : Rat",
+    "d<q : d.U q",
+    "d : ExUpperReal",
+    "f : Nat -> X.E"
+  ],
+  "Expected type": "TruncP (\\Sigma (N : E) (\\Pi {n : E} -> N <= n -> U {X.dist l (f n)} eps))",
+  "Expression": "inP (N.1,\n  \\lam {n} p => induction lf0<B {q} (<=-less $ d>=0 d<q) (\\lam k => dp k <=\u2218 <=_* (<_<= d<q) <=-refl) n $ <=_*_positive-left {RatField} (pow_<=-degree {RatField} (<=-less $ d>=0 d<q) (<=-less q<1) p) (<=-less $ dist>=0 lf0<B) <\u2218r <_rotate-right-conv {RatField} (dist>=0 lf0<B) N.2)",
+  "Premises": [
+    "\\lemma induction \\hlevels  {X : ExPseudoMetricSpace} {f : Nat -> X.E} {l : X.E} {B : Rat} (_ : U {X.dist l (f 0)} B) {q : Rat} (_ : zro <= q)\n  (_ : \\Pi (n : Nat) -> X.dist l (f (suc n)) <= fromRat q * X.dist l (f n)) (n : Nat) :\n  X.dist l (f n) <= fromRat (pow {RatField} q n * B) ",
+    "suc Nat",
+    "| dist E E : ExUpperReal",
+    "\\instance RatField : DiscreteOrderedField Rat {\n  | zro => rat (pos 0) 1 {?hidden} {?hidden}\n  | + => (RatField.+)\n  | * => (RatField.*)\n  | negative => RatField.negative\n  | ide => rat (pos 1) 1 {?hidden} {?hidden}\n  | natCoef => \\lam (n : Nat) => rat (pos n) 1 {?hidden} {?hidden}\n  | decideEq => \\lam (x : E {\\this}) (y : E {\\this}) => (\\case decideEq (ratNom x) (ratNom y), decideEq (ratDenom x) (ratDenom y) \\with {\n    | yes p, yes q => yes {x = y} (ext {x} {y} p q)\n    | no p, d => no {x = y} (\\lam (x=y : x = y) => p (pmap {Rat} {Int} ratNom {x} {y} x=y))\n    | d, no q => no {x = y} (\\lam (x=y : x = y) => q (pmap {Rat} {Nat} ratDenom {x} {y} x=y))\n  })\n  | meet => meet\n  | join => join\n  | isPos => \\lam (x : E {\\this}) => isPos (ratNom x)\n  | #0=>eitherPosOrNeg => \\lam {x : E {\\this}} (xInv : #0 {\\this} x) => (\\case x, xInv \\with {\n    | rat n1 d1 d1/=0 r1, (rat n2 d2 d2/=0 r2, il, p) => #0=>eitherPosOrNeg {n1}\n      (\\lam (n1=0 : n1 = zro) => (\\case inv {Rat} {makeRat zro (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden})}\n        {makeRat' zro (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden})}\n        (simp {zro} {d2 Nat.* d1} {productNonZero {d2} {d1} {?hidden} {?hidden}}) *> transport {Int}\n        (\\lam (x : E) => makeRat x (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden}) = rat (pos 1) 1 {?hidden} {?hidden})\n        {n2 Semigroup.* zro} {zro} (zro_*-right {n2}) (transport {Int}\n          (\\lam (x : E) => makeRat (n2 IntRing.* x) (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden}) = rat (pos 1) 1 {?hidden} {?hidden})\n          {n1} {zro} n1=0 il) \\with {}))\n  })\n  | finv => RatField.finv\n  | eitherZeroOrInv => \\lam (x : E {\\this}) => (\\case decideEq {\\this} x (zro {\\this}) \\with {\n    | yes x=0 => byLeft {x = zro {\\this}} {Inv x} x=0\n    | no x/=0 => byRight {x = zro {\\this}} {Inv x} (rmake {x} (DiscreteField.finv {\\this} x) (finv-right {\\this} {x} x/=0))\n  })\n} => \\new DiscreteOrderedField {\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | +-comm => {?hidden}\n  | *-assoc => {?hidden}\n  | ldistr => {?hidden}\n  | rdistr => {?hidden}\n  | negative-left => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | natCoefZero => {?hidden}\n  | natCoefSuc => {?hidden}\n  | zeroProduct => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | zro/>0 => {?hidden}\n  | positive_+ => {?hidden}\n  | ide>zro => {?hidden}\n  | positive_* => {?hidden}\n  | *-comm => {?hidden}\n  | finv_zro => {?hidden}\n  | finv-right => {?hidden}\n}",
+    "inP A",
+    "| \\infix 4 <= E E : \\Prop",
+    "| <=-less {a1 a2 : E} (a1 < a2) : a1 <= a2",
+    "| <=_*_positive-left {x y z : E} (x <= y) (zro <= z) : x * z <= y * z",
+    "\\lemma dist>=0 \\hlevels  {X : ExPseudoMetricSpace} {x y : X.E} : zro <= X.dist x y ",
+    "\\lemma <_rotate-right-conv {this : DiscreteOrderedField} {x y z : E} (_ : zro < y) (_ : x < z * finv y) : x * y < z ",
+    "| \\infixl 7 * E E : E",
+    "\\lemma <_<= \\plevels  \\hlevels  {x : ExUpperReal} {q : Rat} (_ : x.U q) : x <= fromRat q ",
+    "\\instance NatBSemilattice \\hlevels  : BottomJoinSemilattice Nat {\n  | <= => (<=)\n  | join => join {NatSemiring}\n  | bottom => 0\n} => \\new BottomJoinSemilattice {\n  | <=-refl => {?hidden}\n  | <=-transitive => {?hidden}\n  | <=-antisymmetric => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | bottom-univ => {?hidden}\n}",
+    "| E : \\Set",
+    "\\instance ExUpperRealSemigroup \\hlevels  : CSemigroup ExUpperReal {\n  | * => (ExUpperReal.*)\n} => \\new CSemigroup {\n  | *-assoc => {?hidden}\n  | *-comm => {?hidden}\n}",
+    "\\instance RatNormed \\hlevels  : NormedAbGroup Rat {\n  | isOpen => PrecoverSpace.isOpen\n  | isCauchy => PreuniformSpace.isCauchy\n  | isUniform => isUniform\n  | dist => PseudoNormedAbGroup.dist\n  | zro => rat (pos 0) 1 {?hidden} {?hidden}\n  | + => (RatField.+)\n  | negative => RatField.negative\n  | norm => \\lam (a : E {\\this}) => Real.fromRat (abs {RatField} a)\n} => \\new NormedAbGroup {\n  | cauchy-open => {?hidden}\n  | uniform-cauchy => {?hidden}\n  | dist-refl => {?hidden}\n  | dist-symm => {?hidden}\n  | dist-triang => {?hidden}\n  | dist-uniform => {?hidden}\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | negative-left => {?hidden}\n  | +-comm => {?hidden}\n  | norm_zro => {?hidden}\n  | norm_negative => {?hidden}\n  | norm_+ => {?hidden}\n  | norm-dist => {?hidden}\n  | isHausdorff => {?hidden}\n  | isSeparatedCoverSpace => {?hidden}\n  | dist-ext => {?hidden}\n  | norm-ext => {?hidden}\n}",
+    "| <=-transitive \\alias \\infixr 9 <=\u2218 {x y z : E} (x <= y) (y <= z) : x <= z",
+    "\\lemma pow_<=-degree \\hlevels  {this : PosetSemiring} {a : E} (_ : zro <= a) (_ : a <= ide) {n k : Nat} (_ : n <= k) : pow a k <= pow a n ",
+    "| <=-refl {x : E} : x <= x",
+    "\\func fromRat \\plevels  \\hlevels  (x : Rat) : ExUpperReal ((<) x) => \\new ExUpperReal {\n  | U-closed => {?hidden}\n  | U-rounded => {?hidden}\n}",
+    "\\lemma <=_* \\plevels  \\hlevels  {x x' y y' : ExUpperReal} (_ : x <= x') (_ : y <= y') : x * y <= x' * y' ",
+    "| ide : E",
+    "\\data Nat \\plevels  \\hlevels  \n  | zero\n  | suc Nat",
+    "\\instance ExUpperRealAbMonoid \\hlevels  : BiorderedLatticeAbMonoid ExUpperReal {\n  | < => (ExUpperRealAbMonoid.<)\n  | <= => (ExUpperReal.<=)\n  | meet => ExUpperReal.meet\n  | join => ExUpperReal.join\n  | zro => fromRat zro\n  | + => (ExUpperReal.+)\n} => \\new BiorderedLatticeAbMonoid {\n  | <-irreflexive => {?hidden}\n  | <-transitive => {?hidden}\n  | <=-refl => {?hidden}\n  | <=-transitive => {?hidden}\n  | <=-antisymmetric => {?hidden}\n  | <-transitive-right => {?hidden}\n  | <-transitive-left => {?hidden}\n  | <=-less => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | <_meet-univ => {?hidden}\n  | <_join-univ => {?hidden}\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | <=_+ => {?hidden}\n  | join_+-left => {?hidden}\n  | +-comm => {?hidden}\n  | meet_+-left => {?hidden}\n}",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I",
+    "| zro : E",
+    "| U Rat : \\Prop",
+    "| <-transitive-right \\alias \\infixr 9 <\u2218r {a1 a2 a3 : E} (a1 <= a2) (a2 < a3) : a1 < a3",
+    "\\func pow \\hlevels  {this2 : Monoid} (_ : E) (_ : Nat) : E \n  | {this}, a, 0 => ide\n  | {this}, a, suc n => pow a n * a"
+  ]
+}
+model output: 
+<<<Expected value:>>> inP (\Sigma (N : E) (\Pi {n : E} -> N <= n -> U {X.dist l (f n)} eps))<<<Actual value:>>> inP (\Sigma (N : E) (\Pi {n : E} -> N <= n -> U {X.dist l (f n)} eps))<<<Actual type:>>> TruncP (\Sigma (N : E) (\Pi {n : E} -> N <= n -> U {X.dist l (f n)} eps))<<<Actual value:>>> inP (\Sigma (N : E) (\Pi {n : E} -> N <= n -> U {X.dist l (f n)} eps))<<<Actual type:>>> TruncP (\Sigma (N : E) (\Pi {n : E} -> N <= n -> U {X.dist l (f n)} eps))<<<Actual value:>>> inP (\Sigma (N : E) (\Pi {n : E} -> N <= n -> U {X.dist l (f n)} eps))<<<Actual type:>>> TruncP (\Sigma (N : E) (\Pi {n : E} -> N <= n -> U {X.dist l

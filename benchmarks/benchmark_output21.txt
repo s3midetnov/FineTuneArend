@@ -1,0 +1,25 @@
+index = 21
+
+the query:{
+  "Context": [
+    "M : UniformLocale",
+    "f : UniformHom M L",
+    "L : UniformLocale"
+  ],
+  "Expected type": "\\Pi {x y : E {Dom {f \u2218 completion {M}}}} -> x <= y -> func {f \u2218 completion {M}} x <= func {f \u2218 completion {M}} y",
+  "Expression": "func-<= {f \u2218 completion {M}}",
+  "Premises": [
+    "| func-<= {x y : E {Dom}} (x <= y) : func x <= func y",
+    "\\func completion {L : UniformLocale} : UniformEmbedding (Completion L) L {\n  | func => \\lam (U : E {Dom {completionLocale {L}}}) =>\n    L.Join {\\Sigma (x : E) (U.1 x)} (\\lam (j : \\Sigma (x : E) (U.1 x)) => func {presentation {L}} j.1)\n} => \\new UniformEmbedding {\n  | func-<= => {?hidden}\n  | func-top => {?hidden}\n  | func-top>= => {?hidden}\n  | func-meet => {?hidden}\n  | func-meet>= => {?hidden}\n  | func-Join => {?hidden}\n  | func-Join>= => {?hidden}\n  | func-uniform => {?hidden}\n  | isEmbedding => {?hidden}\n  | isUniformEmbedding => {?hidden}\n}",
+    "\\func Completion (L : UniformLocale) : UniformLocale (Opens (CompletionPres L)) {\n  | <= => (PresentedFrame.<=)\n  | meet => \\lam (U : E) (V : E) =>\n    closure {CompletionPres L} {\\Sigma (a b : E) (U.1 a) (V.1 b)} (\\lam (t : \\Sigma (a b : E) (U.1 a) (V.1 b)) => conj t.1 t.2)\n  | top => (\\lam (_ : E) => \\Sigma, \\lam (e : E) (_ : SCover {CompletionPres L} e (\\lam (_ : E) => \\Sigma)) => ())\n  | Join => \\lam {J : \\Set} (f : J -> E) =>\n    closure {CompletionPres L} {\\Sigma (j : J) (x : E) ((f j).1 x)} (\\lam (p0 : \\Sigma (j : J) (x : E) ((f j).1 x)) => p0.2)\n  | isUniform => Completion.isUniform {L}\n} => \\new UniformLocale {\n  | <=-refl => {?hidden}\n  | <=-transitive => {?hidden}\n  | <=-antisymmetric => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | top-univ => {?hidden}\n  | Join-cond => {?hidden}\n  | Join-univ => {?hidden}\n  | Join-ldistr>= => {?hidden}\n  | uniform-overt => {?hidden}\n  | isCovering => {?hidden}\n  | isDownset => {?hidden}\n  | top-uniform => {?hidden}\n  | meet-uniform => {?hidden}\n  | <=-uniform => {?hidden}\n  | star-uniform => {?hidden}\n  | isAdmissible => {?hidden}\n}",
+    "| \\infix 4 <= E E : \\Prop",
+    "| \\infixl 8 o \\alias \\infixl 8 \u2218 {X Y Z : Ob} (Hom Y Z) (Hom X Y) : Hom X Z",
+    "| E : \\Set",
+    "| Cod : BaseSet",
+    "| func (E {Dom}) : E {Cod}",
+    "\\func UniformCat : Cat UniformLocale {\n  | Hom => Hom\n  | id => id\n  | o => \\lam {X Y Z : Ob} => (\u2218)\n} => subCat {PreuniformCat} {UniformLocale} (\\new Embedding {UniformLocale} {Ob} (\\lam (L : A {\\this}) => L) {\n  | isEmb => \\lam (L M : UniformLocale) =>\n  \\new Retraction {L = M} {f {\\this} L = f {\\this} M} (pmap {A {\\this}} {B {\\this}} (f {\\this}) {L} {M}) {\n    | sec => \\lam (p : B {\\this}) => path (\\lam (i : I) => \\new UniformLocale (E {p @ i}) {\n      | <= => (<=) {p @ i}\n      | <=-refl => {?hidden}\n      | <=-transitive => {?hidden}\n      | <=-antisymmetric => {?hidden}\n      | meet => (\u2227) {p @ i}\n      | meet-left => {?hidden}\n      | meet-right => {?hidden}\n      | meet-univ => {?hidden}\n      | top => top {p @ i}\n      | top-univ => {?hidden}\n      | Join => Join {p @ i}\n      | Join-cond => {?hidden}\n      | Join-univ => {?hidden}\n      | Join-ldistr>= => {?hidden}\n      | uniform-overt => {?hidden}\n      | isUniform => isUniform {p @ i}\n      | isCovering => {?hidden}\n      | isDownset => {?hidden}\n      | top-uniform => {?hidden}\n      | meet-uniform => {?hidden}\n      | <=-uniform => {?hidden}\n      | star-uniform => {?hidden}\n      | isAdmissible => {?hidden}\n    })\n    | f_sec => idpe {L = M}\n  }\n})",
+    "| Dom : BaseSet"
+  ]
+}
+model output: 
+<<<break>>> \Pi {x y : E {Dom {f ∘ completion {M}}}} -> x <= y -> func {f ∘ completion {M}} x <= func {f ∘ completion {M}} y <<<break>>> \Pi {x y : E {Dom {f ∘ completion {M}}}} -> x <= y -> func {f ∘ completion {M}} x <= func {f ∘ completion {M}} y <<<break>>> \Pi {x y : E {Dom {f ∘ completion {M}}}} -> x <= y -> func {f ∘ completion {M}} x <= func {f ∘ completion {M}} y <<<break>>> \Pi {x y : E {Dom {f ∘ completion {M}}}} -> x <= y -> func {f ∘ completion {M}} x <= func {f ∘ completion {M}} y <<<break>>> \Pi {x y : E {Dom {f ∘ completion {M}}}} -> x <= y -> func {f ∘ completion {M}} x <= func {f ∘ completion {M}} y <<<break>>> \Pi {x y : E {Dom {f ∘ completion {M}}}}

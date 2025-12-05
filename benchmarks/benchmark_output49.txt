@@ -1,0 +1,16 @@
+index = 49
+
+the query:{
+  "Context": [
+    "x : A",
+    "D : \\Pi (a : A) -> Dec (P a)",
+    "P : A -> \\Prop"
+  ],
+  "Expected type": "Dec (P x)",
+  "Expression": "D x",
+  "Premises": [
+    "\\data Dec \\plevels  \\hlevels  \\Prop \n  | yes E\n  | no (Not E)"
+  ]
+}
+model output: 
+<<<Expected evaluation:>>> yes (D x) <<<Expected result:>>> yes (D x) <<<Actual result:>>> no (Not (D x)) <<<Actual evaluation:>>> no (Not (D x)) <<<Actual type:>>> Dec (P x) <<<Actual result:>>> no (Not (D x)) <<<Actual evaluation:>>> no (Not (D x)) <<<Actual type:>>> Dec (P x) <<<Actual result:>>> no (Not (D x)) <<<Actual evaluation:>>> no (Not (D x)) <<<Actual type:>>> Dec (P x) <<<Actual result:>>> no (Not (D x)) <<<Actual evaluation:>>> no (Not (D x)) <<<Actual type:>>> Dec (P x) <<<Actual result:>>> no (Not (D x)) <<<Actual evaluation:>>> no (Not (D x)) <<<Actual type:>>> Dec (P x) <<<Actual result:>>> no (Not (D x)) <<<Actual evaluation:>>> no (Not (D x)) <<<Actual type:>>> Dec (P x) <<<Actual result:>>> no (Not (D x)) <<<Actual evaluation:>>> no (Not (D x)) <<<Actual type:>>> Dec (P

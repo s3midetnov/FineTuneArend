@@ -1,0 +1,24 @@
+index = 89
+
+the query:{
+  "Context": [
+    "k : Nat",
+    "l'h : \\Pi (j : Fin (suc l'.len)) -> isHomogen (at {a :: l'} j) (k + j)",
+    "a : E",
+    "n : Nat",
+    "this : GradedCRing",
+    "l' : Array E n"
+  ],
+  "Expected type": "isHomogen (at {a :: l'} 0) (k + 0)",
+  "Expression": "l'h 0",
+  "Premises": [
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "suc Nat",
+    "| at (j : Fin len) : A j",
+    "| isHomogen E Nat : \\Prop",
+    "| E : \\Set",
+    "\\func \\infixl 6 + \\plevels  \\hlevels  (_ _ : Nat) : Nat \n  | x, 0 => x\n  | x, suc y => suc (x + y)"
+  ]
+}
+model output: 
+<<<Proof:>>> \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l' \case l' => \new l'

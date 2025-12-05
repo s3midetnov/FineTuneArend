@@ -1,0 +1,32 @@
+index = 92
+
+the query:{
+  "Context": [
+    "X : RegularPreuniformSpace",
+    "E : Set (Set (E {Cod {\\this}}))",
+    "g : UniformMap Y Z",
+    "Y : RegularPreuniformSpace",
+    "f : UniformMap X Y",
+    "Du : isUniform {Cod {\\this}} E",
+    "Z : RegularPreuniformSpace"
+  ],
+  "Expected type": "X.isUniform (\\lam (U : Set (E {f.Dom})) =>\n  TruncP (\\Sigma (V : Set (E {f.Cod})) (TruncP (\\Sigma (V1 : Set Z.E) (E1 V1) (V = g.func ^-1 V1))) (U = f.func ^-1 V)))",
+  "Expression": "func-uniform {f} (func-uniform {g} Du)",
+  "Premises": [
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\func Set \\hlevels  (X : \\hType) : \\Set => X -> \\Prop",
+    "\\func \\infix 8 ^-1 \\hlevels  {X Y : \\hType} (f : X -> Y) (S : Set Y) : Set X => \\lam (a : X) => S (f a)",
+    "| E : \\Set",
+    "| func (E {Dom}) : E {Cod}",
+    "| isUniform (Set (Set E)) : \\Prop",
+    "| Cod : BaseSet",
+    "| func-uniform {E1 : Set (Set (E {Cod}))} (isUniform {Cod} E1) : isUniform {Dom} (\\lam (U : Set (E {Dom})) => TruncP (\\Sigma (V : Set (E {Cod})) (E1 V) (U = func ^-1 V)))",
+    "| Dom : BaseSet",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I"
+  ]
+}
+model output: 
+<<<Expected type:>>> X.isUniform (\lam (U : Set (E {f.Dom})) =>
+  TruncP (\Sigma (V : Set (E {f.Cod})) (TruncP (\Sigma (V1 : Set Z.E) (E1 V1) (V = g.func ^-1 V1))) (U = f.func ^-1 V)))<<<Expected type:>>> X.isUniform (\lam (U : Set (E {f.Dom})) =>
+  TruncP (\Sigma (V : Set (E {f.Cod})) (TruncP (\Sigma (V1 : Set Z.E) (E1 V1) (V = g.func ^-1 V1))) (U = f.func ^-1 V)))<<<Expected type:>>> X.isUniform (\lam (U : Set (E {f.Dom})) =>
+  TruncP (\Sigma (V : Set (E {f.Cod})) (TruncP (\Sigma (V1 : Set Z.E) (E1 V1) (V = g.func ^-1 V1))) (U = f.func ^-1 V)))<<<Expected type:>>> X.isUniform (\lam (U : Set (E {f.Dom

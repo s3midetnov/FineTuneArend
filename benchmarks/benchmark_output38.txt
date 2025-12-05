@@ -1,0 +1,36 @@
+index = 38
+
+the query:{
+  "Context": [
+    "a' : L.E",
+    "a*U<=a' : star {L} a U L.<= a'",
+    "L : PreuniformLocale",
+    "V : L.E -> \\Prop",
+    "a : L.E",
+    "b*V<=b' : star {L} b V L.<= b'",
+    "U : L.E -> \\Prop",
+    "s : \\Sigma (b1 : L.E) (\\Sigma (\\Sigma (U b1) (V b1)) (IsPositive {L} (a L.\u2227 b L.\u2227 b1)))",
+    "b : L.E",
+    "b' : L.E"
+  ],
+  "Expected type": "s.1 L.<= a' L.\u2227 b'",
+  "Expression": "meet-univ (Join-cond (later (s.1, (s.2.1.1, positive_<= s.2.2 $ meet-monotone meet-left <=-refl))) <=\u2218 a*U<=a')\n  (Join-cond (later (s.1, (s.2.1.2, positive_<= s.2.2 $ meet-monotone meet-right <=-refl))) <=\u2218 b*V<=b')",
+  "Premises": [
+    "| meet-univ {x y z : E} (z <= x) (z <= y) : z <= x \u2227 y",
+    "| <=-refl {x : E} : x <= x",
+    "| Join-cond {J : \\Set} (j : J) {f : J -> E} : f j <= Join {J} f",
+    "| Join {J : \\Set} (J -> E) : E",
+    "| \\infix 4 <= E E : \\Prop",
+    "\\lemma meet-monotone \\hlevels  {this : MeetSemilattice} {x y x' y' : E} (_ : x <= x') (_ : y <= y') : x \u2227 y <= x' \u2227 y' ",
+    "| meet-left {x y : E} : x \u2227 y <= x",
+    "\\func Total {B : \\Type} (F : B -> \\Type) : \\Type => \\Sigma (b : B) (F b)",
+    "\\lemma positive_<= \\hlevels  {this : Locale} {a b : E} (_ : IsPositive a) (_ : a <= b) : IsPositive b ",
+    "| E : \\Set",
+    "| meet \\alias \\infixl 7 \u2227 E E : E",
+    "\\func IsPositive \\hlevels  {this : Locale} (a : E) : \\Prop => \\Pi (P : \\Prop) -> a <= pHat P -> P",
+    "| <=-transitive \\alias \\infixr 9 <=\u2218 {x y z : E} (x <= y) (y <= z) : x <= z",
+    "| meet-right {x y : E} : x \u2227 y <= y"
+  ]
+}
+model output: 
+L.∧ b L.∧ U b L.∧ V b L.∧ b1 L.∧ U b1 L.∧ V b1 L.∧ a L.∧ b L.∧ b1 L.∧ U b L.∧ V b L.∧ b1 L.∧ a L.∧ b L.∧ b1 L.∧ U b L.∧ V b L.∧ b1 L.∧ a L.∧ b L.∧ b1 L.∧ U b L.∧ V b L.∧ b1 L.∧ a L.∧ b L.∧ b1 L.∧ U b L.∧ V b L.∧ b1 L.∧ a L.∧ b L.∧ b1 L.∧ U b L.∧ V b L.∧ b1 L.∧ a L.∧ b L.∧ b1 L.∧ U b L.∧ V b L.∧ b1 L.∧ a L.∧ b L.∧ b1 L.∧ U b L.∧ V b L.∧ b1 L.∧ a L.∧ b L.∧ b1 L.∧ U b L.∧ V b L.∧ b1 L

@@ -1,0 +1,31 @@
+index = 63
+
+the query:{
+  "Context": [
+    "R : CRing"
+  ],
+  "Expected type": "LModule R1 (Matrix (E {R1}) 2 2) {\n  | zro => \\new Array (Array (E {R1}) 2) 2 (\\lam (_ : Fin 2) => \\new Array (E {R1}) 2 (\\lam (_ : Fin 2) => zro {R1}))\n  | + => \\lam (M : E) (N : E) => mkMatrix {E {R1}} {2} {2} (\\lam (i : Fin 2) (j : Fin 2) => at {at {M} i} j + at {at {N} i} j)\n  | negative => \\lam (M : E) => mkMatrix {E {R1}} {2} {2} (\\lam (i : Fin 2) (j : Fin 2) => negative {R1} (at {at {M} i} j))\n  | *c => \\lam (a : E {R {\\this}}) (M : E {\\this}) => mkMatrix {E {R1}} {2} {2} (\\lam (i : Fin 2) (j : Fin 2) => a * at {at {M} i} j)\n}",
+  "Expression": "MatrixModule _ _ _",
+  "Premises": [
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "\\func mkMatrix {R : \\Type} {n m : Nat} (f : Fin n -> Fin m -> R) : Matrix R n m \n  => \\new Array (Array R m) n (\\lam (i : Fin n) => \\new Array R m (f i))",
+    "| \\infixl 6 + E E : E",
+    "\\class LModule \\extends AbGroup \\hlevels  {\n  | R : Ring\n  | \\infixl 7 *c (E {R}) E : E\n  | *c-assoc {r r' : E {R}} {a : E} : r * r' *c a = r *c (r' *c a)\n  | *c-ldistr {r : E {R}} {a b : E} : r *c (a + b) = r *c a + r *c b\n  | *c-rdistr {r s : E {R}} {a : E} : (r + s) *c a = r *c a + s *c a\n  | ide_*c {a : E} : ide {R} *c a = a\n}",
+    "\\class DArray {\n  | len : Nat\n  | A (Fin len) : \\Type\n  | at (j : Fin len) : A j\n}",
+    "| R : Ring",
+    "\\instance MatrixAbGroup \\hlevels  (A : AbGroup) (n m : Nat) : AbGroup (Matrix A.E n m) {\n  | zro => mkMatrix {A.E} {n} {m} (\\lam (_ : Fin n) (_ : Fin m) => A.zro)\n  | + => \\lam (M : E {\\this}) (N : E {\\this}) =>\n    mkMatrix {A.E} {n} {m} (\\lam (i : Fin n) (j : Fin m) => at {at {M} i} j A.+ at {at {N} i} j)\n  | negative => \\lam (M : E {\\this}) => mkMatrix {A.E} {n} {m} (\\lam (i : Fin n) (j : Fin m) => A.negative (at {at {M} i} j))\n} => \\new AbGroup {\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | negative-left => {?hidden}\n  | +-comm => {?hidden}\n}",
+    "| zro : E",
+    "| \\infixl 7 * E E : E",
+    "\\instance MatrixModule \\hlevels  (R1 : Ring) (n m : Nat) : LModule R1 (Matrix R.E n m) {\n  | zro => \\new Array (Array R.E m) n (\\lam (_ : Fin n) => \\new Array R.E m (\\lam (_ : Fin m) => R.zro))\n  | + => \\lam (M : E) (N : E) => mkMatrix {R.E} {n} {m} (\\lam (i : Fin n) (j : Fin m) => at {at {M} i} j R.+ at {at {N} i} j)\n  | negative => \\lam (M : E) => mkMatrix {R.E} {n} {m} (\\lam (i : Fin n) (j : Fin m) => R.negative (at {at {M} i} j))\n  | *c => \\lam (a : E {R {\\this}}) (M : E {\\this}) => mkMatrix {R.E} {n} {m} (\\lam (i : Fin n) (j : Fin m) => a R.* at {at {M} i} j)\n} => \\new LModule {\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | negative-left => {?hidden}\n  | +-comm => {?hidden}\n  | *c-assoc => {?hidden}\n  | *c-ldistr => {?hidden}\n  | *c-rdistr => {?hidden}\n  | ide_*c => {?hidden}\n}",
+    "| at (j : Fin len) : A j",
+    "| E : \\Set",
+    "| negative E : E",
+    "\\type Matrix (R : \\Type) (n m : Nat) : \\Type => Array (Array R m) n"
+  ]
+}
+model output: 
+<<<Expected value:>>> LModule R1 (Matrix (E {R1}) 2 2) {
+  | zro => \new Array (Array (E {R1}) 2) 2 (\lam (_ : Fin 2) => \new Array (E {R1}) 2 (\lam (_ : Fin 2) => zro {R1}))
+  | + => \lam (M : E) (N : E) => mkMatrix {E {R1}} {2} {2} (\lam (i : Fin 2) (j : Fin 2) => at {at {M} i} j + at {at {N} i} j)
+  | negative => \lam (M : E) => mkMatrix {E {R1}} {2} {2} (\lam (i : Fin 2) (j : Fin 2) => negative {R1} (at {at {M} i} j))
+  | *c => \lam (a : E {R {\this}}) (M : E {\this}) => mkMatrix {E {R1}} {2} {2} (\lam (i : Fin 2) (j : Fin

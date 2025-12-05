@@ -1,0 +1,42 @@
+index = 70
+
+the query:{
+  "Context": [
+    "x : E {S}",
+    "y : E {S}",
+    "r : x ~ y",
+    "this : NormalSubGroup"
+  ],
+  "Expected type": "contains (interpret {\\new MonoidData {S} (inverse {S} x :: y :: nil)} (var {Fin 2} 0 :* :ide {Fin 2} :* var {Fin 2} 1))",
+  "Expression": "\n  \\let d => \\new MonoidData {S} (inverse {S} x :: y :: nil)\n  \\in transportInv (\\lam x0 => substitution_meta)\n        ((normalize-consistent (var 0 :* :ide :* var 1) *> interpretNF_++ (0 :: nil) (1 :: nil) *> pmap (\\lam occurVar => occurVar * interpretNF (1 :: nil)) (inv (normalize-consistent (:ide :* var 0)))) *> pmap (\\lam (occurVar : E {S}) => occurVar * interpretNF (1 :: nil)) (ide-left {S} {inverse {S} x}))\n        r",
+  "Premises": [
+    "\\func pmap {A B : \\Type} (f : A -> B) {a a' : A} (p : a = a') : f a = f a' => path (\\lam (i : I) => f (p @ i))",
+    "var V",
+    "nil",
+    "| inverse E : E",
+    "\\infixl 7 :* (_ _ : MonoidTerm V)",
+    "| \\infixl 7 * E E : E",
+    ":ide",
+    "| E : \\Set",
+    "\\class MonoidData \\hlevels  {\n  | M : Monoid\n  | vars : Array (E {M})\n}",
+    "\\func interpretNF \\hlevels  {this3 : MonoidData} (_ : List (Fin (len {vars}))) : E {M} \n  | {this}, nil => ide {M}\n  | {this}, x :: nil => at {vars} x\n  | {this}, x :: l => at {vars} x * interpretNF l",
+    "| contains (E {S}) : \\Prop",
+    "\\func \\infixr 9 *> {A : \\Type} {a a' a'' : A} (_ : a = a') (_ : a' = a'') : a = a'' \n  | {A}, {a}, {a'}, {a''}, p, idp => p",
+    "| len : Nat",
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "| ide-left {x : E} : ide * x = x",
+    "| M : Monoid",
+    "\\func normalize {V : \\Type} (t : MonoidTerm V) : List V => aux {V} t (nil {V})",
+    "\\func interpret \\hlevels  {this3 : MonoidData} (_ : MonoidTerm (Fin (len {vars}))) : E {M} \n  | {this}, var x => at {vars} x\n  | {this}, :ide => ide {M}\n  | {this}, t :* s => interpret t * interpret s",
+    "\\lemma interpretNF_++ \\hlevels  {this : MonoidData} (l1 l2 : List (Fin (len {vars}))) : interpretNF (l1 ++ l2) = interpretNF l1 * interpretNF l2 ",
+    "| ide : E",
+    "| vars : Array (E {M})",
+    "\\lemma normalize-consistent \\hlevels  {this : MonoidData} (t : MonoidTerm (Fin (len {vars}))) : interpret t = interpretNF (normalize {Fin (len {vars})} t) ",
+    "\\func transportInv {A : \\Type} (B : A -> \\Type) {a a' : A} (_ : a = a') (_ : B a') : B a \n  | {A}, B, {a}, {a'}, idp, b => b",
+    "\\func inv {A1 : \\Type} {a1 a' : A1} (_ : a1 = a') : a' = a1 \n  | {A}, {a}, {a'}, idp => idp {A} {a}",
+    "| S : BaseSet",
+    "\\infixr 5 :: A (List A)"
+  ]
+}
+model output: 
+*> contains (interpret {\new MonoidData {S} (inverse {S} x :: y :: nil)} (var {Fin 2} 0 :* :ide {Fin 2} :* var {Fin 2} 1)) *> contains (interpret {\new MonoidData {S} (inverse {S} x :: y :: nil)} (var {Fin 2} 0 :* :ide {Fin 2} :* var {Fin 2} 1)) *> contains (interpret {\new MonoidData {S} (inverse {S} x :: y :: nil)} (var {Fin 2} 0 :* :ide {Fin 2} :* var {Fin 2} 1)) *> contains (interpret {\new MonoidData {S} (inverse {S} x :: y :: nil)} (var {Fin 2} 0 :* :ide {Fin 2} :* var {Fin 2} 1)) *> contains (interpret {\new MonoidData {S} (inverse {S} x :: y :: nil)} (var {Fin 2} 0 :* :ide {Fin 2} :* var {Fin 2

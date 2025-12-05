@@ -1,0 +1,24 @@
+index = 83
+
+the query:{
+  "Context": [
+    "D : Array X.E",
+    "j : Fin D.len",
+    "X : ExPseudoMetricSpace",
+    "f : \\Pi (i : Fin D.len) -> \\Sigma (U1 : Set X.E) (C U1) (\\Pi {y : X.E} -> U {X.dist (D.at i) y} eps -> U1 y)",
+    "eps : Rat"
+  ],
+  "Expected type": "\\Pi {y : X.E} -> U {X.dist (D.at j) y} eps -> (f j).1 y",
+  "Expression": "(f j).3",
+  "Premises": [
+    "| at (j : Fin len) : A j",
+    "| U Rat : \\Prop",
+    "| dist E E : ExUpperReal",
+    "| E : \\Set"
+  ]
+}
+model output: 
+, U {X.dist (D.at j) y} eps -> (f j).2 y, U {X.dist (D.at j) y} eps -> (f j).3 y <<<Proof:>>> \Pi {y : X.E} -> U {X.dist (D.at j) y} eps -> (f j).1 y, U {X.dist (D.at j) y} eps -> (f j).2 y, U {X.dist (D.at j) y} eps -> (f j).3 y => \Pi {y : X.E} -> U {X.dist (D.at j) y} eps -> (f j).1 y, U {X.dist (D.at j) y} eps -> (f j).2 y, U {X.dist (D.at j) y} eps -> (f j).3 y \case \in => \lam (p0 : \Sigma) => p0.1
+  \case \in => \lam (p0 : \Sigma) => p0.2
+  \case \in => \lam (p0 : \Sigma) => p0.3
+  \case \in => \lam (p0 : \

@@ -1,0 +1,30 @@
+index = 56
+
+the query:{
+  "Context": [
+    "f : MonoidHom"
+  ],
+  "Expected type": "PointedHom f.Dom (ImagePointed f) {\n  | func => \\lam (a : E {Dom {\\this}}) => (f.func a, inP {\\Sigma (a1 : E {f.Dom}) (f.func a1 = f.func a)} (a, idp {E {f.Cod}} {f.func a}))\n}",
+  "Expression": "ImagePointedLeftHom f",
+  "Premises": [
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\func idp {A : \\Type} {a : A} : a = a => path (\\lam (_ : I) => a)",
+    "\\class PointedHom \\extends SetHom \\hlevels  {\n  | func-ide : func (ide {Dom}) = ide {Cod}\n}",
+    "\\instance ImagePointed \\hlevels  (f : PointedHom) : Pointed (Image {E {f.Dom}} {E {f.Cod}} f.func) {\n  | ide => (ide {f.Cod}, inP {\\Sigma (a : E {f.Dom}) (f.func a = ide {f.Cod})} (ide {f.Dom}, f.func-ide))\n} => \\new Pointed",
+    "inP A",
+    "| E : \\Set",
+    "| Cod : BaseSet",
+    "| func (E {Dom}) : E {Cod}",
+    "\\func ImagePointedLeftHom \\hlevels  (f : PointedHom) : PointedHom f.Dom (ImagePointed f) {\n  | func => \\lam (a : E {Dom {\\this}}) => (f.func a, inP {\\Sigma (a1 : E {f.Dom}) (f.func a1 = f.func a)} (a, idp {E {f.Cod}} {f.func a}))\n} => \\new PointedHom {\n  | func-ide => {?hidden}\n}",
+    "| Dom : BaseSet",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I"
+  ]
+}
+model output: 
+=> \new PointedHom {
+  | func-ide => {?hidden}
+}<<<Proof:>>> \case ImagePointedLeftHom f \with {
+  | func => \lam (a : E {Dom {\this}}) => (f.func a, inP {\Sigma (a1 : E {f.Dom}) (f.func a1 = f.func a)} (a, idp {E {f.Cod}} {f.func a}))
+} => \new PointedHom {
+  | func-ide => {?hidden}
+} TruncP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP (inP

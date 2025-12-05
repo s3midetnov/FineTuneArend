@@ -1,0 +1,17 @@
+index = 39
+
+the query:{
+  "Context": [
+    "q : Rat",
+    "q<a2 : a2.L q",
+    "e : a2 <= a3",
+    "a3 : E {\\this}"
+  ],
+  "Expected type": "a3.L q",
+  "Expression": "e q<a2",
+  "Premises": [
+    "| L Rat : \\Prop"
+  ]
+}
+model output: 
+<<<Expected value:>>> q<a2 <<<Proof:>>> \case q<a2 \in e \with q<a2 \in a2.L q \with q<a2 \in a3 \with q<a2 \in a2 \with q<a2 \in a3 \with q<a2 \in a2 \with q<a2 \in a3 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2 \with q<a2 \in a2

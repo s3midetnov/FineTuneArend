@@ -1,0 +1,32 @@
+index = 46
+
+the query:{
+  "Context": [
+    "R : Ring",
+    "a : Array A.E n",
+    "f : Array A.E (suc n) -> B.E",
+    "B : LModule R",
+    "fl : isMultiLinear {R} {suc n} {A} {B} f",
+    "A : LModule R"
+  ],
+  "Expected type": "LinearMap {R} A B {\n  | func => \\lam (x : E {Dom {\\this}}) => f (insert {A.E} x a 0)\n}",
+  "Expression": "fl a 0",
+  "Premises": [
+    "\\class LinearMap \\extends AddGroupHom \\hlevels  {\n  | R : Ring\n  | func-*c {r : E {R}} {x : E {Dom}} : func (r *c x) = r *c func x\n}",
+    "\\func insert {A3 : \\Type} (_ : A3) (l2 : Array A3) (_ : Fin (suc l.len)) : Array A3 (suc l.len) \n  | {A}, a, nil, j => a :: nil\n  | {A}, a, :: {n} b l, zero => a :: b :: l\n  | {A}, a, :: {n} b l, suc j => b :: insert {A} a l j",
+    "| E : \\Set",
+    "| Dom : BaseSet"
+  ]
+}
+model output: 
+(insert {A.E} a a 0) fl<|endoftext|>\new LinearMap \extends AddGroupHom \hlevels  {
+  | R : Ring
+  | func-*c {r : E {R}} {x : E {Dom}} : func (r *c x) = r *c func x
+} {
+  | func => \lam (x : E {Dom {\this}}) => f (insert {A.E} x a 0)
+} (insert {A.E} a a 0) fl (insert {A.E} a a 0) fl<|endoftext|>\new LinearMap \extends AddGroupHom \hlevels  {
+  | R : Ring
+  | func-*c {r : E {R}} {x : E {Dom}} : func (r *c x) = r *c func x
+} {
+  | func => \lam (x : E {Dom {\this}}) => f (insert {A.E} x a 0)
+} (insert {A.E} a a 0) fl (insert {A.E} a a 0) fl (insert {A.E} a a 0) fl (insert {A.E} a a 0

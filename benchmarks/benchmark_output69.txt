@@ -1,0 +1,39 @@
+index = 69
+
+the query:{
+  "Context": [
+    "z : E",
+    "x : E",
+    "y : E",
+    "this : OrderedAddGroup"
+  ],
+  "Expected type": "y + z + (negative z - x) = y + (z + (negative z - x))",
+  "Expression": "+-assoc {this}",
+  "Premises": [
+    "| \\infixl 6 + E E : E",
+    "\\func \\infixl 6 - \\hlevels  {G : AddGroup} (x y : G.E) : G.E => x G.+ G.negative y",
+    "| +-assoc {x y z : E} : x + y + z = x + (y + z)",
+    "| negative E : E",
+    "| E : \\Set"
+  ]
+}
+model output: 
+<<<Proof:>>> \case z + (negative z - x) \with {
+  | z => x
+  | negative z => negative z
+} \in \Sigma (y + z + (negative z - x) = y + (z + (negative z - x))) \with {
+  | z => x
+  | negative z => negative z
+} \in \Sigma (y + z + (negative z - x) = y + (z + (negative z - x))) \with {
+  | z => x
+  | negative z => negative z
+} \in \Sigma (y + z + (negative z - x) = y + (z + (negative z - x))) \with {
+  | z => x
+  | negative z => negative z
+} \in \Sigma (y + z + (negative z - x) = y + (z + (negative z - x))) \with {
+  | z => x
+  | negative z => negative z
+} \in \Sigma (y + z + (negative z - x) = y + (z + (negative z - x))) \with {
+  | z => x
+  | negative z => negative z
+

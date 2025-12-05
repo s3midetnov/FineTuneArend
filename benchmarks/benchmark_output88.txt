@@ -1,0 +1,43 @@
+index = 88
+
+the query:{
+  "Context": [
+    "m : Fin (suc n) -> Nat",
+    "y : \\Sigma (i : Fin (suc n)) (Fin (m i)) -> E",
+    "n : Nat",
+    "this : AbMonoid"
+  ],
+  "Expected type": "FinSum {FinFin (Big {Nat} {Nat} (+) zro (\\new Array Nat n (\\lam (i : Fin n) => m (suc i))))}\n  (\\lam (b : Fin (Big {Nat} {Nat} (+) zro (\\new Array Nat n (\\lam (i : Fin n) => m (suc i))))) =>\n    (\\lam (k : Or (Fin (m 0)) (Fin (Big {Nat} {Nat} (+) zro (\\new Array Nat n (\\lam (i : Fin n) => m (suc i)))))) =>\n    y (\\case k \\with {\n      | inl s => (0, s)\n      | inr t => (suc (f {n} {\\lam (i : Fin n) => m (suc i)} t).1, (f {n} {\\lam (i : Fin n) => m (suc i)} t).2)\n    })) (inr {Fin (m 0)} {Fin (Big {Nat} {Nat} (+) zro (\\new Array Nat n (\\lam (i : Fin n) => m (suc i))))} b)) = BigSum (\\new Array E (Big {Nat} {Nat} (+) zro (\\new Array Nat n (\\lam (i : Fin n) => m (suc i))))\n  (\\lam (b : Fin (Big {Nat} {Nat} (+) zro (\\new Array Nat n (\\lam (i : Fin n) => m (suc i))))) =>\n    (\\lam (k : Or (Fin (m 0)) (Fin (Big {Nat} {Nat} (+) zro (\\new Array Nat n (\\lam (i : Fin n) => m (suc i)))))) =>\n    y (\\case k \\with {\n      | inl s => (0, s)\n      | inr t => (suc (f {n} {\\lam (i : Fin n) => m (suc i)} t).1, (f {n} {\\lam (i : Fin n) => m (suc i)} t).2)\n    })) (inr {Fin (m 0)} {Fin (Big {Nat} {Nat} (+) zro (\\new Array Nat n (\\lam (i : Fin n) => m (suc i))))} b)))",
+  "Expression": "FinSum=BigSum {this}",
+  "Premises": [
+    "\\data \\infixr 2 Or (_ _ : \\Type) \n  | inl A\n  | inr B",
+    "| \\infixl 6 + E E : E",
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "suc Nat",
+    "\\lemma FinSum=BigSum {this : AbMonoid} {n : Nat} {x : Fin n -> E} : FinSum {FinFin n} x = BigSum (\\new Array E n x) ",
+    "\\data Nat \\plevels  \\hlevels  \n  | zero\n  | suc Nat",
+    "\\class DArray {\n  | len : Nat\n  | A (Fin len) : \\Type\n  | at (j : Fin len) : A j\n}",
+    "FinSum {this : AbMonoid} {A : FinSet} (x : A.E -> E) : E => (aux {A} {x}).1",
+    "\\func Big {A1 B1 : \\Type} (_ : A1 -> B1 -> B1) (_ : B1) (_ : Array A1) : B1 \n  | {A}, {B}, op, b, nil => b\n  | {A}, {B}, op, b, :: {n} a l => op a (Big {A} {B} op b l)",
+    "\\func BigSum \\hlevels  {this : AddMonoid} (l : Array E) : E => Big {E} {E} (+) zro l",
+    "| zro : E",
+    "\\func f {n1 : Nat} {Q1 : Fin n1 -> Nat} (_ : Fin (BigSum {NatSemiring} (\\new Array Nat n1 Q1))) :\n  \\Sigma (i : Fin n1) (Fin (Q1 i)) \n  | {suc n}, {Q}, k =>\n  \\case OrFin.aux.f {Q 0} {Big {Nat} {Nat} (+) zro (\\new Array Nat n (\\lam (j : Fin n) => Q (suc j)))} k \\with {\n    | inl s => (0, s)\n    | inr t => \n      \\have (i, r) => SigmaFin.aux.f {n} {\\lam (j : Fin n) => Q (suc j)} t\n      \\in (suc i, r)\n  }",
+    "\\instance FinFin (n : Nat) : FinSet (Fin n) {\n  | finCard => n\n  | decideEq => decideEq\n} => \\new FinSet {\n  | finEq => {?hidden}\n}",
+    "\\instance NatSemiring \\hlevels  : LinearlyOrderedCSemiring.Dec Nat {\n  | zro => 0\n  | + => (Nat.+)\n  | * => (Nat.*)\n  | ide => 1\n  | natCoef => \\lam (n : Nat) => n\n  | < => (NatOrder.<)\n  | meet => meet\n  | join => join\n  | # => (#)\n  | decideEq => \\lam (x : E {\\this}) (y : E {\\this}) => (\\case trichotomy {\\this} x y \\with {\n    | less x<y => no {x = y} (\\lam (x=y : x = y) => StrictPoset.<-irreflexive\n      {\\this} {y} (transport {E {\\this}} (\\lam (_x : E {\\this}) => _x StrictPoset.< y) {x} {y} x=y x<y))\n    | equals x=y => yes {x = y} x=y\n    | greater y<x => no {x = y} (\\lam (x=y : x = y) =>\n      StrictPoset.<-irreflexive {\\this} {y} (transport {E {\\this}} ((StrictPoset.<) {\\this} y) {x} {y} x=y y<x))\n  })\n  | trichotomy => \\lam (n : E {\\this}) (m : E {\\this}) => (\\case n - m, idp {Int} {n - m} \\with {\n    | pos 0, p => equals {n} {m} (triEquals {n} {m} p)\n    | pos (suc d), p => greater {n} {m} (triGreater {n} {m} {d} p)\n    | neg (suc d), p => less {n} {m} (triLess {n} {m} {d} p)\n  })\n} => \\new LinearlyOrderedCSemiring.Dec {\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | +-comm => {?hidden}\n  | *-assoc => {?hidden}\n  | ldistr => {?hidden}\n  | rdistr => {?hidden}\n  | zro_*-left => {?hidden}\n  | zro_*-right => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | natCoefZero => {?hidden}\n  | natCoefSuc => {?hidden}\n  | <-irreflexive => {?hidden}\n  | <-transitive => {?hidden}\n  | <_+-left => {?hidden}\n  | zro<ide => {?hidden}\n  | <_*_positive-left => {?hidden}\n  | <_*_negative-left => {?hidden}\n  | *-comm => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | #-irreflexive => {?hidden}\n  | #-symmetric => {?hidden}\n  | #-comparison => {?hidden}\n  | tightness => {?hidden}\n  | nonEqualApart => {?hidden}\n}",
+    "inr B",
+    "| E : \\Set"
+  ]
+}
+model output: 
+<<<Proof:>>> \case \elim (FinSum=BigSum {this}) \with {
+  | inl (b, k), (b', k') => \case \elim k \with {
+    | inl s => \case \elim k' \with {
+      | inl t => \case \elim b \with {
+        | inl (a, b), (a', b') => \case \elim b' \with {
+          | inl (c, d), (c', d') => \case \elim a \with {
+            | inl (a', b), (a'', b') => \case \elim a'' \with {
+              | inl (a'', b), (a'''', b') => \case \elim b'' \with {
+                | inl (c, d), (c', d') => \case \elim a''' \with {
+                  | inl (a'''', b), (a''''', b') => \case \elim b''' \with {
+                    | inl (d, e), (d', e') => \case \elim a'''' \with {
+                      | inl (a''''', b), (

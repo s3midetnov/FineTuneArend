@@ -1,0 +1,51 @@
+index = 94
+
+the query:{
+  "Context": [
+    "lb : IsBasis {U} l",
+    "j : Fin l.len",
+    "l : Array U.E",
+    "U : LModule R",
+    "i : Fin l.len"
+  ],
+  "Expected type": "at {basis-split {U} {l} lb (at {l} i)} j = (\\case decideEq i j \\with {\n  | yes p => ide {U.R}\n  | no n => zro {U.R}\n})",
+  "Expression": "basis_split_basis {U}",
+  "Premises": [
+    "| len : Nat",
+    "\\data Dec \\plevels  \\hlevels  \\Prop \n  | yes E\n  | no (Not E)",
+    "\\lemma basis_split_basis {this : LModule} {l : Array E} {lb : IsBasis l} {j k : Fin l.len} :\nat {basis-split {l} lb (l.at j)} k = (\\case decideEq j k \\with {\n  | yes p => ide {R}\n  | no n => zro {R}\n}) ",
+    "| ide : E",
+    "\\func Not (A : \\Type) : \\Prop => A -> Empty",
+    "| R : Ring",
+    "basis-split \\hlevels  {this : LModule} {l : Array E} (lb : IsBasis l) (x : E) : Array (E {R}) l.len => (basis-split-pair {l} lb x).1",
+    "| zro : E",
+    "\\instance FinFin (n : Nat) : FinSet (Fin n) {\n  | finCard => n\n  | decideEq => decideEq\n} => \\new FinSet {\n  | finEq => {?hidden}\n}",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "| at (j : Fin len) : A j",
+    "| E : \\Set",
+    "\\field decideEq (x y : E) : Dec (x = y)"
+  ]
+}
+model output: 
+<<<Proof:>>> \case lb \with {
+  | yes p => \new IsBasis {
+    | len => l.len
+    | at => \lam (j : Fin l.len) => l.at j
+    | decideEq => \lam (x : E) (y : E) => (p x y, \case decideEq x y \with {
+      | yes p => p
+      | no n => n
+    })
+  }
+  | no n => \new IsBasis {
+    | len => l.len
+    | at => \lam (j : Fin l.len) => l.at j
+    | decideEq => \lam (x : E) (y : E) => (n x y, \case decideEq x y \with {
+      | yes p => p
+      | no n => n
+    })
+  }
+} \in \case basis_split {U} {l} lb (at {l} i) \with {
+  | yes p => \new IsBasis {
+    | len => l.len
+    | at => \lam (j : Fin l.len) => l.at j
+    | decideEq => \lam (x : E) (y

@@ -1,0 +1,27 @@
+index = 12
+
+the query:{
+  "Context": [
+    "X : CoverSpace",
+    "Y : CoverSpace",
+    "Z : CompleteCoverSpace",
+    "fd : IsDenseEmbedding {f}",
+    "x : X.E",
+    "f : CoverMap X Y",
+    "g : CoverMap X Z"
+  ],
+  "Expected type": "cauchy-lift {X} {Y} {Z} f {?hidden} g (f.func x) = filter-point {Z} (g.func-cauchy (dense-filter-lift {X} {Y} f {?hidden} (pointCF {Y} (f.func x))))",
+  "Expression": "\\peval cauchy-lift f fd g (f x)",
+  "Premises": [
+    "filter-point \\hlevels  {this : CompleteCoverSpace} (F : CauchyFilter this) : E => (filter-point-pair F).1",
+    "| func-cauchy (F1 : CauchyFilter Dom) : CauchyFilter Cod (\\lam (V : E {A {SetFilter-map {E {Dom}} {E {Cod}} func F1}}) => F.F (func ^-1 V)) {\n  | filter-mono => {?hidden}\n  | filter-top => {?hidden}\n  | filter-meet => {?hidden}\n  | isProper => {?hidden}\n}",
+    "cauchy-lift \\hlevels  {X Y : CoverSpace} {Z : CompleteCoverSpace} (f : CoverMap X Y) (\\property fd : IsDenseEmbedding {f}) (g : CauchyMap X Z)\n  (y : Y.E) : Z.E => filter-point {Z} (g.func-cauchy (dense-filter-lift {X} {Y} f fd (pointCF {Y} y)))",
+    "\\func IsDenseEmbedding \\hlevels  {this : PrecoverMap} : \\Prop => \\Sigma IsDense IsEmbedding",
+    "\\func pointCF \\hlevels  {S1 : CoverSpace} (x : S.E) : RegularCauchyFilter S1 ((<=<) (single {S.E} x)) => \\new RegularCauchyFilter {\n  | filter-mono => {?hidden}\n  | filter-top => {?hidden}\n  | filter-meet => {?hidden}\n  | isCauchyFilter => {?hidden}\n  | isProper => {?hidden}\n  | isRegularFilter => {?hidden}\n}",
+    "| func (E {Dom}) : E {Cod}",
+    "| E : \\Set",
+    "\\func dense-filter-lift \\hlevels  {X1 Y : CoverSpace} (f : CoverMap X1 Y) (fd : IsDenseEmbedding {f}) (F1 : CauchyFilter Y) :\n  CauchyFilter X1 (\\lam (U : E {A {\\this}}) => TruncP (\\Sigma (V' V : Set Y.E) (f.func ^-1 V \u2286 U) (V' <=< V) (F.F V'))) \n=> \\new CauchyFilter {\n  | filter-mono => {?hidden}\n  | filter-top => {?hidden}\n  | filter-meet => {?hidden}\n  | isCauchyFilter => {?hidden}\n  | isProper => {?hidden}\n}"
+  ]
+}
+model output: 
+<<<Expected value:>>> filter-point {Z} (g.func-cauchy (dense-filter-lift {X} {Y} f {?hidden} (pointCF {Y} (f.func x)))) <<<Actual value:>>> filter-point {Z} (g.func-cauchy (dense-filter-lift {X} {Y} f {?hidden} (pointCF {Y} (f.func x))))<<<Actual type:>>> cauchy-lift {X} {Y} {Z} f {?hidden} g (f.func x) = filter-point {Z} (g.func-cauchy (dense-filter-lift {X} {Y} f {?hidden} (pointCF {Y} (f.func x))))<<<Actual value:>>> filter-point {Z} (g.func-cauchy (dense-filter-lift {X} {Y} f {?hidden} (pointCF {Y} (f.func x))))<<<Actual type:>>> cauchy-lift {X} {Y} {Z} f {?hidden} g (f.func x) = filter-point {Z} (g.func-cauchy (dense-filter-lift {X} {Y} f {?hidden} (pointCF {Y} (

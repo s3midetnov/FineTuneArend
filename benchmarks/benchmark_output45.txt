@@ -1,0 +1,24 @@
+index = 45
+
+the query:{
+  "Context": [
+    "d/=0 : d /= 0",
+    "d : Nat",
+    "null : Nat"
+  ],
+  "Expected type": "signum (pos d - pos (suc n mod d)) = pos 1",
+  "Expression": "pos<pos (mod<right d/=0)",
+  "Premises": [
+    "\\instance IntRing \\hlevels  : OrderedCRing.Dec Int {\n  | zro => pos 0\n  | + => (IntRing.+)\n  | * => (IntRing.*)\n  | negative => negative\n  | ide => pos 1\n  | natCoef => pos\n  | #0 => AddGroup.Dec.#0\n  | decideEq => \\lam (x : E {\\this}) (y : E {\\this}) => (\\case trichotomy {\\this} x y \\with {\n    | less x<y => no {x = y}\n      (\\lam (x=y : x = y) => <-irreflexive {\\this} {y} (transport {E {\\this}} (\\lam (_x : E {\\this}) => _x < y) {x} {y} x=y x<y))\n    | equals x=y => yes {x = y} x=y\n    | greater y<x => no {x = y} (\\lam (x=y : x = y) => <-irreflexive {\\this} {y} (transport {E {\\this}} ((<) {\\this} y) {x} {y} x=y y<x))\n  })\n  | meet => meet\n  | join => join\n  | isPos => \\lam (x : E {\\this}) => signum x = pos 1\n  | #0=>eitherPosOrNeg => #0=>eitherPosOrNeg\n  | +_trichotomy => \\lam (x : E {\\this}) => (\\case x \\with {\n    | pos 0 => equals {pos 0} {pos 0} (idp {Int} {pos 0})\n    | pos (suc n) => greater {pos (suc n)} {pos 0} (idp {Int} {signum (pos (suc n) - pos 0)})\n    | neg (suc n) => less {neg (suc n)} {pos 0} (idp {Int} {signum (pos 0 - neg (suc n))})\n  })\n} => \\new OrderedCRing.Dec {\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | +-comm => {?hidden}\n  | *-assoc => {?hidden}\n  | ldistr => {?hidden}\n  | rdistr => {?hidden}\n  | negative-left => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | natCoefZero => {?hidden}\n  | natCoefSuc => {?hidden}\n  | zro/=ide => {?hidden}\n  | zeroProduct => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | zro/>0 => {?hidden}\n  | positive_+ => {?hidden}\n  | ide>zro => {?hidden}\n  | positive_* => {?hidden}\n  | positive=>#0 => {?hidden}\n  | negative=>#0 => {?hidden}\n  | *-comm => {?hidden}\n}",
+    "\\func \\infixl 6 - \\hlevels  {G : AddGroup} (x y : G.E) : G.E => x G.+ G.negative y",
+    "suc Nat",
+    "\\func \\infixl 8 mod \\plevels  \\hlevels  (n m : Nat) : Nat => n mod m",
+    "\\data Int \\plevels  \\hlevels  \n  | pos Nat\n  | neg Nat  {\n    | 0 => pos 0\n  }",
+    "\\lemma mod<right \\plevels  \\hlevels  {n m : Nat} (_ : m /= 0) : n mod m < m ",
+    "\\func signum \\plevels  \\hlevels  (_ : Int) : Int \n  | pos 0 => pos 0\n  | pos (suc n) => pos 1\n  | neg (suc n) => neg 1",
+    "\\lemma pos<pos \\plevels  \\hlevels  {n m : Nat} (_ : n < m) : pos n < pos m ",
+    "pos Nat"
+  ]
+}
+model output: 
+<<<Expected type:>>> signum (pos d - pos (suc n mod d)) = pos 1 <<<Expected type:>>> signum (pos d - pos (suc n mod d)) = pos 1 <<<Expected type:>>> signum (pos d - pos (suc n mod d)) = pos 1 <<<Expected type:>>> signum (pos d - pos (suc n mod d)) = pos 1 <<<Expected type:>>> signum (pos d - pos (suc n mod d)) = pos 1 <<<Expected type:>>> signum (pos d - pos (suc n mod d)) = pos 1 <<<Expected type:>>> signum (pos d - pos (suc n mod d)) = pos 1 <<<Expected type:>>> signum (pos d - pos (suc n mod d)) = pos 1 <<<Expected type:>>> signum (pos d - pos (suc n mod d)) = pos 1 <<<Expected type:>>> signum (pos d - pos (suc n mod d)) = pos 1 <<<Expected type:>>> signum (pos d - pos (suc n mod d)) = pos 1 <<<Expected type

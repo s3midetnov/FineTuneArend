@@ -1,0 +1,35 @@
+index = 40
+
+the query:{
+  "Context": [
+    "c : InList {Nat} j (makeStep' G (nil {Nat}))",
+    "j : Nat",
+    "G : Graph Nat"
+  ],
+  "Expected type": "TruncP (\\Sigma (i : Nat) (InList {Nat} i (nil {Nat})) (Index {\\Sigma Nat Nat} (i, j) G))",
+  "Expression": "\\case c \\with {}",
+  "Premises": [
+    "\\data InList {A : \\Type} A (List A) : \\Prop \\with\n  | {A}, a, a' :: l => here (a = a')\n  | {A}, a, a' :: l => there (InList {A} a l)",
+    "\\data Nat \\plevels  \\hlevels  \n  | zero\n  | suc Nat",
+    "\\func makeStep' \\plevels  \\hlevels  (_ : Graph Nat) (_ : List Nat) : List Nat \n  | G, nil => nil {Nat}\n  | G, i :: l => step1' G i ++ makeStep' G l",
+    "nil",
+    "\\func Index {A : \\Type} (x : A) (l : Array A) : \\Type => \\Sigma (i : Fin l.len) (l.at i = x)",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I"
+  ]
+}
+model output: 
+<<<Expected value:>>> (\Sigma (i : Nat) (InList {Nat} i (nil {Nat})) (Index {\Sigma Nat Nat} (i, j) G))<<<Proof:>>> \case \elim makeStep' \with {
+  | G, nil => nil {Nat}
+  | G, i :: l => step1' G i ++ makeStep' G l
+} \in \case \elim InList \with {
+  | {A}, a, a' :: l => here (a = a')
+  | {A}, a, a' :: l => there (InList {A} a l)
+} \in \case \elim Index \with {
+  | {A}, x, nil => inP {A} x
+  | {A}, x, i :: l => inP {A} x ∨ Index {A} x l
+} \in \case \elim \inP \with {
+  | {A}, x => inP {A} x
+} \in \case \elim inP \with {
+  | {A}, x => inP {A} x
+} \in \case \elim inP \with {
+  | {A

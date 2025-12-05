@@ -1,0 +1,20 @@
+index = 27
+
+the query:{
+  "Context": [
+    "y : E {Dom {\\this}}",
+    "x : E {Dom {\\this}}",
+    "x<=y : x <= y",
+    "Z : Ob {D {\\this}}"
+  ],
+  "Expected type": "\\Pi (xu : x ()) -> (\\lam (_ : y ()) => Z.top) (x<=y {()} xu) <= Join {Z} {y ()} (\\lam (_ : y ()) => Z.top)",
+  "Expression": "\\lam xu => Join-cond (x<=y xu)",
+  "Premises": [
+    "| Join-cond {J : \\Set} (j : J) {f : J -> E} : f j <= Join {J} f",
+    "| Join {J : \\Set} (J -> E) : E",
+    "| top : E",
+    "| \\infix 4 <= E E : \\Prop"
+  ]
+}
+model output: 
+(x<=y {()} xu) <<<Proof:>>> \case Join-cond {x<=y} x<=y \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {y} \in Join {x} {

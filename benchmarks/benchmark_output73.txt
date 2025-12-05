@@ -1,0 +1,17 @@
+index = 73
+
+the query:{
+  "Context": [
+    "null : B {\\this}"
+  ],
+  "Expected type": "\\Pi {x y z : E} -> x * y * z = x * (y * z)",
+  "Expression": "*-assoc {b}",
+  "Premises": [
+    "| \\infixl 7 * E E : E",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "| E : \\Set",
+    "| *-assoc {x y z : E} : x * y * z = x * (y * z)"
+  ]
+}
+model output: 
+<<<Expected value:>>> \lam {x y z : E} => x * y * z = x * (y * z) <<<Proof:>>> \lam {x y z : E} => x * y * z = x * (y * z) = x * (y * z) \in \Sigma (x * y * z = x * (y * z)) \in \Sigma (x * y * z = x * (y * z)) \in \Sigma (x * y * z = x * (y * z)) \in \Sigma (x * y * z = x * (y * z)) \in \Sigma (x * y * z = x * (y * z)) \in \Sigma (x * y * z = x * (y * z)) \in \Sigma (x * y * z = x * (y * z)) \in \Sigma (x * y * z = x * (y * z)) \in \Sigma (x * y * z = x * (y * z)) \in \Sigma (x * y * z = x * (y * z)) \in \Sigma (x * y * z = x *

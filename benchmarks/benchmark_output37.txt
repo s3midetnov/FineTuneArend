@@ -1,0 +1,33 @@
+index = 37
+
+the query:{
+  "Context": [
+    "R : CRing",
+    "f : J -> R.E",
+    "J : \\Set"
+  ],
+  "Expected type": "RingHom (MonoidRing (PermSetMonoid J) R) R {\n  | func => \\lam (p0 : E {Dom {evalMSMonoidHom {E} {R} (func {permSet-univ {J} {R} f})}}) =>\n    evalMS {E} {R} p0 (func {permSet-univ {J} {R} f})\n}",
+  "Expression": "evalMSRingHom (permSet-univ {J} {R} f)",
+  "Premises": [
+    "\\func evalMSRingHom \\hlevels  {M : Monoid} {R : CRing} (f : MonoidHom M R) : RingHom (MonoidRing M R) R {\n  | func => \\lam (p0 : E {Dom {evalMSMonoidHom {M.E} {R} f.func}}) => evalMS {M.E} {R} p0 f.func\n} => \\new RingHom {\n  | func-+ => {?hidden}\n  | func-ide => {?hidden}\n  | func-* => {?hidden}\n}",
+    "\\func evalMSMonoidHom \\hlevels  {M : \\Set} {R : Semiring} (f : M -> R.E) : AddMonoidHom (MonoidAbMonoid M R) R {\n  | func => \\lam (p0 : E {Dom {\\this}}) => evalMS {M} {R} p0 f\n} => \\new AddMonoidHom {\n  | func-zro => {?hidden}\n  | func-+ => {?hidden}\n}",
+    "\\func evalMS \\hlevels  {M2 : \\Set} {R2 : Semiring} (_ : MonoidSet M2 R2) (_ : M2 -> R.E) : R.E \n  | {M}, {R}, in~ l, f => BigSum {R} (map {\\Sigma R.E M} {R.E} (\\lam (s : \\Sigma R.E M) => s.1 R.* f s.2) l)\n  | {M}, {R}, ~-equiv l l' r i, f => evalMS-coh {M} {R} f {l} {l'} r @ i",
+    "\\instance PermSetMonoid \\hlevels  (A : \\Set) : CMonoid (PermSet A) {\n  | ide => in~ {Array A} {EPerm {A}} nil\n  | * => (PermSetMonoid.*)\n} => \\new CMonoid {\n  | *-assoc => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | *-comm => {?hidden}\n}",
+    "\\instance MonoidRing \\hlevels  (M : Monoid) (R : Ring) : Ring (MonoidSet M.E R) {\n  | zro => in~ {Array (\\Sigma R.E M.E)} {(~)} nil\n  | + => (+)\n  | * => (*)\n  | negative => negative {M.E} {R}\n  | ide => in~ {Array (\\Sigma R.E M.E)} {(~)} ((R.ide, M.ide) :: nil)\n  | natCoef => natCoefImpl {MonoidSemiring M R}\n} => \\new Ring {\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | +-comm => {?hidden}\n  | *-assoc => {?hidden}\n  | ldistr => {?hidden}\n  | rdistr => {?hidden}\n  | negative-left => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | natCoefZero => {?hidden}\n  | natCoefSuc => {?hidden}\n}",
+    "| E : \\Set",
+    "| func (E {Dom}) : E {Cod}",
+    "| Dom : BaseSet",
+    "\\func permSet-univ \\hlevels  {A : \\Set} {B : CMonoid} (f : A -> B.E) : MonoidHom (PermSetMonoid A) B {\n  | func => \\lam (x : E {Dom {\\this}}) => permSet-sum {B} (permSet-map {A} {B.E} f x)\n} => \\new MonoidHom {\n  | func-ide => {?hidden}\n  | func-* => {?hidden}\n}",
+    "\\class RingHom \\extends SemiringHom, AddGroupHom \\hlevels "
+  ]
+}
+model output: 
+<<<Expected type:>>> RingHom (MonoidRing (PermSetMonoid J) R) R {
+  | func => \lam (p0 : E {Dom {evalMSMonoidHom {E} {R} (func {permSet-univ {J} {R} f})}}) =>
+    evalMS {E} {R} p0 (func {permSet-univ {J} {R} f})
+}<<<Expected type:>>> RingHom (MonoidRing (PermSetMonoid J) R) R {
+  | func => \lam (p0 : E {Dom {evalMSMonoidHom {E} {R} (func {permSet-univ {J} {R} f})}}) =>
+    evalMS {E} {R} p0 (func {permSet-univ {J} {R} f})
+}<<<Expected type:>>> RingHom (MonoidRing (PermSetMonoid J) R) R {
+  | func => \lam (p0 : E {Dom {evalMSMonoidHom {E} {R} (func {permSet-univ {J} {R} f})}}) =>
+    evalMS {E} {

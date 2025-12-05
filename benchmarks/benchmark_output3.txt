@@ -1,0 +1,23 @@
+index = 3
+
+the query:{
+  "Context": [
+    "null : A",
+    "g : PosetHom S2 S1 {\n  | func => \\lam (x : A) => x\n}",
+    "S1 : Dec A",
+    "S2 : Dec A",
+    "null : A"
+  ],
+  "Expected type": "a1 S2.\u2227 a S1.<= a1 S1.\u2227 a",
+  "Expression": "meet-univ (func-<= {g} meet-left) (func-<= {g} meet-right)",
+  "Premises": [
+    "| meet-left {x y : E} : x \u2227 y <= x",
+    "| meet-univ {x y z : E} (z <= x) (z <= y) : z <= x \u2227 y",
+    "| \\infix 4 <= E E : \\Prop",
+    "| meet \\alias \\infixl 7 \u2227 E E : E",
+    "| func-<= {x y : E {Dom}} (x <= y) : func x <= func y",
+    "| meet-right {x y : E} : x \u2227 y <= y"
+  ]
+}
+model output: 
+1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.∧ a1 S2.

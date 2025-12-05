@@ -1,0 +1,23 @@
+index = 32
+
+the query:{
+  "Context": [
+    "V : PosetQModule",
+    "l : PFunc {V} {B}",
+    "a : B.E",
+    "b : B.E",
+    "B : BooleanRing"
+  ],
+  "Expected type": "SFRefines {V} {B} (map {\\Sigma V.E B.E} {\\Sigma V.E B.E} (\\lam (s : \\Sigma V.E B.E) => (s.1, diff {B} s.2 (b B.\u2228 a))) l)\n  (map {\\Sigma V.E B.E} {\\Sigma V.E B.E} (\\lam (s : \\Sigma V.E B.E) => (s.1, diff {B} s.2 (b B.\u2228 a))) l)",
+  "Expression": "SFRefines-refl {V} {B}",
+  "Premises": [
+    "\\lemma SFRefines-refl \\hlevels  {V : PosetQModule} {B : BooleanRing} {l : PFunc {V} {B}} : SFRefines {V} {B} l l ",
+    "\\func diff \\hlevels  {this : BooleanRing} (x y : E) : E => x + x * y",
+    "\\type SFRefines \\hlevels  {V : PosetQModule} {B : BooleanRing} (l l' : PFunc {V} {B}) : \\Prop => \\Sigma (\\Pi (j : Fin l'.len) ->\n  ((l' !! j).1 = V.zro) || (l' !! j).2 B.<= BigJoin {B} (map {\\Sigma V.E B.E} {B.E} (\\lam (p0 : \\Sigma V.E B.E) => p0.2) l))\n  (\\Pi (j : Fin l.len) -> TruncP (\\Sigma (j1 : Fin l'.len) ((l !! j).1 = (l' !! j1).1) ((l !! j).2 B.<= (l' !! j1).2)))",
+    "| E : \\Set",
+    "| join \\alias \\infixl 6 \u2228 E E : E",
+    "\\func map {A B : \\Type} (f : A -> B) (as : Array A) : Array B as.len (\\lam (i : Fin as.len) => f (as.at i)) => \\new DArray"
+  ]
+}
+model output: 
+<<<Expected value:>>> \Sigma (l.len = 0) (\lam () => ()) || \Sigma (l.len > 0) (\lam (j : Fin l.len) => TruncP (l.at j.1 = b B.∨ a) (l.at j.2 B.<= diff {B} l.at j.2 (b B.∨ a)))<<<Actual value:>>> \Sigma (l.len = 0) (\lam () => ()) || \Sigma (l.len > 0) (\lam (j : Fin l.len) => TruncP (l.at j.1 = b B.∨ a) (l.at j.2 B.<= diff {B} l.at j.2 (b B.∨ a)))<<<Actual type:>>> \Sigma (l.len = 0) (\lam () => ()) || \Sigma (l.len > 0) (\lam (j : Fin l.len) => TruncP (l.at j.1 = b B.∨ a) (l.at j.2 B.<= diff {B} l.at j.2 (b B.∨ a)))<<<Actual value:>>> \Sigma (l.len = 0) (\lam

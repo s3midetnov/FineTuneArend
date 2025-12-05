@@ -1,0 +1,39 @@
+index = 52
+
+the query:{
+  "Context": [
+    "u2 : E",
+    "u1 : E",
+    "y : S",
+    "q : Bool",
+    "G : Group",
+    "S : \\Set",
+    "i : S -> G.E"
+  ],
+  "Expected type": "univ_map {S} {G} i u1 G.* univ_map {S} {G} i u2 = univ_map {S} {G} i (((u1 ++ (y, q) :: nil {\\Sigma S Bool}) ++ (y, not q) :: nil {\\Sigma S Bool}) ++ u2)",
+  "Expression": "rewrite (univ_map_++ {S}) (rewrite (univ_map_++ {S})\n  (rewrite (univ_map_++ {S}) (repeat {2} (rewrite ide-right) (cases q (\\case  \\with {}) (repeat {2} (rewrite *-assoc)\n    (rewriteI {2} *-assoc (rewrite (inverse-left, ide-left {G}) idp <|> rewrite (inverse-right, ide-left {G}) idp)))))))",
+  "Premises": [
+    "| ide-left {x : E} : ide * x = x",
+    "\\func not \\plevels  \\hlevels  (_ : Bool) : Bool \n  | true => false\n  | false => true",
+    "\\func transport {A : \\Type} (B : A -> \\Type) {a a' : A} (p : a = a') (b : B a) : B a' => coe (\\lam (i : I) => B (p @ i)) b right",
+    "\\func idp {A : \\Type} {a : A} : a = a => path (\\lam (_ : I) => a)",
+    "\\data Bool \\plevels  \\hlevels  \n  | false\n  | true",
+    "| ide : E",
+    "nil",
+    "| inverse E : E",
+    "\\func univ_map \\hlevels  {S1 : \\Set} {G2 : Group} (_ : S1 -> G.E) (_ : List (\\Sigma S1 Bool)) : G.E \n  | {S}, {G}, i, nil => G.ide\n  | {S}, {G}, i, (s, b) :: l => (\\case b \\with {\n    | true => i s\n    | false => G.inverse (i s)\n  }) G.* univ_map {S} {G} i l",
+    "| \\infixl 7 * E E : E",
+    "\\func transportInv {A : \\Type} (B : A -> \\Type) {a a' : A} (_ : a = a') (_ : B a') : B a \n  | {A}, B, {a}, {a'}, idp, b => b",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\lemma univ_map_++ \\hlevels  {S : \\Set} {G : Group} (i : S -> G.E) (l1 l2 : List (\\Sigma S Bool)) :\n  univ_map {S} {G} i (l1 ++ l2) = univ_map {S} {G} i l1 G.* univ_map {S} {G} i l2 ",
+    "| E : \\Set",
+    "| inverse-left {x : E} : inverse x * x = ide",
+    "| *-assoc {x y z : E} : x * y * z = x * (y * z)",
+    "\\func \\infixr 5 ++ {A1 : \\Type} (_ _ : List A1) : List A1 \n  | {A}, nil, ys => ys\n  | {A}, a :: xs, ys => a :: xs ++ ys",
+    "\\infixr 5 :: A (List A)",
+    "| ide-right {x : E} : x * ide = x",
+    "| inverse-right {x : E} : x * inverse x = ide"
+  ]
+}
+model output: 
+G.* univ_map {S} {G} i (((u1 ++ (y, q) :: nil {\Sigma S Bool}) ++ (y, not q) :: nil {\Sigma S Bool}) ++ u2) G.* univ_map {S} {G} i (((u1 ++ (y, q) :: nil {\Sigma S Bool}) ++ (y, not q) :: nil {\Sigma S Bool}) ++ u2) G.* univ_map {S} {G} i (((u1 ++ (y, q) :: nil {\Sigma S Bool}) ++ (y, not q) :: nil {\Sigma S Bool}) ++ u2) G.* univ_map {S} {G} i (((u1 ++ (y, q) :: nil {\Sigma S Bool}) ++ (y, not q) :: nil {\Sigma S Bool}) ++ u2) G.* univ_map {S} {G} i (((u1 ++ (y, q) :: nil {\Sigma S Bool}) ++ (y, not q) :: nil {\Sigma S Bool}) ++ u2) G.* univ_map {S} {G} i (((u1 ++ (y, q) :: nil {\Sigma S

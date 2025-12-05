@@ -1,0 +1,26 @@
+index = 93
+
+the query:{
+  "Context": [
+    "C : Cat",
+    "x : C.Ob"
+  ],
+  "Expected type": "FaithfulFunctor (SlicePrecat {C1} x) C1 (\\lam (p0 : Ob {C {\\this}}) => p0.1) {\n  | Func => \\lam {X Y : Ob {C {\\this}}} (p0 : Hom {C {\\this}} X Y) => p0.1\n}",
+  "Expression": "forget x",
+  "Premises": [
+    "| Hom Ob Ob : \\Set",
+    "\\instance SlicePrecat \\plevels obj >= hom \\hlevels  {C : Precat} (x : C.Ob) : Precat (ObOver {C} x) {\n  | Hom => \\lam (p0 : Ob {\\this}) (p1 : Ob {\\this}) => \\Sigma (h : C.Hom p0.1 p1.1) (p1.2 C.\u2218 h = p0.2)\n  | id => \\lam (p0 : Ob {\\this}) => (C.id p0.1, C.id-right {p0.1} {x} {p0.2})\n  | o => \\lam {X Y Z : Ob {\\this}} (p0 : Hom {\\this} Y Z) (p1 : Hom {\\this} X Y) => (p0.1 C.\u2218 p1.1,\n    inv {C.Hom X.1 x} {Z.2 C.\u2218 p0.1 C.\u2218 p1.1} {Z.2 C.\u2218 (p0.1 C.\u2218 p1.1)} (C.o-assoc {X.1} {Y.1} {Z.1} {x} {Z.2} {p0.1} {p1.1}) *> pmap {C.Hom Y.1 x} {C.Hom X.1 x} (\\lam (_x : C.Hom Y.1 x) => _x C.\u2218 p1.1) {Z.2 C.\u2218 p0.1} {Y.2} p0.2 *> p1.2)\n} => \\new Precat {\n  | id-left => {?hidden}\n  | id-right => {?hidden}\n  | o-assoc => {?hidden}\n}",
+    "| Ob : \\hType",
+    "| C : Precat",
+    "\\lemma forget \\plevels obj >= hom \\hlevels  {C1 : Precat} (x : C.Ob) : FaithfulFunctor (SlicePrecat {C1} x) C1 (\\lam (p0 : Ob {C {\\this}}) => p0.1) {\n  | Func => \\lam {X Y : Ob {C {\\this}}} (p0 : Hom {C {\\this}} X Y) => p0.1\n} ",
+    "\\class FaithfulFunctor \\extends Functor \\plevels obj >= hom \\hlevels  {\n  | isFaithful {X Y : Ob {C}} {f g : Hom {C} X Y} (Func {X} {Y} f = Func {X} {Y} g) : f = g\n}"
+  ]
+}
+model output: 
+>>>\Sigma (C : Precat) (x : C.Ob) -> FaithfulFunctor (SlicePrecat {C} x) C (C.ObOver {C} x) {
+  | Func => \lam {X Y : Ob {C {\this}}} (p0 : Hom {C {\this}} X Y) => p0.1
+} >>>\Sigma (C : Precat) (x : C.Ob) -> FaithfulFunctor (SlicePrecat {C} x) C (C.ObOver {C} x) {
+  | Func => \lam {X Y : Ob {C {\this}}} (p0 : Hom {C {\this}} X Y) => p0.1
+} >>>\Sigma (C : Precat) (x : C.Ob) -> FaithfulFunctor (SlicePrecat {C} x) C (C.ObOver {C} x) {
+  | Func => \lam {X Y : Ob {C {\this}}} (p0 : Hom {C {\this}} X Y) => p0.1
+} >>>\Sigma (C : Precat) (x : C.Ob) -> FaithfulFunctor (

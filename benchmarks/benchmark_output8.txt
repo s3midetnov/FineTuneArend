@@ -1,0 +1,32 @@
+index = 8
+
+the query:{
+  "Context": [
+    "bs : Array B.E n",
+    "v : V.E",
+    "vs : Array V.E bs.len",
+    "b : B.E",
+    "v' : V.E",
+    "B : BottomDistributiveLattice",
+    "V : AddMonoid",
+    "n : Nat",
+    "vs' : Array V.E bs.len"
+  ],
+  "Expected type": "mkArray {\\Sigma V.E B.E} {suc bs.len} (\\lam (j : Fin (suc bs.len)) => (at {v :: vs} j, at {b :: bs} j)) ++ mkArray {\\Sigma V.E B.E} {suc bs.len} (\\lam (j : Fin (suc bs.len)) => (at {v' :: vs'} j, at {b :: bs} j)) ~ (at {v' :: vs'} 0, at {b :: bs} 0) :: mkArray {\\Sigma V.E B.E} {suc n} (\\lam (j : Fin (suc n)) => (at {v :: vs} j, at {b :: bs} j)) ++ \\new Array (\\Sigma V.E B.E) n (\\lam (j : Fin n) => (at {v' :: vs'} (suc j), at {b :: bs} (suc j)))",
+  "Expression": "~-perm (EPerm_++-swap {_} {mkArray (\\lam (j : Fin (suc bs.len)) => ((::) v vs j, (::) b bs j))})",
+  "Premises": [
+    "| len : Nat",
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "\\func \\infixr 5 ++ {A1 : \\Type} (_ _ : Array A1) : Array A1 \n  | {A}, nil, ys => ys\n  | {A}, :: {n} a xs, ys => a :: xs ++ ys",
+    "suc Nat",
+    "| at (j : Fin len) : A j",
+    "\\data \\infix 4 ~ {V : AddMonoid} {B : BottomDistributiveLattice} (_ _ : Array (\\Sigma V.E B.E)) : \\Prop \n  | ~-perm (EPerm {\\Sigma V.E B.E} l l')\n  | ~-sym (l' ~ l)\n  | ~-trans {m : Array (\\Sigma V.E B.E)} (l ~ m) (m ~ l')\n  | ~-zro-left {b : B.E} (l = (V.zro, b) :: l')\n  | ~-zro-right {v : V.E} (l = (v, B.bottom) :: l')\n  | ~-+-left {l'' : Array (\\Sigma V.E B.E)} {u v : V.E} {b : B.E} (l = (u, b) :: (v, b) :: l'') (l' = (u V.+ v, b) :: l'')\n  | ~-+-right {l'' : Array (\\Sigma V.E B.E)} {v : V.E} {a b : B.E} (l = (v, a B.\u2228 b) :: (v, a B.\u2227 b) :: l'') (l' = (v, a) :: (v, b) :: l'')",
+    "\\class DArray {\n  | len : Nat\n  | A (Fin len) : \\Type\n  | at (j : Fin len) : A j\n}",
+    "\\func EPerm_++-swap {A2 : \\Type} {l1 l'2 : Array A2} {a2 : A2} : EPerm {A2} (l1 ++ a2 :: l'2) (a2 :: l1 ++ l'2) \n  | {A}, {nil}, {l'}, {a} => eperm-refl {A} {nil ++ a :: l'}\n  | {A}, {:: {n} a' l}, {l'}, {a} => eperm-trans {A} {(a' :: l) ++ a :: l'} {a :: (a' :: l) ++ l'} {a' :: a :: l ++ l'}\n    (eperm-:: {A} {len {l ++ a :: l'}} {a'} {\\new (l ++ a :: l') {\n      | A => \\lam (_ : Fin (len {\\this})) => A\n    }} {suc (len {l ++ l'})} {a'} {a :: l ++ l'} (idp {A} {a'}) (EPerm_++-swap {A} {l} {l'} {a}))\n    (eperm-swap {A} {len {l ++ l'}} {a'} {a} {\\new (l ++ l') {\n      | A => \\lam (_ : Fin (len {\\this})) => A\n    }} {len {l ++ l'}} {a} {a'} {\\new (l ++ l') {\n      | A => \\lam (_ : Fin (len {\\this})) => A\n    }} (idp {A} {a'}) (idp {A} {a}) (idp {Array A (len {l ++ l'}) (at {l ++ l'})} {\\new (l ++ l') {\n      | A => \\lam (_ : Fin (len {\\this})) => A\n    }}))",
+    "| E : \\Set",
+    "\\func mkArray {A : \\Type} {n : Nat} (f : Fin n -> A) : Array A n f => \\new DArray",
+    "~-perm (EPerm {\\Sigma V.E B.E} l l')"
+  ]
+}
+model output: 
+~ (at {v' :: vs'} 0, at {b :: bs} 0) :: mkArray {\Sigma V.E B.E} {suc n} (\lam (j : Fin (suc n)) => (at {v :: vs} j, at {b :: bs} j)) ++ \new Array (\Sigma V.E B.E) n (\lam (j : Fin n) => (at {v' :: vs'} (suc j), at {b :: bs} (suc j))) ~ (at {v' :: vs'} 0, at {b :: bs} 0) :: mkArray {\Sigma V.E B.E} {suc n} (\lam (j : Fin (suc n)) => (at {v :: vs} j, at {b :: bs} j)) ++ \new Array (\Sigma V.E B.E) n (\lam (j : Fin n) => (at {v' :: vs'} (suc j), at {b :: bs} (suc j))) ~ (at {v' :: vs'} 0, at {b :: bs} 0) :: mkArray {\Sigma V.E B.E} {suc n}

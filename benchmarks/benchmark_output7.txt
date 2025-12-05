@@ -1,0 +1,34 @@
+index = 7
+
+the query:{
+  "Context": [
+    "Y : CoverSpace",
+    "this : CoverSpace (\\Sigma X.E Y.E) {\n  | isOpen => \\lam (W : Set E) => \\Pi {s : E} -> W s -> TruncP (\\Sigma (U : Set X.E) (X.isOpen U) (U s.1) (V : Set Y.E) (Y.isOpen V) (V s.2)\n    (\\Pi {x : X.E} -> U x -> \\Pi {y : Y.E} -> V y -> W (x, y)))\n  | open-top => {?hidden}\n  | open-inter => {?hidden}\n  | open-Union => {?hidden}\n  | isCauchy => isCauchy {CoverTransfer {\\Sigma X.E Y.E} {X} (\\lam (p0 : \\Sigma X.E Y.E) => p0.1) \u2228 CoverTransfer {\\Sigma X.E Y.E} {Y} (\\lam (p0 : \\Sigma X.E Y.E) => p0.2)}\n  | cauchy-cover => {?hidden}\n  | cauchy-top => {?hidden}\n  | cauchy-refine => {?hidden}\n  | cauchy-glue => {?hidden}\n  | cauchy-open => {?hidden}\n  | isRegular => {?hidden}\n}",
+    "S : Set (E {\\this})",
+    "X : CoverSpace"
+  ],
+  "Expected type": "(\\Pi {x : E {\\this}} -> S x -> isCauchy {\\this} (\\lam (U : Set (E {\\this})) => U x -> U \u2286 S)) ->\n\\Pi {s : E} -> S s -> TruncP (\\Sigma (U : Set X.E) (X.isOpen U) (U s.1) (V : Set Y.E) (Y.isOpen V) (V s.2)\n  (\\Pi {x : X.E} -> U x -> \\Pi {y : Y.E} -> V y -> S (x, y)))",
+  "Expression": "\\lam f Ss => (\\case prod-neighborhood' (open-char.1 (later f) Ss) \\with {\n  | inP (U, V, x<=<U, y<=<V, h) =>\n    inP (_, interior {X} {U}, x<=<U, _, interior {Y} {V}, y<=<V, \\lam c d => h (<=<_<= c idp) (<=<_<= d idp))\n})",
+  "Premises": [
+    "\\lemma prod-neighborhood' \\hlevels  {X Y : CoverSpace} {x : X.E} {y : Y.E} {W : Set (\\Sigma X.E Y.E)} (_ : single {\\Sigma X.E Y.E} (x, y) <=< W) :\nTruncP (\\Sigma (U : Set X.E) (V : Set Y.E) (single {X.E} x <=< U) (single {Y.E} y <=< V)\n  (\\Pi {x : X.E} -> U x -> \\Pi {y : Y.E} -> V y -> W (x, y))) ",
+    "\\instance CoverLattice \\hlevels  (X : \\Set) : CompleteLattice (CoverSpace X) {\n  | <= => \\lam (A : E {\\this}) (B : E {\\this}) => \\Pi {C : Set (Set X)} -> A.isCauchy C -> B.isCauchy C\n  | meet => meet-impl\n  | join => \\lam (A : E {\\this}) (B : E {\\this}) => \\new CoverSpace X {\n    | isOpen => isOpen {ClosurePrecoverSpace {X} (\\lam (C : Set (Set X)) => TruncP (\\Sigma (j : Bool) (isCauchy C)))\n      (\\lam {C : Set (Set X)} (e : TruncP (\\Sigma (j : Bool) (isCauchy C))) (x : X) => (\\case e \\with {\n        | inP (j, Cc) => cauchy-cover {C} Cc x\n      }))}\n    | open-top => {?hidden}\n    | open-inter => {?hidden}\n    | open-Union => {?hidden}\n    | isCauchy => Closure {X} (\\lam (C : Set (Set X)) => TruncP (\\Sigma (j : Bool) (isCauchy C)))\n    | cauchy-cover => {?hidden}\n    | cauchy-top => {?hidden}\n    | cauchy-refine => {?hidden}\n    | cauchy-glue => {?hidden}\n    | cauchy-open => {?hidden}\n    | isRegular => {?hidden}\n  }\n  | top => DiscreteCover X\n  | Join => \\lam {J : \\Set} (f : J -> E {\\this}) => \\new CoverSpace X {\n    | isOpen => isOpen {ClosurePrecoverSpace {X} (\\lam (C : Set (Set X)) => TruncP (\\Sigma (j : J) (isCauchy {f j} C)))\n      (\\lam {C : Set (Set X)} (e : TruncP (\\Sigma (j : J) (isCauchy {f j} C))) (x : X) => (\\case e \\with {\n        | inP (j, Cc) => cauchy-cover {f j} {C} Cc x\n      }))}\n    | open-top => {?hidden}\n    | open-inter => {?hidden}\n    | open-Union => {?hidden}\n    | isCauchy => Closure {X} (\\lam (C : Set (Set X)) => TruncP (\\Sigma (j : J) (isCauchy {f j} C)))\n    | cauchy-cover => {?hidden}\n    | cauchy-top => {?hidden}\n    | cauchy-refine => {?hidden}\n    | cauchy-glue => {?hidden}\n    | cauchy-open => {?hidden}\n    | isRegular => {?hidden}\n  }\n  | Meet => Meet-impl\n} => \\new CompleteLattice {\n  | <=-refl => {?hidden}\n  | <=-transitive => {?hidden}\n  | <=-antisymmetric => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | top-univ => {?hidden}\n  | Join-cond => {?hidden}\n  | Join-univ => {?hidden}\n  | Meet-cond => {?hidden}\n  | Meet-univ => {?hidden}\n}",
+    "\\func idp {A : \\Type} {a : A} : a = a => path (\\lam (_ : I) => a)",
+    "| isCauchy (Set (Set E)) : \\Prop",
+    "\\func Set \\hlevels  (X : \\hType) : \\Set => X -> \\Prop",
+    "inP A",
+    "\\func single \\hlevels  {X : \\Set} (a : X) : Set X => (=) a",
+    "\\lemma interior \\hlevels  {this : CoverSpace} {U : Set E} : isOpen (\\lam (x : E) => single {E} x <=< U) ",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I",
+    "\\lemma <=<_<= \\hlevels  {X : PrecoverSpace} {V U : Set X.E} (_ : V <=< U) : V <= U ",
+    "\\func CoverTransfer \\hlevels  {X : \\Set} {Y : CoverSpace} (f : X -> Y.E) : CoverSpace X {\n  | isOpen => \\lam (U : Set E) => TruncP (\\Sigma (V : Set Y.E) (Y.isOpen V) (U = f ^-1 V))\n  | isCauchy => isCauchy\n} => \\new CoverSpace {\n  | open-top => {?hidden}\n  | open-inter => {?hidden}\n  | open-Union => {?hidden}\n  | cauchy-cover => {?hidden}\n  | cauchy-top => {?hidden}\n  | cauchy-refine => {?hidden}\n  | cauchy-glue => {?hidden}\n  | cauchy-open => {?hidden}\n  | isRegular => {?hidden}\n}",
+    "\\type Subset \\alias \\infix 4 \u2286 \\hlevels  {X : \\hType} (U V : Set X) : \\Prop => \\Pi {x : X} -> U x -> V x",
+    "| isOpen (Set E) : \\Prop",
+    "| E : \\Set",
+    "\\instance ProductTopSpace \\hlevels  (X Y : TopSpace) : TopSpace (\\Sigma X.E Y.E) {\n  | isOpen => \\lam (W : Set (E {\\this})) =>\n  \\Pi {s : E {\\this}} -> W s -> TruncP (\\Sigma (U : Set X.E) (X.isOpen U) (U s.1) (V : Set Y.E) (Y.isOpen V) (V s.2)\n    (\\Pi {x : X.E} -> U x -> \\Pi {y : Y.E} -> V y -> W (x, y)))\n} => \\new TopSpace {\n  | open-top => {?hidden}\n  | open-inter => {?hidden}\n  | open-Union => {?hidden}\n}",
+    "| join \\alias \\infixl 6 \u2228 E E : E",
+    "\\lemma open-char \\hlevels  {this : PrecoverSpace} {S : Set E} : isOpen S <-> (\\Pi {x : E} -> S x -> single {E} x <=< S) ",
+    "\\type \\infix 4 <=< \\hlevels  {X : PrecoverSpace} (V U : Set X.E) : \\Prop => X.isCauchy (\\lam (W : Set X.E) => \\Sigma (e : X.E) ((\u2227) V W e) -> W \u2286 U)"
+  ]
+}
+model output: 
+<<<Expected value:>>> (\lam (U : Set (E {\this})) => U x -> U ⊆ S) <<<Proof:>>> \lam (U : Set (E {\this})) => U x -> U ⊆ S <<<Proofs:\lam (U : Set (E {\this})) => U x -> U ⊆ S <<<Proofs:\lam (U : Set (E {\this})) => U x -> U ⊆ S <<<Proofs:\lam (U : Set (E {\this})) => U x -> U ⊆ S <<<Proofs:\lam (U : Set (E {\this})) => U x -> U ⊆ S <<<Proofs:\lam (U : Set (E {\this})) => U x -> U ⊆ S <<<Proofs:\lam (U : Set (E {\this})) => U x -> U ⊆ S <<<Proofs:\lam (U : Set (E {\this})) => U x -> U ⊆ S <<<Proofs:\lam (U : Set (E {\this})) => U x -> U ⊆ S <<<Proofs:\lam (U : Set (E {\this})) => U x -> U ⊆ S <<<Proofs:\lam (U : Set (

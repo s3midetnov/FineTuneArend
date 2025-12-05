@@ -1,0 +1,64 @@
+index = 80
+
+the query:{
+  "Context": [
+    "I : DirectedSet"
+  ],
+  "Expected type": "CompleteCoverSpace (RegularCauchyFilter (\\new CoverSpace I.E {\n  | isOpen => isOpen {ClosurePrecoverSpace {I.E}\n    (\\lam (C : Set (Set I.E)) => TruncP (\\Sigma (j : \\Sigma (b : CoverSpace I.E) (b <= \\new precover {I} {})) (isCauchy {j.1} C)))\n    (\\lam {C : Set (Set I.E)}\n      (e : TruncP (\\Sigma (j : \\Sigma (b : CoverSpace I.E) (b <= \\new precover {I} {})) (isCauchy {j.1} C))) (x : I.E) =>\n    (\\case e \\with {\n      | inP (j, Cc) => cauchy-cover {j.1} {C} Cc x\n    }))}\n  | open-top => {?hidden}\n  | open-inter => {?hidden}\n  | open-Union => {?hidden}\n  | isCauchy => Closure {I.E}\n    (\\lam (C : Set (Set I.E)) => TruncP (\\Sigma (j : \\Sigma (b : CoverSpace I.E) (b <= \\new precover {I} {})) (isCauchy {j.1} C)))\n  | cauchy-cover => {?hidden}\n  | cauchy-top => {?hidden}\n  | cauchy-refine => {?hidden}\n  | cauchy-glue => {?hidden}\n  | cauchy-open => {?hidden}\n  | isRegular => {?hidden}\n})) {\n  | isOpen => isOpen {coverSpace {\\new CoverSpace I.E {\n    | isOpen => isOpen {ClosurePrecoverSpace {I.E}\n      (\\lam (C : Set (Set I.E)) => TruncP (\\Sigma (j : \\Sigma (b : CoverSpace I.E) (b <= \\new precover {I} {})) (isCauchy {j.1} C)))\n      (\\lam {C : Set (Set I.E)}\n        (e : TruncP (\\Sigma (j : \\Sigma (b : CoverSpace I.E) (b <= \\new precover {I} {})) (isCauchy {j.1} C))) (x : I.E) =>\n      (\\case e \\with {\n        | inP (j, Cc) => cauchy-cover {j.1} {C} Cc x\n      }))}\n    | open-top => {?hidden}\n    | open-inter => {?hidden}\n    | open-Union => {?hidden}\n    | isCauchy => Closure {I.E}\n      (\\lam (C : Set (Set I.E)) => TruncP (\\Sigma (j : \\Sigma (b : CoverSpace I.E) (b <= \\new precover {I} {})) (isCauchy {j.1} C)))\n    | cauchy-cover => {?hidden}\n    | cauchy-top => {?hidden}\n    | cauchy-refine => {?hidden}\n    | cauchy-glue => {?hidden}\n    | cauchy-open => {?hidden}\n    | isRegular => {?hidden}\n  }}}\n  | isCauchy => isCCauchy {\\new CoverSpace I.E {\n    | isOpen => isOpen {ClosurePrecoverSpace {I.E}\n      (\\lam (C : Set (Set I.E)) => TruncP (\\Sigma (j : \\Sigma (b : CoverSpace I.E) (b <= \\new precover {I} {})) (isCauchy {j.1} C)))\n      (\\lam {C : Set (Set I.E)}\n        (e : TruncP (\\Sigma (j : \\Sigma (b : CoverSpace I.E) (b <= \\new precover {I} {})) (isCauchy {j.1} C))) (x : I.E) =>\n      (\\case e \\with {\n        | inP (j, Cc) => cauchy-cover {j.1} {C} Cc x\n      }))}\n    | open-top => {?hidden}\n    | open-inter => {?hidden}\n    | open-Union => {?hidden}\n    | isCauchy => Closure {I.E}\n      (\\lam (C : Set (Set I.E)) => TruncP (\\Sigma (j : \\Sigma (b : CoverSpace I.E) (b <= \\new precover {I} {})) (isCauchy {j.1} C)))\n    | cauchy-cover => {?hidden}\n    | cauchy-top => {?hidden}\n    | cauchy-refine => {?hidden}\n    | cauchy-glue => {?hidden}\n    | cauchy-open => {?hidden}\n    | isRegular => {?hidden}\n  }}\n}",
+  "Expression": "Completion _",
+  "Premises": [
+    "| cauchy-top : isCauchy (single {E -> \\Prop} top)",
+    "| Join-cond {J : \\Set} (j : J) {f : J -> E} : f j <= Join {J} f",
+    "| isCauchy (Set (Set E)) : \\Prop",
+    "| \\infix 4 <= E E : \\Prop",
+    "inP A",
+    "| cauchy-refine {C D : Set (Set E)} (isCauchy C) (Refines {E} C D) : isCauchy D",
+    "\\func isOpen \\hlevels  {this : PrecoverSpace} (S : Set E) : \\Prop => \\Pi {x : E} -> S x -> isCauchy (\\lam (U : Set E) => U x -> U \u2286 S)",
+    "| open-top : isOpen top",
+    "\\class CoverSpace \\extends PrecoverSpace \\hlevels  {\n  | isRegular {C : Set (Set E)} (isCauchy C) : isCauchy (\\lam (V : Set E) => TruncP (\\Sigma (U : Set E) (C U) (V <=< U)))\n}",
+    "\\func Total {B : \\Type} (F : B -> \\Type) : \\Type => \\Sigma (b : B) (F b)",
+    "\\class RegularCauchyFilter \\extends CauchyFilter \\hlevels  {\n  | isRegularFilter {U : Set (E {S})} (F U) : TruncP (\\Sigma (V : Set (E {S})) (V <=< U) (F V))\n}",
+    "\\instance Completion \\hlevels  (X : CoverSpace) : CompleteCoverSpace (RegularCauchyFilter X) {\n  | isOpen => PrecoverSpace.isOpen {coverSpace {X}}\n  | isCauchy => isCCauchy {X}\n} => \\new CompleteCoverSpace {\n  | open-top => {?hidden}\n  | open-inter => {?hidden}\n  | open-Union => {?hidden}\n  | cauchy-cover => {?hidden}\n  | cauchy-top => {?hidden}\n  | cauchy-refine => {?hidden}\n  | cauchy-glue => {?hidden}\n  | cauchy-open => {?hidden}\n  | isRegular => {?hidden}\n  | isHausdorff => {?hidden}\n  | isSeparatedCoverSpace => {?hidden}\n  | isComplete => {?hidden}\n}",
+    "\\type Subset \\alias \\infix 4 \u2286 \\hlevels  {X : \\hType} (U V : Set X) : \\Prop => \\Pi {x : X} -> U x -> V x",
+    "| cauchy-cover {C : Set (Set E)} (isCauchy C) (x : E) : TruncP (\\Sigma (U : Set E) (C U) (U x))",
+    "| E : \\Set",
+    "\\class PrecoverSpace \\extends TopSpace \\hlevels  {\n  | isCauchy (Set (Set E)) : \\Prop\n  | cauchy-cover {C : Set (Set E)} (isCauchy C) (x : E) : TruncP (\\Sigma (U : Set E) (C U) (U x))\n  | cauchy-top : isCauchy (single {E -> \\Prop} top)\n  | cauchy-refine {C D : Set (Set E)} (isCauchy C) (Refines {E} C D) : isCauchy D\n  | cauchy-glue {C : Set (Set E)} (isCauchy C) {D : Set E -> Set (Set E)} (\\Pi {U : Set E} -> C U -> isCauchy (D U)) : isCauchy (\\lam (U : Set E) => TruncP (\\Sigma (V W : Set E) (C V) (D V W) (U = V \u2227 W)))\n  | cauchy-open {S : Set E} : TopSpace.isOpen S <-> (\\Pi {x : E} -> S x -> isCauchy (\\lam (U : Set E) => U x -> U \u2286 S))\n}",
+    "\\func precover \\hlevels  {I : DirectedSet} : PrecoverSpace I.E {\n  | isOpen => PrecoverSpace.isOpen\n  | isCauchy => \\lam (C : Set (Set (E {\\this}))) =>\n  \\Sigma (TruncP (\\Sigma (U : Set (E {\\this})) (C U) (N : I.E) (\\Pi {n : I.E} -> N I.<= n -> U n)))\n    (\\Pi (n : I.E) -> TruncP (\\Sigma (V : Set (E {\\this})) (C V) (V n)))\n} => \\new PrecoverSpace {\n  | open-top => {?hidden}\n  | open-inter => {?hidden}\n  | open-Union => {?hidden}\n  | cauchy-cover => {?hidden}\n  | cauchy-top => {?hidden}\n  | cauchy-refine => {?hidden}\n  | cauchy-glue => {?hidden}\n  | cauchy-open => {?hidden}\n}",
+    "| meet \\alias \\infixl 7 \u2227 E E : E",
+    "\\instance SetLattice \\hlevels  (A : \\hType) : Locale (Set A) {\n  | <= => (\u2286)\n  | meet => \\lam (U : E {\\this}) (V : E {\\this}) (a : A) => \\Sigma (U a) (V a)\n  | top => \\lam (_ : A) => \\Sigma\n  | Join => \\lam {J : \\Set} (f : J -> E {\\this}) (a : A) => TruncP (\\Sigma (j : J) (f j a))\n} => \\new Locale {\n  | <=-refl => {?hidden}\n  | <=-transitive => {?hidden}\n  | <=-antisymmetric => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | top-univ => {?hidden}\n  | Join-cond => {?hidden}\n  | Join-univ => {?hidden}\n  | Join-ldistr>= => {?hidden}\n}",
+    "| open-inter {U V : Set E} (isOpen U) (isOpen V) : isOpen (U \u2227 V)",
+    "| cauchy-glue {C : Set (Set E)} (isCauchy C) {D : Set E -> Set (Set E)} (\\Pi {U : Set E} -> C U -> isCauchy (D U)) : isCauchy (\\lam (U : Set E) => TruncP (\\Sigma (V W : Set E) (C V) (D V W) (U = V \u2227 W)))",
+    "\\class CompleteCoverSpace \\extends SeparatedCoverSpace \\hlevels  {\n  | isComplete : IsCompleteCoverSpace \\this\n}",
+    "| cauchy-open {S : Set E} : isOpen S <-> (\\Pi {x : E} -> S x -> isCauchy (\\lam (U : Set E) => U x -> U \u2286 S))",
+    "| Join {J : \\Set} (J -> E) : E",
+    "\\func Set \\hlevels  (X : \\hType) : \\Set => X -> \\Prop",
+    "\\func coverSpace \\hlevels  {X1 : CoverSpace} : CoverSpace (RegularCauchyFilter X1) {\n  | isOpen => PrecoverSpace.isOpen\n  | isCauchy => isCCauchy {X1}\n} => \\new CoverSpace {\n  | open-top => {?hidden}\n  | open-inter => {?hidden}\n  | open-Union => {?hidden}\n  | cauchy-cover => {?hidden}\n  | cauchy-top => {?hidden}\n  | cauchy-refine => {?hidden}\n  | cauchy-glue => {?hidden}\n  | cauchy-open => {?hidden}\n  | isRegular => {?hidden}\n}",
+    "\\instance PrecoverLattice \\hlevels  (X : \\Set) : CompleteLattice (PrecoverSpace X) {\n  | <= => \\lam (A : E {\\this}) (B : E {\\this}) => \\Pi {C : Set (Set X)} -> A.isCauchy C -> B.isCauchy C\n  | meet => meet-impl\n  | join => join-impl\n  | top => DiscreteCover X\n  | Join => \\lam {J : \\Set} (f : J -> E {\\this}) =>\n  ClosurePrecoverSpace {X} (\\lam (C : Set (Set X)) => TruncP (\\Sigma (j : J) (isCauchy {f j} C)))\n    (\\lam {C : Set (Set X)} (e : TruncP (\\Sigma (j : J) (isCauchy {f j} C))) (x : X) => (\\case e \\with {\n      | inP (j, Cc) => cauchy-cover {f j} {C} Cc x\n    }))\n  | Meet => Meet-impl\n} => \\new CompleteLattice {\n  | <=-refl => {?hidden}\n  | <=-transitive => {?hidden}\n  | <=-antisymmetric => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | top-univ => {?hidden}\n  | Join-cond => {?hidden}\n  | Join-univ => {?hidden}\n  | Meet-cond => {?hidden}\n  | Meet-univ => {?hidden}\n}",
+    "\\func ClosurePrecoverSpace \\hlevels  {X : \\Set} (A : Set (Set X) -> \\Prop)\n  (CA : \\Pi {C : Set (Set X)} -> A C -> \\Pi (x : X) -> TruncP (\\Sigma (U : Set X) (C U) (U x))) : PrecoverSpace X {\n  | isOpen => PrecoverSpace.isOpen\n  | isCauchy => Closure {X} A\n} => \\new PrecoverSpace {\n  | open-top => {?hidden}\n  | open-inter => {?hidden}\n  | open-Union => {?hidden}\n  | cauchy-cover => {?hidden}\n  | cauchy-top => {?hidden}\n  | cauchy-refine => {?hidden}\n  | cauchy-glue => {?hidden}\n  | cauchy-open => {?hidden}\n}",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I",
+    "\\data Closure \\hlevels  {X : \\Set} (Set (Set X) -> \\Prop) (Set (Set X)) : \\Prop \n  | closure (A C)\n  | closure-top (C = single {X -> \\Prop} top)\n  | closure-refine {D : Set (Set X)} (Closure {X} A D) (Refines {X} D C)\n  | closure-trans {D : Set (Set X)} (Closure {X} A D) {E : Set X -> Set (Set X)} (\\Pi {U : Set X} -> D U -> Closure {X} A (E U)) (C = (\\lam (U : Set X) => TruncP (\\Sigma (V W : Set X) (D V) (E V W) (U = V \u2227 W))))",
+    "\\lemma closure-regular \\hlevels  {X : PrecoverSpace} (RB : RatherBelow {SetLattice X.E}) {A : Set (Set X.E) -> \\Prop}\n  (_ : \\Pi {C : Set (Set X.E)} -> A C -> Closure {X.E} A (\\lam (V : Set X.E) => TruncP (\\Sigma (U : Set X.E) (C U) (RB.R V U))))\n  {C : Set (Set X.E)} (_ : Closure {X.E} A C) :\n  Closure {X.E} A (\\lam (V : Set X.E) => TruncP (\\Sigma (U : Set X.E) (C U) (RB.R V U))) ",
+    "closure (A C)",
+    "| isRegular {C : Set (Set E)} (isCauchy C) : isCauchy (\\lam (V : Set E) => TruncP (\\Sigma (U : Set E) (C U) (V <=< U)))",
+    "| open-Union {S : Set (Set E)} (\\Pi {U : Set E} -> S U -> isOpen U) : isOpen (Union {E} S)",
+    "\\func isCCauchy \\hlevels  {X : CoverSpace} (D : Set (Set (RegularCauchyFilter X))) : \\Prop => TruncP (\\Sigma (C : Set (Set X.E)) (X.isCauchy C)\n  (\\Pi {U : Set X.E} -> C U -> TruncP (\\Sigma (V : Set (RegularCauchyFilter X)) (D V) (mkSet {X} U \u2286 V))))",
+    "\\type \\infix 4 <=< \\hlevels  {X : PrecoverSpace} (V U : Set X.E) : \\Prop => X.isCauchy (\\lam (W : Set X.E) => \\Sigma (e : X.E) ((\u2227) V W e) -> W \u2286 U)",
+    "\\lemma cauchy-subset \\hlevels  {X : PrecoverSpace} {C D : Set (Set X.E)} (_ : X.isCauchy C) (_ : \\Pi {U : Set X.E} -> C U -> D U) : X.isCauchy D ",
+    "\\instance RegularRatherBelow \\hlevels  {X : PrecoverSpace} : RatherBelow {SetLattice X.E} (<=<) => \\new RatherBelow {\n  | <=<-left => {?hidden}\n  | <=<-right => {?hidden}\n  | <=<_top => {?hidden}\n  | <=<_meet => {?hidden}\n}"
+  ]
+}
+model output: 
+{
+  | isOpen => isOpen {Completion {\new CoverSpace I.E {
+    | isOpen => isOpen {ClosurePrecoverSpace {I.E}
+      (\lam (C : Set (Set I.E)) => TruncP (\Sigma (j : \Sigma (b : CoverSpace I.E) (b <= \new precover {I} {})) (isCauchy {j.1} C)))
+      (\lam {C : Set (Set I.E)}
+        (e : TruncP (\Sigma (j : \Sigma (b : CoverSpace I.E) (b <= \new precover {I} {})) (isCauchy {j.1} C))) (x : I.E) =>
+      (\case e \with {
+        | inP (j, Cc) => cauchy-cover {j.1} {C} Cc x
+      }))}
+    | open-top => {?hidden}
+    | open-inter => {?hidden}
+    | open-Union => {?hidden}
+    | isCauchy => Closure {I.E}
+      (\lam (C : Set (Set I.E)) => TruncP (\Sigma (j : \Sigma (b : CoverSpace I.E) (b

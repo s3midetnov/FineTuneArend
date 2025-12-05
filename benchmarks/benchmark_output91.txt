@@ -1,0 +1,46 @@
+index = 91
+
+the query:{
+  "Context": [
+    "X : \\Set",
+    "f : X -> Y",
+    "p : IsInj {X} {Y} f",
+    "q : IsSurj {X} {Y} f",
+    "Y : \\Set"
+  ],
+  "Expected type": "Equiv {X} {Y} f",
+  "Expression": "fromInjSurj f p q",
+  "Premises": [
+    "\\lemma fromInjSurj {A B : \\Set} (f : A -> B) (_ : IsInj {A} {B} f) (_ : IsSurj {A} {B} f) : Equiv {A} {B} f ",
+    "\\class Equiv \\extends Section, Retraction"
+  ]
+}
+model output: 
+<<<Proof:>>> \new Equiv {X} {Y} f {
+  | func => f
+  | func-<= => {?hidden}
+  | func>= => {?hidden}
+  | func-iff => {?hidden}
+  | func-univ => {?hidden}
+  | func-dest => {?hidden}
+} \and \new Equiv {X} {Y} f {
+  | func => f
+  | func-<= => {?hidden}
+  | func>= => {?hidden}
+  | func-iff => {?hidden}
+  | func-univ => {?hidden}
+  | func-dest => {?hidden}
+} \with {
+  | func-<= => {?hidden}
+  | func>= => {?hidden}
+  | func-iff => {?hidden}
+  | func-univ => {?hidden}
+  | func-dest => {?hidden}
+} \and \new Equiv {X} {Y} f {
+  | func => f
+  | func-<= => {?hidden}
+  | func>= => {?hidden}
+  | func-iff => {?hidden}
+  | func-univ => {?hidden}
+  | func-dest => {?hidden}
+} \and \new Equiv {X} {Y

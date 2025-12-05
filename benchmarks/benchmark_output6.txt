@@ -1,0 +1,23 @@
+index = 6
+
+the query:{
+  "Context": [
+    "x : E",
+    "y : E",
+    "this : TotalOrder"
+  ],
+  "Expected type": "y <= (tjoin {x} {y} (totality x y)).1",
+  "Expression": "(tjoin (totality {this} x y)).3",
+  "Premises": [
+    "| \\infix 4 <= E E : \\Prop",
+    "\\func tjoin \\hlevels  {E1 : Poset} {x y : E.E} : \\Pi (t : x E.<= y || y E.<= x) ->\n  \\Sigma (m : E.E) (x E.<= m) (y E.<= m) (\\Pi (z : E.E) -> x E.<= z -> y E.<= z -> m E.<= z) \n=> rec {x E.<= y} {y E.<= x} {\\Sigma (m : E.E) (x E.<= m) (y E.<= m) (\\Pi (z : E.E) -> x E.<= z -> y E.<= z -> m E.<= z)}\n  (Joins-isProp {E1} {x} {y})\n  (\\lam (x<=y : x E.<= y) => (y, x<=y, E.<=-refl {y}, \\lam (z : E.E) (_ : x E.<= z) (y<=z : y E.<= z) => y<=z))\n  (\\lam (y<=x : y E.<= x) => (x, E.<=-refl {x}, y<=x, \\lam (z : E.E) (z<=x : x E.<= z) (_ : y E.<= z) => z<=x))",
+    "| totality (x y : E) : x <= y || y <= x"
+  ]
+}
+model output: 
+<= x <<<Proof:>>> \new TotalOrder x y => \new TotalOrder x y \with
+  | <= => (tjoin {x} {y} (totality x y)).1 <= (tjoin {x} {y} (totality x y)).2
+  | meet => \lam (x' : E) => \lam (y' : E) => (tjoin {x} {y} (totality x y)).1 <= (tjoin {x} {y} (totality x y)).2 x' y'
+  | join => \lam (x' : E) => \lam (y' : E) => (tjoin {x} {y} (totality x y)).1 <= (tjoin {x} {y} (totality x y)).2 x' y'
+  | isRefl => \lam (x : E) => (tjoin {x} {x} (totality x x)).1 <= (tjoin {x} {x} (totality x x)).2
+  | isSymmetric => \lam (x : E) => \lam (y : E) => (tjoin {x} {y

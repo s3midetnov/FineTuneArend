@@ -1,0 +1,21 @@
+index = 57
+
+the query:{
+  "Context": [
+    "this : LinearlyOrderedSemiring",
+    "l : Array E"
+  ],
+  "Expected type": "Array E l.len (\\lam (i : Fin l.len) => (\\lam (x : E) => x * x) (l.at i))",
+  "Expression": "map (\\lam x => x * {this} x) l",
+  "Premises": [
+    "| len : Nat",
+    "| \\infixl 7 * E E : E",
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "| at (j : Fin len) : A j",
+    "\\class DArray {\n  | len : Nat\n  | A (Fin len) : \\Type\n  | at (j : Fin len) : A j\n}",
+    "| E : \\Set",
+    "\\func map {A B : \\Type} (f : A -> B) (as : Array A) : Array B as.len (\\lam (i : Fin as.len) => f (as.at i)) => \\new DArray"
+  ]
+}
+model output: 
+<<<Expected value:>>> map (\lam (x : E) => x * x) l at (len {this})<<<Expected type:>>> Array E l.len (\lam (i : Fin l.len) => (\lam (x : E) => x * x) (l.at i))<<<Expected value:>>> map (\lam (x : E) => x * x) l at (len {this})<<<Expected type:>>> Array E l.len (\lam (i : Fin l.len) => (\lam (x : E) => x * x) (l.at i))<<<Expected value:>>> map (\lam (x : E) => x * x) l at (len {this})<<<Expected type:>>> Array E l.len (\lam (i : Fin l.len) => (\lam (x : E) => x * x) (l.at i))<<<Expected value:>>> map (\lam (x : E) => x * x) l at (len {this})<<<Expected type:>>> Array E l.len (\lam (i : Fin l.len) => (\lam (x : E) => x * x) (l.at i))<<<Expected value:>>> map (\lam (x : E

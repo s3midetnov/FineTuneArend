@@ -1,0 +1,44 @@
+index = 66
+
+the query:{
+  "Context": [
+    "this : FrameHom",
+    "s : IsSurj {E {Dom}} {E {Cod}} func"
+  ],
+  "Expected type": "QEquiv {Subtype {image}} {E {Cod}} (func {factor}) {\n  | ret => \\lam (y : B {\\this}) => (direct y, direct-<= {func (direct y)} {y} (direct-counit {y}))\n  | ret_f => \\lam (x : A {\\this}) => path (\\lam (i : I) => (\n    \\have arg => <=-antisymmetric {Dom} {(ret {\\this} (func {factor} x)).1} {x.1} x.2 (direct-unit {x.1})\n    \\in (arg @ i, prop-dpi (\\lam (i : I) => nucleus {image} (arg @ i) <= arg @ i) (ret {\\this} (f {\\this} x)).2 x.2 @ i)))\n  | f_sec => surjective-split s\n}",
+  "Expression": "\\new QEquiv {\n  | ret => \\lam y => (direct {this} y, direct-<= {this} (direct-counit {this}))\n  | ret_f => \\lam x => ext (<=-antisymmetric x.2 (direct-unit {this}))\n  | f_sec => \\lam y => surjective-split {this} s y\n}",
+  "Premises": [
+    "\\func image \\hlevels  {this2 : FrameHom} : Nucleus {Dom} (\\lam (x : E {L {\\this}}) => direct (func x)) => \\new Nucleus {\n  | nucleus-meet => {?hidden}\n  | nucleus-meet>= => {?hidden}\n  | nucleus-<= => {?hidden}\n  | nucleus-unit => {?hidden}\n  | nucleus-join>= => {?hidden}\n  | nucleus-join => {?hidden}\n}",
+    "| A : \\Type",
+    "\\lemma prop-dpi \\plevels  \\hlevels  (A : I -> \\Prop) (a : A left) (a' : A right) : Path A a a' ",
+    "\\class QEquiv \\extends Equiv {\n  | sec => ret\n}",
+    "| nucleus (E {L}) : E {L}",
+    "\\func factor \\hlevels  {this2 : FrameHom} : FrameHom (locale {image}) Cod {\n  | func => \\lam (x : E {Dom {\\this}}) => func x.1\n} => \\new FrameHom {\n  | func-<= => {?hidden}\n  | func-top => {?hidden}\n  | func-top>= => {?hidden}\n  | func-meet => {?hidden}\n  | func-meet>= => {?hidden}\n  | func-Join => {?hidden}\n  | func-Join>= => {?hidden}\n}",
+    "| \\infix 4 <= E E : \\Prop",
+    "| Cod : BaseSet",
+    "\\type Subtype \\hlevels  {this : Nucleus} : \\Set => \\Sigma (x : E {L}) (nucleus x <= x)",
+    "\\lemma direct-counit \\hlevels  {this : FrameHom} {y : E {Cod}} : func (direct y) <= y ",
+    "\\lemma direct-unit \\hlevels  {this : FrameHom} {x : E {Dom}} : x <= direct (func x) ",
+    "\\func direct \\hlevels  {this : FrameHom} (y : E {Cod}) : E {Dom} => SJoin {Dom} (\\lam (p0 : E {Dom}) => func p0 <= y)",
+    "| ret B : A",
+    "| f A : B",
+    "| B : \\Type",
+    "| E : \\Set",
+    "| func (E {Dom}) : E {Cod}",
+    "| L : Locale",
+    "| <=-antisymmetric {x y : E} (x <= y) (y <= x) : x = y",
+    "| Dom : BaseSet",
+    "\\lemma surjective-split \\hlevels  {this : FrameHom} (_ : IsSurj {E {Dom}} {E {Cod}} func) (x : E {Cod}) : func (direct x) = x ",
+    "\\lemma direct-<= \\hlevels  {this : FrameHom} {y z : E {Cod}} (_ : y <= z) : direct y <= direct z "
+  ]
+}
+model output: 
+<<<Expected type:>>> QEquiv {Subtype {image}} {E {Cod}} (func {factor}) {
+  | ret => \lam (y : B {\this}) => (direct y, direct-<= {func (direct y)} {y} (direct-counit {y}))
+  | ret_f => \lam (x : A {\this}) => path (\lam (i : I) => (
+    \have arg => <=-antisymmetric {Dom} {(ret {\this} (func {factor} x)).1} {x.1} x.2 (direct-unit {x.1})
+    \in (arg @ i, prop-dpi (\lam (i : I) => nucleus {image} (arg @ i) <= arg @ i) (ret {\this} (f {\this} x)).2 x.2 @ i)))
+  | f_sec => surjective-split s
+}<<<Proof:>>> \case s => \new QEquiv {
+  | ret => \lam (y : B {\this}) => (direct y, direct-<= {func (direct y)} {y} (direct-counit {y}))
+  | ret_f => \lam (x : A {\this

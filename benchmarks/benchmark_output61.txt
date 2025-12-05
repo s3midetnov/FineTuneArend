@@ -1,0 +1,24 @@
+index = 61
+
+the query:{
+  "Context": [
+    "l : List (Fin (len {vars}))",
+    "a1 : Fin (len {vars})",
+    "this : LData"
+  ],
+  "Expected type": "interpretNF (a1 :: l) = interpretNF (removeDuplicates (a1 :: l))",
+  "Expression": "removeDuplicates-consistent (a1 :: l)",
+  "Premises": [
+    "| len : Nat",
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "\\lemma removeDuplicates-consistent \\hlevels  {this : LData} (l : List (Fin (len {vars}))) : interpretNF l = interpretNF (removeDuplicates l) ",
+    "| L : TopMeetSemilattice",
+    "| E : \\Set",
+    "\\func removeDuplicates \\hlevels  {this3 : LData} (_ : List (Fin (len {vars}))) : List (Fin (len {vars})) \n  | {this}, nil => nil {Fin (len {vars})}\n  | {this}, a :: nil => a :: nil {Fin (len {vars})}\n  | {this}, a :: a' :: l => \\case decideEq a a' \\with {\n    | yes p => removeDuplicates (a' :: l)\n    | no n => a :: removeDuplicates (a' :: l)\n  }",
+    "\\func interpretNF \\hlevels  {this3 : MonoidData} (_ : List (Fin (len {vars}))) : E {M} \n  | {this}, nil => ide {M}\n  | {this}, x :: nil => at {vars} x\n  | {this}, x :: l => at {vars} x * interpretNF l",
+    "| vars : Array (E {M})",
+    "\\infixr 5 :: A (List A)"
+  ]
+}
+model output: 
+<<<Expected evaluation:>>> interpretNF (a1 :: l) = interpretNF (removeDuplicates (a1 :: l))<<<Actual evaluation:>>> interpretNF (a1 :: l) = interpretNF (removeDuplicates (a1 :: l))<<<Actual type:>>> interpretNF (a1 :: l) = interpretNF (removeDuplicates (a1 :: l))<<<Actual evaluation:>>> interpretNF (a1 :: l) = interpretNF (removeDuplicates (a1 :: l))<<<Expected type:>>> interpretNF (a1 :: l) = interpretNF (removeDuplicates (a1 :: l))<<<Expected evaluation:>>> interpretNF (a1 :: l) = interpretNF (removeDuplicates (a1 :: l))<<<Actual evaluation:>>> interpretNF (a1 :: l) = interpretNF (removeDuplicates (a1 :: l))<<<Actual type:>>> interpretNF (a1 :: l) = interpretNF (removeDuplicates (a1 :: l))<<<Actual evaluation:>>> interpretNF (a1 :: l) = interpretNF (removeDuplicates (a1 :: l))<<<Expected type:>>> interpretNF (a1 :: l) = interpretNF (removeDuplicates (a1 :: l))<<<Expected evaluation:>>> interpret

@@ -1,0 +1,33 @@
+index = 96
+
+the query:{
+  "Context": [
+    "S : DecSet",
+    "e2 : a.1 = a3.1",
+    "p6 : a.2 xor a3.2 = true",
+    "x2 : List (\\Sigma S.E Bool)",
+    "a : \\Sigma S.E Bool",
+    "a3 : \\Sigma S.E Bool"
+  ],
+  "Expected type": "TruncP (\\Sigma (u_1 u_2 : E) (x : S.E) (p : Bool) (\\Sigma (nil {\\Sigma S.E Bool} * x2 = u_1 * u_2)\n  (a :: a3 :: x2 = u_1 * ((x, p) :: nil {\\Sigma S.E Bool}) * ((x, not p) :: nil {\\Sigma S.E Bool}) * u_2)))",
+  "Expression": "inP (nil, x2, a.1, a.2, (idp, rewrite {2} e2 (rewrite (helper1 p6) idp)))",
+  "Premises": [
+    "\\func not \\plevels  \\hlevels  (_ : Bool) : Bool \n  | true => false\n  | false => true",
+    "\\func idp {A : \\Type} {a : A} : a = a => path (\\lam (_ : I) => a)",
+    "\\data Bool \\plevels  \\hlevels  \n  | false\n  | true",
+    "nil",
+    "inP A",
+    "\\func W \\hlevels  {S : \\Set} : Monoid (List (\\Sigma S Bool)) {\n  | ide => nil {\\Sigma S Bool}\n  | * => (++)\n} => ListMonoid {\\Sigma S Bool}",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I",
+    "| \\infixl 7 * E E : E",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\func transportInv {A : \\Type} (B : A -> \\Type) {a a' : A} (_ : a = a') (_ : B a') : B a \n  | {A}, B, {a}, {a'}, idp, b => b",
+    "| E : \\Set",
+    "\\instance ListMonoid \\hlevels  {A : \\Set} : Monoid (List A) {\n  | ide => nil {A}\n  | * => (++)\n} => \\new Monoid {\n  | *-assoc => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n}",
+    "\\func helper1 \\plevels  \\hlevels  {a2 b2 : Bool} (_ : a2 xor b2 = true) : not a2 = b2 \n  | {false}, {true}, p => idp {Bool} {not false}\n  | {true}, {false}, p => idp {Bool} {not true}",
+    "\\data List \\Type \n  | nil\n  | \\infixr 5 :: A (List A)",
+    "\\infixr 5 :: A (List A)"
+  ]
+}
+model output: 
+(u_1 * u_2) (x, p) (x, not p) (u_1 * u_2) (x, p) (x, not p) (u_1 * u_2) (x, p) (x, not p) (u_1 * u_2) (x, p) (x, not p) (u_1 * u_2) (x, p) (x, not p) (u_1 * u_2) (x, p) (x, not p) (u_1 * u_2) (x, p) (x, not p) (u_1 * u_2) (x, p) (x, not p) (u_1 * u_2) (x, p) (x, not p) (u_1 * u_2) (x, p) (x, not p) (u_1 * u_2) (x, p) (x, not p) (u_1 * u_2) (x, p) (x, not p) (u_1 * u_2) (x, p) (x

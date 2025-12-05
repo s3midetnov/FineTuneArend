@@ -1,0 +1,27 @@
+index = 64
+
+the query:{
+  "Context": [
+    "n : Nat",
+    "m : Nat",
+    "B : Matrix R.E m n",
+    "s : IsSmith {R} {m} {n} B",
+    "R : CRing"
+  ],
+  "Expected type": "IsSmith {R} {n} {m} (transpose {R.E} {m} {n} B)",
+  "Expression": "transposed s",
+  "Premises": [
+    "\\lemma transposed \\hlevels  {R : Semiring} {n m : Nat} {A : Matrix R.E n m} (_ : IsSmith {R} {n} {m} A) :\n  IsSmith {R} {m} {n} (transpose {R.E} {n} {m} A) ",
+    "\\func transpose {R : \\Type} {n m : Nat} (M : Matrix R n m) : Matrix R m n \n  => mkMatrix {R} {m} {n} (\\lam (i : Fin m) (j : Fin n) => at {at {M} j} i)",
+    "\\type IsSmith \\hlevels  {R : Semiring} {n m : Nat} (A : Matrix R.E n m) : \\Prop \n=> \\Sigma (IsDiagonal {R} {n} {m} A) (\\Pi (i : Nat) -> \\Pi (p : suc i StrictPoset.< n) ->\n  \\Pi (q : suc i StrictPoset.< m) -> TruncP (LDiv {R} (at {at {A} (toFin i {n} {?hidden})} (toFin i {m} {?hidden}))\n    (at {at {A} (toFin (suc i) {n} {?hidden})} (toFin (suc i) {m} {?hidden}))))",
+    "| E : \\Set"
+  ]
+}
+model output: 
+<<<Proof:>>> \new IsSmith {
+  | isDiagonal => \lam (i : Nat) => \lam (p : suc i StrictPoset.< n) => \lam (q : suc i StrictPoset.< m) => \case
+    | at {at {B} (toFin i {n} {?hidden})} (toFin i {m} {?hidden}) => \case
+      | at {at {B} (toFin (suc i) {n} {?hidden})} (toFin (suc i) {m} {?hidden}) => \case
+        | at {at {B} (toFin (suc (suc i)) {n} {?hidden})} (toFin (suc (suc i)) {m} {?hidden}) => \case
+          | at {at {B} (toFin (suc (suc (suc i))) {n} {?hidden})} (toFin (suc (suc (suc i))) {m} {?hidden}) => \case
+            | at {at {B} (toFin (suc (suc (suc (suc i)))) {n}

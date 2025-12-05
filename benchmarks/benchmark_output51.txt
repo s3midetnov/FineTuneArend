@@ -1,0 +1,24 @@
+index = 51
+
+the query:{
+  "Context": [
+    "Y : CoverSpace",
+    "Ufx : U (f.func x)",
+    "X : PrecoverSpace",
+    "f : PrecoverMap X Y",
+    "x : X.E",
+    "U : Set Y.E"
+  ],
+  "Expected type": "TruncP (\\Sigma (x' : Y.E) ((\\lam (y : Y.E) => TruncP (\\Sigma (x : X.E) (f.func x = y))) x') (U x'))",
+  "Expression": "inP (f x, inP $ later (x, idp), Ufx)",
+  "Premises": [
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\func idp {A : \\Type} {a : A} : a = a => path (\\lam (_ : I) => a)",
+    "inP A",
+    "| E : \\Set",
+    "| func (E {Dom}) : E {Cod}",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I"
+  ]
+}
+model output: 
+<<<Proof:>>> \case inP x => \case Ufx x => \case inP x => \case Ufx x => \case inP x => \case Ufx x => \case inP x => \case Ufx x => \case inP x => \case Ufx x => \case inP x => \case Ufx x => \case inP x => \case Ufx x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x => \case inP x =>

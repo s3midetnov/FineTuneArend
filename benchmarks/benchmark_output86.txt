@@ -1,0 +1,37 @@
+index = 86
+
+the query:{
+  "Context": [
+    "j : Fin n",
+    "n : Nat"
+  ],
+  "Expected type": "\\Pi (p0 : Fin (length {Array Bool n} (normalize {n} (var {n} j)))) -> NonEmpty (normalize {n} (var {n} j) !! p0)",
+  "Expression": "\\lam p0 => (\\case \\elim p0 \\with {\n  | 0 => inP (j, rewrite (decideEq=_reduce idp) idp)\n})",
+  "Premises": [
+    "| len : Nat",
+    "true",
+    "\\data Dec \\plevels  \\hlevels  \\Prop \n  | yes E\n  | no (Not E)",
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "\\func \\infixl 9 !! {A1 : \\Type} (l1 : List A1) (_ : Fin (length {A1} l1)) : A1 \n  | {A}, a :: l, zero => a\n  | {A}, a :: l, suc i => l !! i",
+    "\\lemma decideEq=_reduce \\hlevels  {A : DecSet} {x y : A.E} (p : x = y) : A.decideEq x y = yes {x = y} p ",
+    "\\func idp {A : \\Type} {a : A} : a = a => path (\\lam (_ : I) => a)",
+    "\\data Bool \\plevels  \\hlevels  \n  | false\n  | true",
+    "\\func NonEmpty \\plevels  \\hlevels  (l : Array Bool) : \\Prop => TruncP (\\Sigma (j : Fin l.len) (l.at j = true))",
+    "\\class DArray {\n  | len : Nat\n  | A (Fin len) : \\Type\n  | at (j : Fin len) : A j\n}",
+    "inP A",
+    "\\func Not (A : \\Type) : \\Prop => A -> Empty",
+    "yes E",
+    "\\func length {A1 : \\Type} (_ : List A1) : Nat \n  | {A}, nil => 0\n  | {A}, a :: l => suc (length {A} l)",
+    "false",
+    "\\instance FinFin (n : Nat) : FinSet (Fin n) {\n  | finCard => n\n  | decideEq => decideEq\n} => \\new FinSet {\n  | finEq => {?hidden}\n}",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\func transportInv {A : \\Type} (B : A -> \\Type) {a a' : A} (_ : a = a') (_ : B a') : B a \n  | {A}, B, {a}, {a'}, idp, b => b",
+    "\\func normalize {n5 : Nat} (_ : Term n5) : NF n5 \n  | {n}, var j => singleAt {Bool} {n} j true false :: nil {Array Bool n}\n  | {n}, :zro => nil {Array Bool n}\n  | {n}, :negative t => normalize {n} t\n  | {n}, t :+ s => normalize {n} t ++ normalize {n} s\n  | {n}, t :* s => multiply {n} (normalize {n} t) (normalize {n} s)",
+    "| at (j : Fin len) : A j",
+    "| E : \\Set",
+    "var (Fin n)",
+    "\\field decideEq (x y : E) : Dec (x = y)"
+  ]
+}
+model output: 
+= NonEmpty (normalize {n} (var {n} j) !! p0) <<<Proof:>>> \case decideEq=_reduce (inP (var {n} j)) \in \case decideEq=_reduce (inP (var {n} j)) \in \case decideEq=_reduce (inP (var {n} j)) \in \case decideEq=_reduce (inP (var {n} j)) \in \case decideEq=_reduce (inP (var {n} j)) \in \case decideEq=_reduce (inP (var {n} j)) \in \case decideEq=_reduce (inP (var {n} j)) \in \case decideEq=_reduce (inP (var {n} j)) \in \case decideEq=_reduce (inP (var {n} j)) \in \case decideEq=_reduce (inP (var {n} j)) \in \case decideEq=_reduce (inP (var {n} j)) \in \case decideEq=_reduce (inP (var {n} j)) \in \case decideEq=_reduce (inP (var {n} j)) \

@@ -1,0 +1,23 @@
+index = 10
+
+the query:{
+  "Context": [
+    "n : Nat",
+    "i : Fin n",
+    "j : Fin n",
+    "p : i /= j"
+  ],
+  "Expected type": "decideEq {FinFin n} i j = no {i = j} p",
+  "Expression": "decideEq/=_reduce p",
+  "Premises": [
+    "\\data Dec \\plevels  \\hlevels  \\Prop \n  | yes E\n  | no (Not E)",
+    "no (Not E)",
+    "\\instance FinFin (n : Nat) : FinSet (Fin n) {\n  | finCard => n\n  | decideEq => decideEq\n} => \\new FinSet {\n  | finEq => {?hidden}\n}",
+    "\\lemma decideEq/=_reduce \\hlevels  {A : DecSet} {x y : A.E} (p : x /= y) : A.decideEq x y = no {x = y} p ",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "| E : \\Set",
+    "\\field decideEq (x y : E) : Dec (x = y)"
+  ]
+}
+model output: 
+<<<Expected answer:>>> no {i = j} p <<<Explanation:>>> We need to show that the decision of equality between the two indices is no, given that the indices are not equal. We can do this by using the `decideEq/=_reduce` lemma, which states that if the indices are not equal, then the decision of equality is no. We can then use the `no` function to show that the decision is no. <<<Proof:>>> decideEq/=_reduce {FinFin n} i j p <<<Proof-implementation:>>> decideEq/=_reduce {FinFin n} i j p <<<Proof-implementation:>>> decideEq/=_reduce {FinFin n} i j p <<<Proof-implementation:>>> decideEq/=_reduce {FinFin n} i j p <<<Proof-implementation:>>> decideEq/=_reduce {FinFin n} i j p <<<Proof-implementation:>>> decideEq/=_reduce {FinFin n} i j p <<<Proof-implementation:>>> decideEq/=_reduce {FinFin n} i j p <<<Proof-implementation:>>> decideEq/=_reduce {FinFin n} i j p <<<Proof-implementation:>>> decideEq/=_reduce {FinFin

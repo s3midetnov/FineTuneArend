@@ -1,0 +1,30 @@
+index = 16
+
+the query:{
+  "Context": [
+    "h : \\Pi {x : E {Dom}} -> U {norm {Dom} x} delta -> U {norm {Cod} (func x)} eps",
+    "this : UniformNormedAbGroupMap",
+    "eps : Rat",
+    "delta : Rat"
+  ],
+  "Expected type": "\\Pi {x x' : E {Dom}} -> U {dist {Dom} x x'} delta -> U {dist {Cod} (func x) (func x')} eps",
+  "Expression": "unfold (\\lam d => rewrite (norm-dist {Cod {this}}, inv (func-minus {this})) $ h $ rewriteI (norm-dist {Dom {this}}) d)",
+  "Premises": [
+    "\\func transport {A : \\Type} (B : A -> \\Type) {a a' : A} (p : a = a') (b : B a) : B a' => coe (\\lam (i : I) => B (p @ i)) b right",
+    "| dist E E : ExUpperReal",
+    "| norm-dist {x y : E} : dist x y = norm (x - y)",
+    "| Cod : BaseSet",
+    "\\lemma func-minus \\hlevels  {this : AddGroupHom} {x y : E {Dom}} : func (x - y) = func x - func y ",
+    "| norm E : ExUpperReal",
+    "\\func \\infixl 6 - \\hlevels  {G : AddGroup} (x y : G.E) : G.E => x G.+ G.negative y",
+    "\\class ExUpperReal \\plevels  \\hlevels  {\n  | U Rat : \\Prop\n  | U-closed {q q' : Rat} (U q) (q < q') : U q'\n  | U-rounded {q : Rat} (U q) : TruncP (\\Sigma (r : Rat) (U r) (r < q))\n}",
+    "\\func transportInv {A : \\Type} (B : A -> \\Type) {a a' : A} (_ : a = a') (_ : B a') : B a \n  | {A}, B, {a}, {a'}, idp, b => b",
+    "| U Rat : \\Prop",
+    "\\func inv {A1 : \\Type} {a1 a' : A1} (_ : a1 = a') : a' = a1 \n  | {A}, {a}, {a'}, idp => idp {A} {a}",
+    "| E : \\Set",
+    "| func (E {Dom}) : E {Cod}",
+    "| Dom : BaseSet"
+  ]
+}
+model output: 
+<<<Expected type:>>> \Pi {x x' : E {Dom}} -> U {norm {Dom} x} delta -> U {norm {Cod} (func x)} eps <<<Expected type:>>> \Pi {x x' : E {Dom}} -> U {dist {Dom} x x'} delta -> U {dist {Cod} (func x) (func x')} eps <<<Expected type:>>> \Pi {x x' : E {Dom}} -> U {norm {Dom} x} delta -> U {norm {Cod} (func x)} eps <<<Expected type:>>> \Pi {x x' : E {Dom}} -> U {dist {Dom} x x'} delta -> U {dist {Cod} (func x) (func x')} eps <<<Expected type:>>> \Pi {x x' : E {Dom}} -> U {norm {Dom} x} delta -> U {norm {Cod} (func x)} eps <<<Expected type:>>> \Pi {x x' : E {Dom}} -> U {dist {Dom} x x'} delta -> U {dist {Cod} (func x) (func x')} eps <<<Expected type:>>> \Pi {x x' : E

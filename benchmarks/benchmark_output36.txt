@@ -1,0 +1,39 @@
+index = 36
+
+the query:{
+  "Context": [
+    "D : Set (Set (E {\\this}))",
+    "p0 : isCauchy {\\this} D",
+    "this : CoverSpace (RegularCauchyFilter X1) {\n  | isOpen => PrecoverSpace.isOpen\n  | open-top => {?hidden}\n  | open-inter => {?hidden}\n  | open-Union => {?hidden}\n  | isCauchy => isCCauchy {X1}\n  | cauchy-cover => {?hidden}\n  | cauchy-top => {?hidden}\n  | cauchy-refine => {?hidden}\n  | cauchy-glue => {?hidden}\n  | cauchy-open => {?hidden}\n  | isRegular => {?hidden}\n}",
+    "X : CoverSpace"
+  ],
+  "Expected type": "isCauchy {\\this} (\\lam (V : Set (E {\\this})) => TruncP (\\Sigma (U : Set (E {\\this})) (D U) (V <=< U)))",
+  "Expression": "\\scase \\elim p0 \\with {\n  | inP (C, Cc, f) => \n    \\have <=<_mkFilters {U' U : Set X} (p : U' <=< U) : mkSet {X} U' <=< mkSet {X} U => unfolds $ inP (_, p, \\lam {W} g => inP (mkSet {X} W, \\lam p0 => (\n            \\let (F, (FU', FW)) => p0\n            \\in \\case isProper (filter-meet FU' FW) \\with {\n                  | inP s => mkSet_<= {X} (g s)\n                }), <=-refl))\n    \\in inP (_, isRegular Cc, \\lam {U'} p0 => (\\case \\elim p0 \\with {\n          | inP (U, CU, U'<=<U) => \\case f CU \\with {\n            | inP (V, DV, U<=V) => inP (mkSet {X} U', inP (V, DV, <=<-left (<=<_mkFilters U'<=<U) U<=V), <=-refl)\n          }\n        }))\n}",
+  "Premises": [
+    "| <=-refl {x : E} : x <= x",
+    "| X : \\Set",
+    "| <=<-left {U V W : E {A}} (R U V) (V <= W) : R U W",
+    "\\func mkSet \\hlevels  {X : CoverSpace} (U : Set X.E) : Set (RegularCauchyFilter X) => \\lam (F1 : RegularCauchyFilter X) => F.F U",
+    "| isCauchy (Set (Set E)) : \\Prop",
+    "\\func Set \\hlevels  (X : \\hType) : \\Set => X -> \\Prop",
+    "inP A",
+    "\\lemma mkSet_<= \\hlevels  {X : CoverSpace} {U V : Set X.E} (_ : U \u2286 V) : mkSet {X} U \u2286 mkSet {X} V ",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I",
+    "| isProper {U : Set X} (F U) : TruncP (\\Sigma (x : X) (U x))",
+    "| isRegular {C : Set (Set E)} (isCauchy C) : isCauchy (\\lam (V : Set E) => TruncP (\\Sigma (U : Set E) (C U) (V <=< U)))",
+    "\\class RegularCauchyFilter \\extends CauchyFilter \\hlevels  {\n  | isRegularFilter {U : Set (E {S})} (F U) : TruncP (\\Sigma (V : Set (E {S})) (V <=< U) (F V))\n}",
+    "\\type Subset \\alias \\infix 4 \u2286 \\hlevels  {X : \\hType} (U V : Set X) : \\Prop => \\Pi {x : X} -> U x -> V x",
+    "| filter-meet {a b : E {A}} (F a) (F b) : F (a \u2227 b)",
+    "\\func isCCauchy \\hlevels  {X : CoverSpace} (D : Set (Set (RegularCauchyFilter X))) : \\Prop => TruncP (\\Sigma (C : Set (Set X.E)) (X.isCauchy C)\n  (\\Pi {U : Set X.E} -> C U -> TruncP (\\Sigma (V : Set (RegularCauchyFilter X)) (D V) (mkSet {X} U \u2286 V))))",
+    "| E : \\Set",
+    "\\type \\infix 4 <=< \\hlevels  {X : PrecoverSpace} (V U : Set X.E) : \\Prop => X.isCauchy (\\lam (W : Set X.E) => \\Sigma (e : X.E) ((\u2227) V W e) -> W \u2286 U)",
+    "| meet \\alias \\infixl 7 \u2227 E E : E",
+    "\\instance SetLattice \\hlevels  (A : \\hType) : Locale (Set A) {\n  | <= => (\u2286)\n  | meet => \\lam (U : E {\\this}) (V : E {\\this}) (a : A) => \\Sigma (U a) (V a)\n  | top => \\lam (_ : A) => \\Sigma\n  | Join => \\lam {J : \\Set} (f : J -> E {\\this}) (a : A) => TruncP (\\Sigma (j : J) (f j a))\n} => \\new Locale {\n  | <=-refl => {?hidden}\n  | <=-transitive => {?hidden}\n  | <=-antisymmetric => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | top-univ => {?hidden}\n  | Join-cond => {?hidden}\n  | Join-univ => {?hidden}\n  | Join-ldistr>= => {?hidden}\n}",
+    "\\instance RegularRatherBelow \\hlevels  {X : PrecoverSpace} : RatherBelow {SetLattice X.E} (<=<) => \\new RatherBelow {\n  | <=<-left => {?hidden}\n  | <=<-right => {?hidden}\n  | <=<_top => {?hidden}\n  | <=<_meet => {?hidden}\n}"
+  ]
+}
+model output: 
+<<<Expected value:>>> (\lam (V : Set (E {\this})) => TruncP (\Sigma (U : Set (E {\this})) (D U) (V <=< U))) <<<Proof:>>> \case \inP \with {
+  | inP => {?hidden}
+  | truncP => {?hidden}
+} \inP (\lam (V : Set (E {\this})) => TruncP (\Sigma (U : Set (E {\this})) (D U) (V <=< U))) \inP (\lam (V : Set (E {\this})) => TruncP (\Sigma (U : Set (E {\this})) (D U) (V <=< U))) \inP (\lam (V : Set (E {\this})) => TruncP (\Sigma (U : Set (E {\this})) (D U) (V <=< U))) \inP (\lam (V : Set (E {\this})) => TruncP (\Sigma (U : Set (E {\this})) (D U) (V <=< U))) \inP (\lam (V : Set (E {\this})) => TruncP (\Sigma (U : Set (E {\this})) (

@@ -1,0 +1,26 @@
+index = 98
+
+the query:{
+  "Context": [
+    "V : Set X.E",
+    "X : CoverSpace",
+    "V<=<U : V <=< U",
+    "U : Set X.E",
+    "this : RegularPreuniformSpace X.E {\n  | isOpen => PrecoverSpace.isOpen\n  | open-top => {?hidden}\n  | open-inter => {?hidden}\n  | open-Union => {?hidden}\n  | isCauchy => X.isCauchy\n  | cauchy-open => {?hidden}\n  | isUniform => X.isCauchy\n  | uniform-cover => {?hidden}\n  | uniform-top => {?hidden}\n  | uniform-refine => {?hidden}\n  | uniform-inter => {?hidden}\n  | uniform-cauchy => {?hidden}\n  | uniform-regular => {?hidden}\n}"
+  ],
+  "Expected type": "TruncP (\\Sigma (C : Set (Set (E {\\this}))) (isUniform {\\this} C) (star {E {\\this}} V C \u2286 U))",
+  "Expression": "inP (_, V<=<U, \\lam p0 => (\\case \\elim p0 \\with {\n  | inP (W, (h, t), Wx) => h t Wx\n}))",
+  "Premises": [
+    "\\func star \\hlevels  {X : \\Set} (V : Set X) (C : Set (Set X)) : Set X \n  => Union {X} (\\lam (W : Set X) => \\Sigma (C W) (\\Sigma (x : X) ((\u2227) V W x)))",
+    "\\type Subset \\alias \\infix 4 \u2286 \\hlevels  {X : \\hType} (U V : Set X) : \\Prop => \\Pi {x : X} -> U x -> V x",
+    "\\func Set \\hlevels  (X : \\hType) : \\Set => X -> \\Prop",
+    "inP A",
+    "| E : \\Set",
+    "| isUniform (Set (Set E)) : \\Prop",
+    "| meet \\alias \\infixl 7 \u2227 E E : E",
+    "\\instance SetLattice \\hlevels  (A : \\hType) : Locale (Set A) {\n  | <= => (\u2286)\n  | meet => \\lam (U : E {\\this}) (V : E {\\this}) (a : A) => \\Sigma (U a) (V a)\n  | top => \\lam (_ : A) => \\Sigma\n  | Join => \\lam {J : \\Set} (f : J -> E {\\this}) (a : A) => TruncP (\\Sigma (j : J) (f j a))\n} => \\new Locale {\n  | <=-refl => {?hidden}\n  | <=-transitive => {?hidden}\n  | <=-antisymmetric => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | top-univ => {?hidden}\n  | Join-cond => {?hidden}\n  | Join-univ => {?hidden}\n  | Join-ldistr>= => {?hidden}\n}",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I"
+  ]
+}
+model output: 
+<|endoftext|>\Sigma (x : E {\this}) (V x) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x <=< U) (x <=< V) (x

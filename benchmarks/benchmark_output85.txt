@@ -1,0 +1,69 @@
+index = 85
+
+the query:{
+  "Context": [
+    "x : Real",
+    "null : x - z < fromRat ide",
+    "z : Real"
+  ],
+  "Expected type": "interpret {\\new LinearRatAlgebraData {RealField} (zro :: x :: z :: nil) {\n  | mData => \\new MonoidData {R {\\this}} (vars {\\this})\n  | interpretNF_negate => {?hidden}\n}} (var {E} {Fin 3} 1 :+ :negative {E} {Fin 3} (:ide {Rat} {Fin 3})) < interpret {\\new LinearRatAlgebraData {RealField} (zro :: x :: z :: nil) {\n  | mData => \\new MonoidData {R {\\this}} (vars {\\this})\n  | interpretNF_negate => {?hidden}\n}} (var {E} {Fin 3} 2)",
+  "Expression": "solve<Problem {\\new LinearRatAlgebraData {\n  | R => RealField\n  | vars => zro :: x :: z :: nil\n}} ((var 1 :+ :negative (var 2), Less, :ide) :: nil) (var 1 :+ :negative :ide) (var 2)\n  (1 :: 1 :: nil, 0, idp, idp {Bool} {true}) (_x :: nil)",
+  "Premises": [
+    "true",
+    "\\func isSuc \\hlevels  {this : LinearData} (_ : Nat) : Bool \n  | {this}, suc n => true\n  | {this}, 0 => false",
+    "| C : Semiring",
+    "\\func \\infixl 2 or \\plevels  \\hlevels  (_ _ : Bool) : Bool \n  | true, y => true\n  | false, y => y",
+    "suc Nat",
+    "| R : Semiring",
+    "\\infixl 6 :+ (_ _ : RingTerm C V)",
+    "\\data Bool \\plevels  \\hlevels  \n  | false\n  | true",
+    "\\instance RatField : DiscreteOrderedField Rat {\n  | zro => rat (pos 0) 1 {?hidden} {?hidden}\n  | + => (RatField.+)\n  | * => (RatField.*)\n  | negative => RatField.negative\n  | ide => rat (pos 1) 1 {?hidden} {?hidden}\n  | natCoef => \\lam (n : Nat) => rat (pos n) 1 {?hidden} {?hidden}\n  | decideEq => \\lam (x : E {\\this}) (y : E {\\this}) => (\\case decideEq (ratNom x) (ratNom y), decideEq (ratDenom x) (ratDenom y) \\with {\n    | yes p, yes q => yes {x = y} (ext {x} {y} p q)\n    | no p, d => no {x = y} (\\lam (x=y : x = y) => p (pmap {Rat} {Int} ratNom {x} {y} x=y))\n    | d, no q => no {x = y} (\\lam (x=y : x = y) => q (pmap {Rat} {Nat} ratDenom {x} {y} x=y))\n  })\n  | meet => meet\n  | join => join\n  | isPos => \\lam (x : E {\\this}) => isPos (ratNom x)\n  | #0=>eitherPosOrNeg => \\lam {x : E {\\this}} (xInv : #0 {\\this} x) => (\\case x, xInv \\with {\n    | rat n1 d1 d1/=0 r1, (rat n2 d2 d2/=0 r2, il, p) => #0=>eitherPosOrNeg {n1}\n      (\\lam (n1=0 : n1 = zro) => (\\case inv {Rat} {makeRat zro (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden})}\n        {makeRat' zro (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden})}\n        (simp {zro} {d2 Nat.* d1} {productNonZero {d2} {d1} {?hidden} {?hidden}}) *> transport {Int}\n        (\\lam (x : E) => makeRat x (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden}) = rat (pos 1) 1 {?hidden} {?hidden})\n        {n2 Semigroup.* zro} {zro} (zro_*-right {n2}) (transport {Int}\n          (\\lam (x : E) => makeRat (n2 IntRing.* x) (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden}) = rat (pos 1) 1 {?hidden} {?hidden})\n          {n1} {zro} n1=0 il) \\with {}))\n  })\n  | finv => RatField.finv\n  | eitherZeroOrInv => \\lam (x : E {\\this}) => (\\case decideEq {\\this} x (zro {\\this}) \\with {\n    | yes x=0 => byLeft {x = zro {\\this}} {Inv x} x=0\n    | no x/=0 => byRight {x = zro {\\this}} {Inv x} (rmake {x} (DiscreteField.finv {\\this} x) (finv-right {\\this} {x} x/=0))\n  })\n} => \\new DiscreteOrderedField {\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | +-comm => {?hidden}\n  | *-assoc => {?hidden}\n  | ldistr => {?hidden}\n  | rdistr => {?hidden}\n  | negative-left => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | natCoefZero => {?hidden}\n  | natCoefSuc => {?hidden}\n  | zeroProduct => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | zro/>0 => {?hidden}\n  | positive_+ => {?hidden}\n  | ide>zro => {?hidden}\n  | positive_* => {?hidden}\n  | *-comm => {?hidden}\n  | finv_zro => {?hidden}\n  | finv-right => {?hidden}\n}",
+    "\\func Cert \\hlevels  {this : LinearData} (n : Nat) : \\Set0 => Array Nat n",
+    "\\func map {A B : \\Type} (f : A -> B) (as : Array A) : Array B as.len (\\lam (i : Fin as.len) => f (as.at i)) => \\new DArray",
+    "Less",
+    "\\func interpretEq \\hlevels  {this3 : LinearData} (_ : Equation) : \\Prop \n  | {this}, (t1, Less, t2) => interpret t1 < interpret t2\n  | {this}, (t1, LessOrEquals, t2) => interpret t1 <= interpret t2\n  | {this}, (t1, Equals, t2) => interpret t1 = interpret t2",
+    ":ide",
+    "\\data Rat \\plevels  \\hlevels  \n  | rat (nom : Int) (denom : Nat) (\\property (denom /= 0)) (\\property (gcd {NatEuclidean} (iabs nom) denom = 1))",
+    "| at (j : Fin len) : A j",
+    "| E : \\Set",
+    "\\data RingTerm (_ _ : \\Type) \n  | coef C\n  | var V\n  | :zro\n  | :ide\n  | :negative (RingTerm C V)\n  | \\infixl 6 :+ (_ _ : RingTerm C V)\n  | \\infixl 7 :* (_ _ : RingTerm C V)",
+    "\\class LinearRatAlgebraData \\extends RatAlgebraData, LinearData \\hlevels ",
+    "\\class MonoidData \\hlevels  {\n  | M : Monoid\n  | vars : Array (E {M})\n}",
+    "| len : Nat",
+    "\\data Fin \\plevels  \\hlevels  Nat \\with\n  | suc n => zero\n  | suc n => suc (Fin n)",
+    "| M : Monoid",
+    "\\lemma solve<Problem \\hlevels  {this : LinearData} (p : Problem) (t1 t2 : RingTerm (E {C}) (Fin (len {vars {mData}})))\n  (_ : CorrectCert (toContr p t1 t2)) (_ : DArray {p.len} (\\lam (j : Fin p.len) => interpretEq (p.at j))) :\n  interpret t1 < interpret t2 ",
+    "\\func toContr \\hlevels  {this1 : LinearData} (p : Problem) (t1 t2 : RingTerm (E {C}) (Fin (len {vars {mData}}))) : Array Equation \n  => (t2, LessOrEquals, t1) :: p",
+    "\\func idp {A : \\Type} {a : A} : a = a => path (\\lam (_ : I) => a)",
+    "\\data Nat \\plevels  \\hlevels  \n  | zero\n  | suc Nat",
+    "\\lemma interpretNF_negate \\hlevels  {this : BaseRingData} (l : List (\\Sigma (List (Fin (len {vars {mData}}))) (E {C}))) :\n  negative {R} (interpretRingNF l) = interpretRingNF (negate {C} {Fin (len {vars})} l) ",
+    "\\instance RealField : OrderedFieldAlgebra RatField Real {\n  | zro => fromRat zro\n  | + => (RealAbGroup.+)\n  | negative => negative\n  | *c => \\lam (a : E {LModule.R {\\this}}) => (RealField.*) (fromRat a)\n  | * => (RealField.*)\n  | ide => ide\n  | natCoef => \\lam (n : Nat) => fromRat (natCoef n)\n  | coefMap => fromRat\n  | meet => meet\n  | join => RealAbGroup.join\n  | isPos => \\lam (x : E) => x.L zro\n  | #0=>eitherPosOrNeg => \\lam {x : E {\\this}} (xi : #0 {\\this} x) => (\\case U-inh {x RealField.* xi.inv} \\with {\n    | inP (u, xy<u) => \\case (real-lift2-char {rat_real \u2218 *-rat-locally-uniform} {x} {xi.inv} zro u).1\n      (transport {Real} (\\lam (x : Real) => x.L zro) {x RealField.* xi.inv} {func {*-cover-def} (x, xi.inv)} (\\peval x RealField.* xi.inv)\n        (transportInv {Real} (\\lam (x : E {xi.M}) => x.L zro) {x Semigroup.* xi.inv} {ide {\\this}} xi.inv-right\n          (idp {Int} {signum (ratNom (ide - zro))})),\n        transport {Real} (\\lam (x : Real) => x.U u) {x RealField.* xi.inv} {func {*-cover-def} (x, xi.inv)} (\\peval x RealField.* xi.inv)\n          xy<u) \\with {\n        | inP (a', b', c1, d1, c2, d2, a'>0, _x, c1<x, x<d1, c2<y, y<d2, h) => \n          \\have | c1<d1 => LU-less {x} {c1} {d1} c1<x x<d1\n                | c2<d2 => LU-less {xi.inv} {c2} {d2} c2<y y<d2\n          \\in \\case dec<_<= {RatField} c1 zro, dec<_<= {RatField} zro d1 \\with {\n                | inl c1<0, inl d1>0 => absurd {isPos {\\this} x || isNeg {\\this} x} (<-irreflexive {zro}\n                  (a'>0 <\u2218 transport {Rat} ((StrictPoset.<) a') {zro Semigroup.* ((c2 RatField.+ d2) RatField.* ratio (pos 1) 2)} {zro}\n                    (zro_*-left {(c2 RatField.+ d2) RatField.* ratio (pos 1) 2})\n                    (h {zro} {mid c2 d2} (c1<0, d1>0) (mid-between {c2} {d2} c2<d2)).1))\n                | inl c1<0, inr d1<=0 =>\n                  byRight {isPos {\\this} x} {isNeg {\\this} x} ((negative_L {x} {zro}).2 (U_<= {x} {d1} {zro} x<d1 d1<=0))\n                | inr c1>=0, inl d1>0 => byLeft {isPos {\\this} x} {isNeg {\\this} x} (L_<= {x} {c1} {zro} c1<x c1>=0)\n                | inr c1>=0, inr d1<=0 => absurd {isPos {\\this} x || isNeg {\\this} x} (<-irreflexive {zro} (c1>=0 <\u2218r c1<d1 <\u2218l d1<=0))\n              }\n      }\n  })\n} => \\new OrderedFieldAlgebra {\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | negative-left => {?hidden}\n  | +-comm => {?hidden}\n  | *c-assoc => {?hidden}\n  | *c-ldistr => {?hidden}\n  | *c-rdistr => {?hidden}\n  | ide_*c => {?hidden}\n  | *-assoc => {?hidden}\n  | ldistr => {?hidden}\n  | rdistr => {?hidden}\n  | *c-comm-left => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | natCoefZero => {?hidden}\n  | natCoefSuc => {?hidden}\n  | coefMap_*c => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | zro/>0 => {?hidden}\n  | positive_+ => {?hidden}\n  | <_+-comparison => {?hidden}\n  | <_+-connectedness => {?hidden}\n  | ide>zro => {?hidden}\n  | positive_* => {?hidden}\n  | positive=>#0 => {?hidden}\n  | coef_< => {?hidden}\n  | coef_<-inv => {?hidden}\n  | *-comm => {?hidden}\n}",
+    ":negative (RingTerm C V)",
+    "| vars : Array (E {M})",
+    "| \\infix 4 < E E : \\Prop",
+    "\\func hasNegative \\hlevels  {this1 : LinearData} (p1 : Problem) (_ : Cert p.len) : Bool \n  | {this}, nil, nil => false\n  | {this}, :: {n} e p, k :: c => isLess e.2 and isSuc k or hasNegative p c",
+    "| zro : E",
+    "\\field mData : MonoidData {R} vars",
+    "\\func Equation \\hlevels  {this : LinearData} : \\Set \n  => \\Sigma (RingTerm (E {C}) (Fin (len {vars {mData}}))) Operation (RingTerm (E {C}) (Fin (len {vars {mData}})))",
+    "\\class Real \\extends InfReal, UpperReal \\hlevels  {\n  | LU-focus (eps : Rat) (eps > zro) : TruncP (\\Sigma (a : Rat) (L a) (U (a AddMonoid.+ eps)))\n}",
+    "\\func interpret \\hlevels  {this7 : AlgData} (_ : RingTerm (E {C}) (Fin (len {vars {mData}}))) : E {R} \n  | {this}, coef c => func {alg} c\n  | {this}, var x => at {vars} x\n  | {this}, :zro => zro {R}\n  | {this}, :ide => ide {R}\n  | {this}, :negative t => pnegative (interpret t)\n  | {this}, t :+ s => interpret t + interpret s\n  | {this}, t :* s => interpret t * interpret s",
+    "\\data Operation \\plevels  \\hlevels  \n  | Less\n  | LessOrEquals\n  | Equals",
+    "var V",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\func interpretCert \\hlevels  {this : LinearData} (l : Array (RingTerm (E {C}) (Fin (len {vars {mData}})))) (c : Cert l.len) : E {R} \n  => interpretRingNF (normalize (cert-toTerm l c))",
+    "\\data List \\Type \n  | nil\n  | \\infixr 5 :: A (List A)"
+  ]
+}
+model output: 
+< interpret {\new LinearRatAlgebraData {RealField} (zro :: x :: z :: nil) {
+  | mData => \new MonoidData {R {\this}} (vars {\this})
+  | interpretNF_negate => {?hidden}
+}} (var {E} {Fin 3} 3) < interpret {\new LinearRatAlgebraData {RealField} (zro :: x :: z :: nil) {
+  | mData => \new MonoidData {R {\this}} (vars {\this})
+  | interpretNF_negate => {?hidden}
+}} (var {E} {Fin 3} 4) < interpret {\new LinearRatAlgebraData {RealField} (zro :: x :: z :: nil) {
+  | mData => \new MonoidData {R {\this}} (vars {\this})
+  | interpretNF_negate => {?hidden}
+}} (var {E} {Fin 3} 5) < interpret {\new LinearRatAlgebraData {RealField} (zro :: x :: z :: nil) {
+  | mData => \new MonoidData {R {\this}} (vars {\this})
+  | interpretNF_negate => {?

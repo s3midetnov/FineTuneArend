@@ -1,0 +1,43 @@
+index = 81
+
+the query:{
+  "Context": [
+    "B : LModule R",
+    "A : LModule R",
+    "d : isDiff {R} {A} {B} {U} f",
+    "R : DRing",
+    "a' : E {Dom {\\this}}",
+    "f : \\Sigma (x : A.E) (U x) -> B.E",
+    "U : A.E -> \\Prop",
+    "x : \\Sigma (a : A.E) (U a)",
+    "a : E {Dom {\\this}}"
+  ],
+  "Expected type": "(d x (a A.+ a') (R.zro, sub-lem {A} {U} {a A.+ a'} x)).1 = (d (x.1 A.+ R.zro A.*c a, sub-lem {A} {U} {a} x) a' (R.zro, transportInv\n  {A.E} (\\lam (x1 : A.E) => U (x.1 A.+ x1 A.+ R.zro A.*c a')) {R.zro A.*c a} {A.zro} (*c_zro-left {A} {a}) (transportInv\n    {A.E} (\\lam (x : A.E) => U (x A.+ R.zro A.*c a')) {x.1 A.+ A.zro} {x.1} (A.zro-right {x.1}) (sub-lem {A} {U} {a'} x)))).1 B.+ (d x a (R.zro, sub-lem {A} {U} {a} x)).1",
+  "Expression": "cancel-lem (\\lam t => \\Sigma (U (x.1 + t *c (a + a'))) (U (x.1 + t *c a)) (U (x.1 + t *c a + t *c a')))\n  (\\lam t => (d x (a + a') (t.1, t.2.1)).1)\n  (\\lam t => (d (x.1 + t.1 *c a, t.2.2) a' (t.1, t.2.3)).1 + (d x a (t.1, t.2.2)).1)\n  (0, (sub-lem x, sub-lem x, rewrite (*c_zro-left {A}, zro-right) (sub-lem x)))\n  (\\lam t => (d _ _ (_, _)).2 *> pmap (\\lam _x => _x - _)\n    (pmap f (ext $ rewrite *c-ldistr $ inv +-assoc) *> inv zro-right *> pmap ((+) _) (inv negative-left) *> inv +-assoc) *> +-assoc *> inv (pmap2 (+) (d _ _ (_, _)).2 (d _ _ (_, _)).2) *> inv (*c-ldistr {B}))",
+  "Premises": [
+    "| \\infixl 6 + E E : E",
+    "\\lemma cancel-lem \\hlevels  {R : DRing} {B : LModule R} (U : R.E -> \\Prop) (f g : \\Sigma (z : R.E) (U z) -> B.E) (p : \\Sigma (z : R.E) (U z))\n  (_ : \\Pi (p : \\Sigma (z : R.E) (U z)) -> p.1 B.*c f p = p.1 B.*c g p) : f p = g p ",
+    "\\lemma prop-dpi \\plevels  \\hlevels  (A : I -> \\Prop) (a : A left) (a' : A right) : Path A a a' ",
+    "| +-assoc {x y z : E} : x + y + z = x + (y + z)",
+    "\\func pmap {A B : \\Type} (f : A -> B) {a a' : A} (p : a = a') : f a = f a' => path (\\lam (i : I) => f (p @ i))",
+    "| zro-right {x : E} : x + zro = x",
+    "\\func pmap2 {A B C : \\Type} (f : A -> B -> C) {a a' : A} (p : a = a') {b b' : B} (q : b = b') : f a b = f a' b' \n  => path (\\lam (i : I) => f (p @ i) (q @ i))",
+    "| zro : E",
+    "\\lemma *c_zro-left \\hlevels  {this : LModule} {a : E} : zro {R} *c a = zro ",
+    "\\func \\infixl 6 - \\hlevels  {G : AddGroup} (x y : G.E) : G.E => x G.+ G.negative y",
+    "\\lemma sub-lem \\hlevels  {A : LModule} {U : A.E -> \\Prop} {a : A.E} (x : \\Sigma (a : A.E) (U a)) : U (x.1 A.+ zro {A.R} A.*c a) ",
+    "\\func transportInv {A : \\Type} (B : A -> \\Type) {a a' : A} (_ : a = a') (_ : B a') : B a \n  | {A}, B, {a}, {a'}, idp, b => b",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "\\func inv {A1 : \\Type} {a1 a' : A1} (_ : a1 = a') : a' = a1 \n  | {A}, {a}, {a'}, idp => idp {A} {a}",
+    "| \\infixl 7 *c (E {R}) E : E",
+    "| negative-left {x : E} : negative x + x = zro",
+    "| E : \\Set",
+    "| negative E : E",
+    "| *c-ldistr {r : E {R}} {a b : E} : r *c (a + b) = r *c a + r *c b",
+    "\\func \\infixr 9 *> {A : \\Type} {a a' a'' : A} (_ : a = a') (_ : a' = a'') : a = a'' \n  | {A}, {a}, {a'}, {a''}, p, idp => p"
+  ]
+}
+model output: 
+= (d (x.1 A.+ R.zro A.*c a, sub-lem {A} {U} {a} x) a' (R.zro, transportInv
+  {A.E} (\lam (x : A.E) => U (x A.+ R.zro A.*c a')) {x.1 A.+ A.zro} {x.1} (A.zro-right {x.1}) (sub-lem {A} {U} {a'} x)))).1 B.+ (d (x.1 A.+ R.zro A.*c a, sub-lem {A} {U} {a} x) a' (R.zro, transportInv
+  {A.E} (\lam (x : A.E) => U (x A.+ R.zro A.*c a')) {x.1 A.+ A.zro} {x.1} (A.zro-right {x.1}) (sub-lem {A} {U} {a'} x)))).1 B.+ (d x a (R.zro, sub-lem {A} {U} {a} x)).1 = (d (x.1 A.+

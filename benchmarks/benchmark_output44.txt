@@ -1,0 +1,51 @@
+index = 44
+
+the query:{
+  "Context": [
+    "x : ExUpperReal",
+    "x<q : x.U q",
+    "q : Rat"
+  ],
+  "Expected type": "zro * x = zro",
+  "Expression": "<=-antisymmetric (\\lam {b} b>0 => *_U_<=.2 (\n  \\have | p1 => zro<ide {RatField} <\u2218l join-right\n        | p2 => <_*_positive_positive {RatField} b>0 (finv>0 {RatField} p1)\n  \\in inP (b * finv (q \u2228 1), p2, p2, q \u2228 1, U_<= x<q join-left, p1,\n        =_<= $ *-assoc *> pmap ((*) b) (finv-left {RatField} $ >_/= {RatField} p1) *> ide-right {RatField})))\n  (\\lam {b} b>0*x => (\\case *_U.1 b>0*x \\with {\n    | inP (a, _, a>0, c, x<c, c>0, ac<b) => <_*_positive_positive {RatField} a>0 c>0 <\u2218 ac<b\n  }))",
+  "Premises": [
+    "\\lemma finv>0 {this : DiscreteOrderedField} {x : E} (_ : zro < x) : zro < finv x ",
+    "\\func pmap {A B : \\Type} (f : A -> B) {a a' : A} (p : a = a') : f a = f a' => path (\\lam (i : I) => f (p @ i))",
+    "\\lemma *_U \\plevels  \\hlevels  {x y : ExUpperReal} {a : Rat} :\n  U {x ExUpperReal.* y} a <-> TruncP (\\Sigma (b : Rat) (x.U b) (zro < b) (c : Rat) (y.U c) (zro < c) (b RatField.* c < a)) ",
+    "\\instance RatField : DiscreteOrderedField Rat {\n  | zro => rat (pos 0) 1 {?hidden} {?hidden}\n  | + => (RatField.+)\n  | * => (RatField.*)\n  | negative => RatField.negative\n  | ide => rat (pos 1) 1 {?hidden} {?hidden}\n  | natCoef => \\lam (n : Nat) => rat (pos n) 1 {?hidden} {?hidden}\n  | decideEq => \\lam (x : E {\\this}) (y : E {\\this}) => (\\case decideEq (ratNom x) (ratNom y), decideEq (ratDenom x) (ratDenom y) \\with {\n    | yes p, yes q => yes {x = y} (ext {x} {y} p q)\n    | no p, d => no {x = y} (\\lam (x=y : x = y) => p (pmap {Rat} {Int} ratNom {x} {y} x=y))\n    | d, no q => no {x = y} (\\lam (x=y : x = y) => q (pmap {Rat} {Nat} ratDenom {x} {y} x=y))\n  })\n  | meet => meet\n  | join => join\n  | isPos => \\lam (x : E {\\this}) => isPos (ratNom x)\n  | #0=>eitherPosOrNeg => \\lam {x : E {\\this}} (xInv : #0 {\\this} x) => (\\case x, xInv \\with {\n    | rat n1 d1 d1/=0 r1, (rat n2 d2 d2/=0 r2, il, p) => #0=>eitherPosOrNeg {n1}\n      (\\lam (n1=0 : n1 = zro) => (\\case inv {Rat} {makeRat zro (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden})}\n        {makeRat' zro (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden})}\n        (simp {zro} {d2 Nat.* d1} {productNonZero {d2} {d1} {?hidden} {?hidden}}) *> transport {Int}\n        (\\lam (x : E) => makeRat x (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden}) = rat (pos 1) 1 {?hidden} {?hidden})\n        {n2 Semigroup.* zro} {zro} (zro_*-right {n2}) (transport {Int}\n          (\\lam (x : E) => makeRat (n2 IntRing.* x) (d2 Nat.* d1) (productNonZero {d2} {d1} {?hidden} {?hidden}) = rat (pos 1) 1 {?hidden} {?hidden})\n          {n1} {zro} n1=0 il) \\with {}))\n  })\n  | finv => RatField.finv\n  | eitherZeroOrInv => \\lam (x : E {\\this}) => (\\case decideEq {\\this} x (zro {\\this}) \\with {\n    | yes x=0 => byLeft {x = zro {\\this}} {Inv x} x=0\n    | no x/=0 => byRight {x = zro {\\this}} {Inv x} (rmake {x} (DiscreteField.finv {\\this} x) (finv-right {\\this} {x} x/=0))\n  })\n} => \\new DiscreteOrderedField {\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | +-comm => {?hidden}\n  | *-assoc => {?hidden}\n  | ldistr => {?hidden}\n  | rdistr => {?hidden}\n  | negative-left => {?hidden}\n  | ide-left => {?hidden}\n  | ide-right => {?hidden}\n  | natCoefZero => {?hidden}\n  | natCoefSuc => {?hidden}\n  | zeroProduct => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | zro/>0 => {?hidden}\n  | positive_+ => {?hidden}\n  | ide>zro => {?hidden}\n  | positive_* => {?hidden}\n  | *-comm => {?hidden}\n  | finv_zro => {?hidden}\n  | finv-right => {?hidden}\n}",
+    "inP A",
+    "| \\infix 4 <= E E : \\Prop",
+    "| join-left {x y : E} : x <= x \u2228 y",
+    "| <-transitive \\alias \\infixr 9 <\u2218 {x y z : E} (x < y) (y < z) : x < z",
+    "\\lemma <_*_positive_positive \\hlevels  {this : OrderedSemiring} {x y : E} (_ : zro < x) (_ : zro < y) : zro < x * y ",
+    "\\lemma U_<= \\plevels  \\hlevels  {this : ExUpperReal} {q r : Rat} (_ : U q) (_ : q <= r) : U r ",
+    "| \\infixl 7 * E E : E",
+    "\\data Rat \\plevels  \\hlevels  \n  | rat (nom : Int) (denom : Nat) (\\property (denom /= 0)) (\\property (gcd {NatEuclidean} (iabs nom) denom = 1))",
+    "\\func join (_ _ : Rat) : Rat \n  | rat n1 d1 denom/=0 reduced, rat n2 d2 denom/=0 reduced => \\case dec<_<= {IntRing} (n1 * pos d2) (n2 * pos d1) \\with {\n    | inl x<y => rat n2 d2 {?hidden} {?hidden}\n    | inr y<=x => rat n1 d1 {?hidden} {?hidden}\n  }",
+    "\\lemma =_<= \\hlevels  {P : Preorder} {x y : P.E} (_ : x = y) : x P.<= y ",
+    "| E : \\Set",
+    "| join-right {x y : E} : y <= x \u2228 y",
+    "\\lemma >_/= \\hlevels  {this : StrictPoset} {x y : E} (_ : x > y) : x /= y ",
+    "| *-assoc {x y z : E} : x * y * z = x * (y * z)",
+    "\\func \\infixr 9 *> {A : \\Type} {a a' a'' : A} (_ : a = a') (_ : a' = a'') : a = a'' \n  | {A}, {a}, {a'}, {a''}, p, idp => p",
+    "| ide-right {x : E} : x * ide = x",
+    "\\infixl 7 * \\plevels  \\hlevels  (x y : ExUpperReal) : ExUpperReal \n=> \\new ExUpperReal (\\lam (a : Rat) => TruncP (\\Sigma (b : Rat) (x.U b) (zro < b) (c : Rat) (y.U c) (zro < c) (b * c < a))) {\n  | U-closed => {?hidden}\n  | U-rounded => {?hidden}\n}",
+    "| ide : E",
+    "| <-transitive-left \\alias \\infixl 8 <\u2218l {a1 a2 a3 : E} (a1 < a2) (a2 <= a3) : a1 < a3",
+    "\\func * (_ _ : Rat) : Rat \n  | rat xNom xDenom xDenom/=0 reduced, rat yNom yDenom yDenom/=0 reduced =>\n    makeRat (xNom IntRing.* yNom) (xDenom Nat.* yDenom) (productNonZero {xDenom} {yDenom} xDenom/=0 yDenom/=0)",
+    "\\lemma finv-left {this : DiscreteField} {x : E} (_ : x /= zro) : finv x * x = ide ",
+    "\\instance ExUpperRealAbMonoid \\hlevels  : BiorderedLatticeAbMonoid ExUpperReal {\n  | < => (ExUpperRealAbMonoid.<)\n  | <= => (ExUpperReal.<=)\n  | meet => ExUpperReal.meet\n  | join => ExUpperReal.join\n  | zro => fromRat zro\n  | + => (ExUpperReal.+)\n} => \\new BiorderedLatticeAbMonoid {\n  | <-irreflexive => {?hidden}\n  | <-transitive => {?hidden}\n  | <=-refl => {?hidden}\n  | <=-transitive => {?hidden}\n  | <=-antisymmetric => {?hidden}\n  | <-transitive-right => {?hidden}\n  | <-transitive-left => {?hidden}\n  | <=-less => {?hidden}\n  | meet-left => {?hidden}\n  | meet-right => {?hidden}\n  | meet-univ => {?hidden}\n  | join-left => {?hidden}\n  | join-right => {?hidden}\n  | join-univ => {?hidden}\n  | <_meet-univ => {?hidden}\n  | <_join-univ => {?hidden}\n  | zro-left => {?hidden}\n  | zro-right => {?hidden}\n  | +-assoc => {?hidden}\n  | <=_+ => {?hidden}\n  | join_+-left => {?hidden}\n  | +-comm => {?hidden}\n  | meet_+-left => {?hidden}\n}",
+    "| \\infix 4 < E E : \\Prop",
+    "\\data TruncP \\Type \n  | inP A\n  | truncP (_ _ : TruncP A) I",
+    "| zro : E",
+    "\\func finv (_ : Rat) : Rat \n  | rat (pos 0) denom denom/=0 reduced => rat (pos 0) 1 {?hidden} {?hidden}\n  | rat (pos (suc n)) b b/=0 r => rat (pos b) (suc n) {?hidden} {?hidden}\n  | rat (neg (suc n)) b b/=0 r => rat (neg b) (suc n) {?hidden} {?hidden}",
+    "| zro<ide : zro < ide",
+    "| finv E : E",
+    "| U Rat : \\Prop",
+    "| join \\alias \\infixl 6 \u2228 E E : E",
+    "\\lemma *_U_<= \\plevels  \\hlevels  {x y : ExUpperReal} {a : Rat} :\n  U {x ExUpperReal.* y} a <-> TruncP (\\Sigma (b : Rat) (x.U b) (zro < b) (c : Rat) (y.U c) (zro < c) (b RatField.* c <= a)) ",
+    "| <=-antisymmetric {x y : E} (x <= y) (y <= x) : x = y"
+  ]
+}
+model output: 
+* x <<<Expected value:>>> join (U_<= (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antisymmetric (<=-antis

@@ -1,0 +1,49 @@
+index = 47
+
+the query:{
+  "Context": [
+    "g : InterwiningMap {G} {R} A B",
+    "A : LinRepres R G",
+    "B : LinRepres R G",
+    "R : CRing",
+    "f : InterwiningMap {G} {R} A B",
+    "G : Group"
+  ],
+  "Expected type": "InterwiningMap {G1} {R} A B {\n  | func => \\lam (a : E {Dom {linearMap_+ {R} {A} {B} f g}}) => f.func a B.+ g.func a\n  | func-+ => {?hidden}\n  | func-*c => {?hidden}\n  | func-** => {?hidden}\n}",
+  "Expression": "\\new InterwiningMap {\n  | G => _\n  | R => _\n  | Dom => A\n  | Cod => B\n  | LinearMap => linearMap_+ f g\n  | func-** => unfold (rewrite (func-** {f}, func-** {g}, **-ldistr {B}) idp)\n}",
+  "Premises": [
+    "| \\infixl 6 + E E : E",
+    "| \\infixl 8 ** (E {G}) E : E",
+    "\\func idp {A : \\Type} {a : A} : a = a => path (\\lam (_ : I) => a)",
+    "\\class InterwiningMap \\extends LinearMap \\hlevels  {\n  | G : Group\n  | func-** {e : E {Dom}} {g : E {G}} : func (g ** e) = g ** func e\n}",
+    "| Cod : BaseSet",
+    "| func-** {e : E {Dom}} {g : E {G}} : func (g ** e) = g ** func e",
+    "| **-ldistr {g : E {G}} {e e' : E} : g ** (e + e') = g ** e + g ** e'",
+    "| G : Group",
+    "\\func transportInv {A : \\Type} (B : A -> \\Type) {a a' : A} (_ : a = a') (_ : B a') : B a \n  | {A}, B, {a}, {a'}, idp, b => b",
+    "\\func \\infix 1 = {A : \\Type} (a a' : A) : \\Type => a = a'",
+    "| func-*c {r : E {R}} {x : E {Dom}} : func (r *c x) = r *c func x",
+    "\\lemma linearMap_+ \\hlevels  {R : Ring} {A B : LModule R} (f g : LinearMap {R} A B) : LinearMap {R} A B {\n  | func => \\lam (a : E {Dom {\\this}}) => f.func a B.+ g.func a\n} ",
+    "| func-+ {x y : E {Dom}} : func (x + y) = func x + func y",
+    "| E : \\Set",
+    "| func (E {Dom}) : E {Cod}",
+    "| Dom : BaseSet"
+  ]
+}
+model output: 
+<<<Proof:>>> \case f => g \with {
+  | func => \lam (a : E {Dom {linearMap_+ {R} {A} {B} f g}}) => f.func a B.+ g.func a
+  | func-+ => {?hidden}
+  | func-*c => {?hidden}
+  | func-** => {?hidden}
+} \infixl 6 + \case f => g \with {
+  | func => \lam (a : E {Dom {linearMap_+ {R} {A} {B} f g}}) => f.func a B.+ g.func a
+  | func-+ => {?hidden}
+  | func-*c => {?hidden}
+  | func-** => {?hidden}
+} \infixl 8 ** \case f => g \with {
+  | func => \lam (a : E {Dom {linearMap_+ {R} {A} {B} f g}}) => f.func a B.+ g.func a
+  | func-+ => {?hidden}
+  | func-*c => {?hidden}
+  | func-** => {?hidden}
+} \infixl 6 + \case f
